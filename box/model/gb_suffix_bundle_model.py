@@ -2,7 +2,6 @@
 from box import db, ma
 
 
-# 定义表模型
 class GbSuffixBundle(db.Model):
     __tablename__ = 'gb_suffix_bundle'
     bundle_id = db.Column(db.String(32), primary_key=True)
