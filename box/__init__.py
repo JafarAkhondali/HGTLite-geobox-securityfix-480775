@@ -12,5 +12,3 @@ ma = Marshmallow(app)
 from box.model.gb_suffix_bundle_model import GbSuffixBundle, GbSuffixBundleSchema
 
 from box.controller import gb_suffix_bundle_controller as suffix1
-from box.controller import aindex
-from box.controller import user

@@ -20,7 +20,8 @@ def list_all_suffix_bundle():
     print '===after'
     print all_suffix[0]
     # return all_suffix[0].suffix_details
-    return jsonify(suffix_schema.dump(all_suffix[0]).data)
+    # return jsonify(suffix_schema.dump(all_suffix).data)
+    return suffix_schema.jsonify(all_suffix, many=True)
 
 
 def save_obj_suffix_bundle(bundle_obj):
@@ -51,5 +52,3 @@ def remove_suffix_bundle_by_id(suffix_id):
     print to_remove_obj.suffix_details
     db.session.delete(to_remove_obj)
     db.session.commit()
-
-
