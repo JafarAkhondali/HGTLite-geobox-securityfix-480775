@@ -1,7 +1,7 @@
 # _*_ coding: utf-8 _*_
 from box import app
 from flask import jsonify
-from box.model import user
+from . import user_model as user
 
 
 @app.route('/user')

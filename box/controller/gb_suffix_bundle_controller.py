@@ -52,5 +52,4 @@ def remove_suffix_bundle_by_id(suffix_id):
     db.session.delete(to_remove_obj)
     db.session.commit()
 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', debug=True)
+
