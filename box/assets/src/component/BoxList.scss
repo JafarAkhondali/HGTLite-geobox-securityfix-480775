@@ -1,4 +1,5 @@
-@import "../styles/global.scss";
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import "../style/global.scss";
 
 .boxlist {
   color: $red-base;
@@ -9,7 +10,7 @@
   border-top-right-radius: 0px;
 }
 
-list-group-item:last-child {
+.list-group-item:last-child {
   margin-bottom: 0;
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;

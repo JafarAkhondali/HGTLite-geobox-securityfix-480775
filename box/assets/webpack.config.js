@@ -9,7 +9,7 @@ module.exports = {
     output: {
         path: __dirname + '/dist',
         filename: 'bundle_[name].js',
-        publicPath: 'http://localhost:8889/static/assets/dist'
+        // publicPath: 'http://localhost:8889/static/assets/dist'
     },
     module: {
         loaders: [
