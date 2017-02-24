@@ -9,6 +9,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:111111@localhost:3306/geob
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
-from box.model.gb_suffix_bundle_model import GbSuffixBundle, GbSuffixBundleSchema
+from box.model.gb_suffix_bundle_do import GbSuffixBundle, GbSuffixBundleSchema
+from box.model.gb_file_do import GbFile, GbFileSchema
 
-from box.controller import gb_suffix_bundle_controller as suffix1
+from box.controller import gb_suffix_bundle_controller
+from box.controller import gb_file_controller

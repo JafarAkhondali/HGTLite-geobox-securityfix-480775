@@ -1,7 +1,7 @@
 # _*_ coding: utf-8 _*_
 from box import app, db
 from flask import jsonify
-from box.model.gb_suffix_bundle_model import GbSuffixBundle, GbSuffixBundleSchema
+from box.model.gb_suffix_bundle_do import GbSuffixBundle, GbSuffixBundleSchema
 
 _BASE_URL = '/suffix'
 
