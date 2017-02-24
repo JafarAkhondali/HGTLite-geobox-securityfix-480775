@@ -12,5 +12,6 @@ ma = Marshmallow(app)
 from box.model.gb_suffix_bundle_do import GbSuffixBundle, GbSuffixBundleSchema
 from box.model.gb_file_do import GbFile, GbFileSchema
 
+from box.controller import index
 from box.controller import gb_suffix_bundle_controller
 from box.controller import gb_file_controller

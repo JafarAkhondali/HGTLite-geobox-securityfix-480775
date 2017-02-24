@@ -1,5 +1,39 @@
+*.pyc
+yarn-error.log
+_modules
+superset/assets/coverage/*
+changelog.sh
+.DS_Store
+.coverage
+_build
+_static
+_images
+superset/bin/supersetc
+env_py3
+.eggs
+build
+*.db
+tmp
+superset_config.py
+local_config.py
+env
+dist
+superset.egg-info/
+app.db
+*.bak
 .idea
 *.iml
+*.sqllite
+
+# Node.js, webpack artifacts
+*.entry.js
+*.js.map
+node_modules
+npm-debug.log
+yarn.lock
+superset/assets/version_info.json
+*db
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
 # Byte-compiled / optimized / DLL files
@@ -41,7 +75,6 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
-.coverage
 .coverage.*
 .cache
 nosetests.xml
