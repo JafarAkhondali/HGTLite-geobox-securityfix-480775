@@ -6,7 +6,7 @@ import {Link} from 'react-router';
 
 import {ListGroup, ListGroupItem} from 'react-bootstrap';
 
-class BoxList extends Component {
+  class BoxList extends Component {
 
     constructor() {
         super()
@@ -27,4 +27,4 @@ class BoxList extends Component {
 
 }
 
-export default  BoxList
+export default BoxList

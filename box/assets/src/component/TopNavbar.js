@@ -6,7 +6,7 @@ import {Link} from 'react-router';
 
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 
-class TopNavbar extends Component {
+  class TopNavbar extends Component {
 
     constructor() {
         super()
@@ -41,7 +41,6 @@ class TopNavbar extends Component {
         );
     }
 
-
 }
 
-export default  TopNavbar
+export default TopNavbar

@@ -5,7 +5,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
-    entry: './src/main/index.js',
+    entry: './src/index.js',
     output: {
         path: __dirname + '/dist',
         filename: 'bundle_[name].js',
@@ -38,11 +38,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: "GeoBox 时空云盘",
             hash: true,
-            template: path.resolve(__dirname, 'src/main/templates/main-contents.html')
+            template: path.resolve(__dirname, 'src/templates/main-contents.html')
         }),
         new CopyWebpackPlugin([
             {
-                from: __dirname + '/src/main/templates/favicon.ico',
+                from: __dirname + '/src/templates/favicon.ico',
                 to: __dirname + '/dist'
             }
         ]),
