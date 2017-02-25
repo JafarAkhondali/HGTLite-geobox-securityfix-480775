@@ -7,11 +7,12 @@ import {Router, Route, IndexRoute, Link, hashHistory, browserHistory} from 'reac
 import {syncHistoryWithStore, routerReducer} from 'react-router-redux'
 
 
-import './style/index.scss'
+
 
 
 import routes from './routes'
 
+import './style/index.scss'
 
 var contentDOM = document.getElementById("content");
 

@@ -1,0 +1,28 @@
+@import "./global.scss";
+
+.bg-white {
+  background-color: #fff;
+  height: 960px;
+  margin-top: -24px;
+}
+
+.no-border {
+  border: none;
+}
+
+.btn-upload {
+  color: #fff;
+  background: $blue-base;
+}
+
+.height-20 {
+  height: 20px;
+}
+
+.font-file-list{
+  color: #999;
+}
+
+.font-file-name{
+  color: #333;
+}

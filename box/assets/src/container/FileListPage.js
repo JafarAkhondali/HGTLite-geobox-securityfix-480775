@@ -6,6 +6,8 @@ import {Link} from 'react-router';
 import FileTopIndicator from '../component/FileTopIndicator'
 import FileList from '../component/FileList'
 
+import '../style/styles.scss'
+
 class FileListPage extends Component {
     constructor() {
         super()
@@ -13,9 +15,12 @@ class FileListPage extends Component {
 
     render() {
         return (
-            <div className="container">
-                <FileTopIndicator/>
-                <FileList/>
+            <div className="container bg-white">
+                <div className="height-20"></div>
+                <div className="font-file-list">
+                    <FileTopIndicator/>
+                    <FileList/>
+                </div>
             </div>
         )
     }

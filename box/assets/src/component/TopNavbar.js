@@ -6,7 +6,7 @@ import {Link} from 'react-router';
 
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 
-  class TopNavbar extends Component {
+class TopNavbar extends Component {
 
     constructor() {
         super()
@@ -34,7 +34,9 @@ import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
                         </NavDropdown>
                     </Nav>
                     <Nav pullRight>
-                        <NavItem eventKey={1} href="#">用户设置</NavItem>
+                        <NavItem eventKey={1} href="/#/accounts">
+                            用户设置
+                        </NavItem>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

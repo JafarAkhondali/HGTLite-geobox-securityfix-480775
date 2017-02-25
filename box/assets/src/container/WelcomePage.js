@@ -10,7 +10,7 @@ class WelcomePage extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container bg-white">
                 <h1>欢迎页 welcome</h1>
             </div>
         )

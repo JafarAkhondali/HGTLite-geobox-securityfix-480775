@@ -10,7 +10,7 @@ import {Link} from 'react-router';
 
     render() {
         return (
-            <div className="container">
+            <div className="container bg-white">
                 <h1>用户设置 settings</h1>
             </div>
         )
