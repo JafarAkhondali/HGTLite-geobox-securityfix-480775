@@ -5,6 +5,32 @@
   color: $red-base;
 }
 
+.to-left2{
+  position: relative;
+  padding-left:2%;
+}
+
+.to-left15{
+  position: relative;
+  padding-left:15%;
+}
+.to-left70{
+  position: relative;
+  padding-left:70%;
+}
+
+.to-left80{
+  position: relative;
+  padding-left:80%;
+}
+
+.to-left90{
+  position: relative;
+  padding-left:90%;
+}
+
+
+
 .list-group-item:first-child {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;

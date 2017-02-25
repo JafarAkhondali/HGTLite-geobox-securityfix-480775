@@ -1,2 +1,2 @@
-export BoxList from './BoxList';
+export BoxList from './FileList';
 export TopNavbar from './TopNavbar';

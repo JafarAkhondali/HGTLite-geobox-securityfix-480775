@@ -9,8 +9,8 @@ import  WelcomePage  from './container/WelcomePage'
 
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={WelcomePage}/>
-        <Route path="/files" component={FileListPage}/>
+        <IndexRoute component={FileListPage}/>
+        <Route path="/welcome" component={WelcomePage}/>
         <Route path="/accounts" component={AccountPage}/>
 
     </Route>

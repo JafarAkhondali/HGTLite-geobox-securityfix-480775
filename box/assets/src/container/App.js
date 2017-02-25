@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import TopNavbar from '../component/TopNavbar'
 
-class App extends Component{
+class App extends Component {
     constructor() {
         super()
     }
@@ -9,9 +10,7 @@ class App extends Component{
     render() {
         return (
             <div>
-                <h2>Home</h2>
-                <p><Link to="/about">About 调转1</Link></p>
-                <p><Link to="/topics">Topics 调转2</Link></p>
+                <TopNavbar/>
                 {this.props.children}
             </div>
         )
