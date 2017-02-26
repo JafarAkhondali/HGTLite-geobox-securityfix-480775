@@ -10,19 +10,57 @@
   border: none;
 }
 
+.fa-blue {
+  color: $blue-base;
+
+}
+.rgb-white-pure{
+  color: #fff;
+}
+
+.rgb-black-pure{
+  color: #000;
+}
+
+.to-p-left-15 {
+  padding-left: 15px;
+}
+
+.to-m-top-15{
+  margin-top: 15px;
+}
+
 .btn-upload {
   color: #fff;
   background: $blue-base;
+}
+
+.btn-all-files {
+  color: #fff;
+  background: $grey-05;
 }
 
 .height-20 {
   height: 20px;
 }
 
-.font-file-list{
+.opacity50 {
+  opacity: 0.5;
+}
+
+.opacity25 {
+  opacity: 0.25;
+}
+
+.opacity75 {
+  opacity: 0.75;
+}
+
+.font-file-list {
   color: #999;
 }
 
-.font-file-name{
+.font-file-name {
   color: #333;
+  margin-top: 15px;
 }

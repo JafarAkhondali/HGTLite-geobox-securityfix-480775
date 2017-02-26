@@ -15,11 +15,11 @@ class FileTopIndicator extends Component {
             <div>
                 <Grid>
                     <Row >
-                        <Col md={1}> <Button>所有文件</Button></Col>
+                        <Col md={1}> <Button bsClass="btn btn-all-files opacity50">所有文件</Button></Col>
                         <Col md={6}> </Col>
                         <Col md={2}>
                             <Row >
-                                <Col md={6}><Button bsClass="btn btn-upload">上传</Button> </Col>
+                                <Col md={6}><Button bsClass="btn btn-upload ">上传</Button> </Col>
                                 <Col md={6}><Button>新建</Button> </Col>
                             </Row>
                         </Col>

@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --progress --colors",
-    "start": "npm run build && cd dist && http-server -p 8889 & webpack --watch"
+    "start": "npm run build && cd dist && http-server -p 8889 & webpack --watch",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
@@ -46,7 +48,8 @@
     "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.1.0",
     "topojson": "^1.6.22",
-    "victory": "^0.17.0"
+    "victory": "^0.17.0",
+    "searchkit": "1.0.0-5"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
