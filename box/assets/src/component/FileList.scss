@@ -1,6 +1,10 @@
 @import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 @import "../style/global.scss";
 
+#boxList .fa-2x {
+  font-size: 1.6em;
+}
+
 .to-left2 {
   position: relative;
   padding-left: 2%;

@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css'
 import   './FileList.scss';
-import   '../style/styles.scss';
 
 import React, {Component} from 'react';
 import {Link} from 'react-router';
@@ -11,6 +10,9 @@ import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} f
 
 import HRLine from './HRLine'
 
+import   '../style/styles.scss';
+
+
 class FileList extends Component {
 
     constructor() {
@@ -19,12 +21,11 @@ class FileList extends Component {
 
     render() {
         return (
-            <div>
+            <div id="boxList">
 
                 <Grid>
                     <Row >
-                        <Col md={1}> </Col>
-                        <Col md={2}>文件名 </Col>
+                        <Col md={3}><i className="fa  fa-2x  "></i> <span className="to-m-left16">文件名</span> </Col>
                         <Col md={5}> </Col>
                         <Col md={1}> 大小</Col>
                         <Col md={1}>类型 </Col>
@@ -35,8 +36,8 @@ class FileList extends Component {
 
                 <Grid>
                     <Row >
-                        <Col md={1}><i className="fa fa-folder-open-o fa-2x fa-blue opacity75"></i> </Col>
-                        <Col md={2}><a className="font-file-name" href="https://www.baidu.com"> 老河口地理国情基础数据 </a></Col>
+                        <Col md={3}><i className="fa fa-folder-open-o fa-2x fa-blue opacity75"></i>
+                        <a className="font-file-name to-m-left6 " href="https://www.baidu.com"> 老河口地理国情基础数据 </a> </Col>
                         <Col md={5}> </Col>
                         <Col md={1}> 12.2 GB</Col>
                         <Col md={1}>文件夹 </Col>
@@ -47,15 +48,15 @@ class FileList extends Component {
 
                 <Grid>
                     <Row >
-                        <Col md={1}><i className="fa fa-file-text-o fa-2x fa-blue opacity75"></i> </Col>
-                        <Col md={2}><a className="font-file-name" href="https://www.baidu.com"> 武汉市地图 </a></Col>
+                        <Col md={3}><i className="fa fa-file-text-o fa-2x fa-blue opacity75"></i>
+                            <a className="font-file-name to-m-left6" href="https://www.baidu.com"> 武汉市地图 </a></Col>
                         <Col md={2}> </Col>
                         <Col md={2}>
                             <span>
-                            <i className="fa fa-tag fa-1x fa-blue opacity75 to-p-left-15"></i>
-                            <i className="fa fa-share-alt fa-1x fa-blue opacity75 to-p-left-15"></i>
-                            <i className="fa fa-edit fa-1x fa-blue opacity75 to-p-left-15"></i>
-                            <i className="fa fa-download fa-1x fa-blue opacity75 to-p-left-15"></i>
+                            <i className="fa fa-tag fa-1x fa-blue opacity75 to-p-left-18"></i>
+                            <i className="fa fa-share-alt fa-1x fa-blue opacity75 to-p-left-18"></i>
+                            <i className="fa fa-edit fa-1x fa-blue opacity75 to-p-left-18"></i>
+                            <i className="fa fa-download fa-1x fa-blue opacity75 to-p-left-18"></i>
                             </span>
                         </Col>
                         <Col md={1}> </Col>

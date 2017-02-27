@@ -1,6 +1,6 @@
 {
-  "name": "fsdrive",
-  "version": "1.0.0",
+  "name": "geobox",
+  "version": "1.0.0-SNAPSHOT",
   "description": "spatio-temporal cloud drive",
   "main": "bin/server.js",
   "scripts": {

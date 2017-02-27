@@ -1,0 +1,34 @@
+
+#fileUploadForm > div {
+  margin-top: 10px;
+  margin-right: 0px;
+  margin-bottom: 15px;
+  margin-left: 0px;
+}
+
+#uploadFooter .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 28px;
+}
+
+#dropbox {
+  border: 2px dashed #999;
+  padding: 72px;
+}
+
+#dropbox.active {
+  border: 4px dashed #FF0000;
+}
+
+.progress-trough {
+  border: 1px solid #000000;
+  height: 48px;
+  width: 100%;
+  position: relative;
+}
+
+.progress-bar {
+  width: 50%;
+  height: 100%;
+  background-color: #0099FF;
+}

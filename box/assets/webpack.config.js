@@ -40,12 +40,25 @@ module.exports = {
             hash: true,
             template: path.resolve(__dirname, 'src/templates/main-contents.html')
         }),
+        new ExtractTextPlugin('styles/[name].css'),
         new CopyWebpackPlugin([
             {
                 from: __dirname + '/src/templates/favicon.ico',
                 to: __dirname + '/dist'
+            },
+            {
+                from: __dirname + '/dist/af7ae505a9eed503f8b8e6982036873e.woff2',
+                to: __dirname + '/dist/styles'
+            },
+            {
+                from: __dirname + '/dist/fee66e712a8a08eef5805a46892932ad.woff',
+                to: __dirname + '/dist/styles'
+            },
+            {
+                from: __dirname + '/dist/b06871f281fee6b241d60582ae9369b9.ttf',
+                to: __dirname + '/dist/styles'
             }
-        ]),
-        new ExtractTextPlugin('styles/[name].css')
+        ])
+
     ]
 };
