@@ -4,10 +4,9 @@
   "description": "spatio-temporal cloud drive",
   "main": "bin/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "react-scripts test --env=jsdom",
     "build": "webpack --progress --colors",
     "start": "npm run build && cd dist && http-server -p 8889 & webpack --watch",
-    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "repository": {
@@ -29,6 +28,7 @@
     "bootstrap-datepicker": "^1.6.0",
     "d3": "^3.5.15",
     "font-awesome": "^4.6.3",
+    "immutable": "^3.8.1",
     "jquery": "^2.2.1",
     "moment": "^2.14.1",
     "moments": "0.0.2",
@@ -37,6 +37,7 @@
     "react-bootstrap": "^0.30.3",
     "react-bootstrap-table": "^2.3.8",
     "react-dom": "^15.3.2",
+    "react-dropzone": "^3.11.0",
     "react-grid-layout": "^0.13.1",
     "react-mixin": "^3.0.5",
     "react-redux": "^5.0.2",
@@ -47,9 +48,9 @@
     "redux": "^3.5.2",
     "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.1.0",
+    "searchkit": "1.0.0-5",
     "topojson": "^1.6.22",
-    "victory": "^0.17.0",
-    "searchkit": "1.0.0-5"
+    "victory": "^0.17.0"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom'
 import {Link} from 'react-router';
 import {
     Grid,
@@ -13,6 +12,7 @@ import {
     Modal,
     FieldGroup
 } from 'react-bootstrap'
+import FileDropbox from'./FileDropbox'
 
 import '../style/styles.scss'
 import '../style/file-uploader.scss'
@@ -39,12 +39,7 @@ class FileTopIndicator extends Component {
         this.setState({value: e.target.value});
     }
 
-
-    // openUploadModel (event) {
-    //     console.log('hello, uploader1')
-    //     alert('hello, uploader')
-    // }
-
+    handle
 
     render() {
         return (
@@ -54,8 +49,9 @@ class FileTopIndicator extends Component {
                         <Col md={1}> <Button bsClass="btn btn-all-files opacity50">所有文件</Button></Col>
                         <Col md={6}> </Col>
                         <Col md={2}>
-                            <Button id="btnUpload" bsClass="btn btn-upload to-m-left8" onClick={this.open.bind(this)}>上传</Button>
-                            <Button id="btnNew" bsClass="btn btn-default to-m-left20">新建</Button>
+                            <Button id="btnUpload" bsClass="btn btn-upload to-m-left8"
+                                    onClick={this.open.bind(this)}>上传</Button>
+                            <Button id="btnNew" bsClass="btn btn-default to-m-left20" >新建</Button>
                         </Col>
                         <Col md={2}> <FormGroup>
                             <InputGroup>
@@ -88,12 +84,13 @@ class FileTopIndicator extends Component {
                                        multiple="multiple"/>
                             </div>
                             <div>
-                                <div id="dropbox">
-                                    <span className="font-file-list">
-                                        可以把文件拖到这里
-                                    </span>
+                                {/*<div id="dropbox">*/}
+                                {/*<span className="font-file-list">*/}
+                                {/*可以把文件拖到这里*/}
+                                {/*</span>*/}
 
-                                </div>
+                                {/*</div>*/}
+                                <FileDropbox ></FileDropbox>
                             </div>
                         </form>
 
