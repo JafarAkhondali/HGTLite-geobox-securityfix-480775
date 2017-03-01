@@ -13,6 +13,5 @@ export default (
         <Route path="welcome" component={WelcomePage}/>
         <Route path="accounts" component={AccountPage}/>
         <Route path="search" component={SearchkitPage}/>
-
     </Route>
 );

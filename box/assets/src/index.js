@@ -1,25 +1,27 @@
 import 'babel-polyfill';
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {createStore, combineReducers} from 'redux'
-import {Provider} from 'react-redux'
-import {Router, Route, IndexRoute, Link, hashHistory, browserHistory} from 'react-router'
-import {syncHistoryWithStore, routerReducer} from 'react-router-redux'
-
-
-
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {createStore, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
+import reducer from './reducer';
+import {Router, Route, IndexRoute, Link, hashHistory, browserHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
+import thunk from 'redux-thunk';
 
 
 import routes from './routes'
 
 import './style/index.scss'
 
-var contentDOM = document.getElementById("content");
+const store = createStore(reducer, applyMiddleware(thunk));
+const history = syncHistoryWithStore(hashHistory, store)
+
 
 ReactDOM.render(
-    <Router history={hashHistory} routes={routes}>
-
-    </Router>
+    <Provider store={store}>
+        <Router history={history} routes={routes}>
+        </Router>
+    </Provider>
     ,
-    contentDOM
+    document.getElementById("content")
 )

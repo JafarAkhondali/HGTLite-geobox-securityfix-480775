@@ -6,7 +6,7 @@ import React  from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import actions from '../actions/appleAction';
+import actions from '../action/fileAction';
 import FileItem from './FileItem';
 import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
 
@@ -21,13 +21,13 @@ class FileList extends React.Component {
         super()
     }
 
-    getFileList(files) {
+    getFileItems(files) {
         let data = [];
         files.forEach(file => {
-            data.push(<File fileItem={file} eatApple={this.props.actions.eatApple}/>)
+            data.push(<FileItem fileItem={file} key={file.id}/>)
         });
 
-        if (!data.length) data.push(<div >苹果篮子空空如也</div>);
+        if (!data.length) data.push(<div >云盘空空如也</div>);
 
         return data;
     }
@@ -35,11 +35,10 @@ class FileList extends React.Component {
 
     render() {
 
-        let {fileBasket, actions} = this.props;
-        let {files, isPicking} = fileBasket;
+        let {fileList, actions} = this.props;
+        let {files, isPicking} = fileList;
 
         return (
-
             <div >
                 <div>
                     <Grid>
@@ -48,13 +47,15 @@ class FileList extends React.Component {
                             <Col md={5}> </Col>
                             <Col md={1}> 大小</Col>
                             <Col md={1}>类型 </Col>
-                            <Col md={2}> 修改时间</Col>
+                            <Col md={2}> 修改时间 <button onClick={actions.fetchFile()
+                            }></button>
+                            </Col>
                         </Row>
                     </Grid>
                     <HRLine/>
                 </div>
                 <div id="boxList">
-                    {this.getFileList(files)}
+                    {this.getFileItems(files)}
                 </div >
 
 
@@ -66,7 +67,7 @@ class FileList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    fileBasket: state.fileBasket
+    fileList: state.fileList
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -27,7 +27,7 @@ class FileItem extends React.Component {
             <div>
                 <Grid>
                     <Row >
-                        <Col md={3}><i className="fa fa-file-text-o fa-2x fa-blue opacity75"></i>
+                        <Col md={3}><i className="fa fa-folder-open-o fa-2x fa-blue opacity75"></i>
                             <a className="font-file-name to-m-left6" href="https://www.baidu.com"> {fileItem.name} </a></Col>
                         <Col md={1}> </Col>
                         <Col md={3}>
@@ -44,7 +44,7 @@ class FileItem extends React.Component {
                         <Col md={1}> {fileItem.size}</Col>
                         <Col md={1}>{fileItem.type} </Col>
                         <Col md={2}> {fileItem.modified}
-                            <button onClick={eatApple.bind(this, fileItem.name)}> 删掉</button>
+                            <button  > 删掉</button>
                         </Col>
                     </Row>
                 </Grid>
@@ -56,7 +56,6 @@ class FileItem extends React.Component {
 }
 
 FileItem.propTypes = {
-    eatApple: React.PropTypes.func.isRequired,   // 吃苹果的回调，已通过bindActionCreators包装成dispatch(action)
     fileItem: React.PropTypes.object.isRequired     // 单个苹果的数据
 };
 
