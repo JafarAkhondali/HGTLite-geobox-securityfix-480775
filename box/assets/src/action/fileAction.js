@@ -14,10 +14,16 @@ let actions = {
 
             /** 通知开始摘苹果 */
             dispatch(actions.fileFetchStart());
-
-            fetch('https://hacker-news.firebaseio.com/v0/jobstories.json')
+            var listFileURL = 'https://api.github.com/users/uptonking';
+            fetch(listFileURL, {
+                mode: 'cors'
+            })
                 .then(res => {
-                    if (res.status != 200) dispatch(actions.fileFetchFailure(res.statusText));
+                    if (res.status != 200) {
+                        dispatch(actions.fileFetchFailure(res.statusText));
+                    }
+
+                    console.log(res.json())
 
                     /** 备注这里的url只是测试用的，这个是之前hacker news的api, 这里只是确保接口是通的，至于数据还是自己mock */
                     let weight = Math.floor(200 + Math.random() * 50);

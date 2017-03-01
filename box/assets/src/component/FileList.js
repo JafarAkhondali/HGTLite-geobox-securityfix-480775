@@ -43,12 +43,12 @@ class FileList extends React.Component {
                 <div>
                     <Grid>
                         <Row >
-                            <Col md={3}><i className="fa  fa-2x  "></i> <span className="to-m-left16">文件名</span> </Col>
+                            <Col md={3}><i className="fa fa-2x"></i> <span className="to-m-left16">文件名</span> </Col>
                             <Col md={5}> </Col>
                             <Col md={1}> 大小</Col>
                             <Col md={1}>类型 </Col>
-                            <Col md={2}> 修改时间 <button onClick={actions.fetchFile()
-                            }></button>
+                            <Col md={2}> 修改时间
+                                <button onClick={actions.fetchFile}>请求</button>
                             </Col>
                         </Row>
                     </Grid>

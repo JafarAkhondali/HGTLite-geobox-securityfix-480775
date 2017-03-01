@@ -5,7 +5,6 @@ import   './FileList.scss';
 import React  from 'react';
 import {Link} from 'react-router';
 
-import {ListGroup, ListGroupItem} from 'react-bootstrap';
 import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
 
 import HRLine from './HRLine'
@@ -43,9 +42,7 @@ class FileItem extends React.Component {
                         <Col md={1}> </Col>
                         <Col md={1}> {fileItem.size}</Col>
                         <Col md={1}>{fileItem.type} </Col>
-                        <Col md={2}> {fileItem.modified}
-                            <button  > 删掉</button>
-                        </Col>
+                        <Col md={2}> {fileItem.modified}  </Col>
                     </Row>
                 </Grid>
                 <HRLine/>

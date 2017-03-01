@@ -2,7 +2,6 @@ import {fromJS} from 'immutable';
 
 const initialState = {
     isPicking: false,
-    newFileId: "file000099",
     files: [
         {
             id: "file000001",
