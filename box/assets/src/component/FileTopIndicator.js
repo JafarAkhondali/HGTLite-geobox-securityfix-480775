@@ -25,6 +25,7 @@ class FileTopIndicator extends Component {
             showModal: false,
             value: ''
         }
+        this.submit = this.submit.bind(this);
     }
 
     close() {
@@ -39,7 +40,30 @@ class FileTopIndicator extends Component {
         this.setState({value: e.target.value});
     }
 
-    handle
+
+    submit(e) {
+        e.preventDefault()
+        // alert('点击了上传按钮')
+        let formData = new FormData();
+        const filesToUpload = this.fileInput.files;
+        console.log(filesToUpload)
+        formData.append('file', filesToUpload[0])
+
+        console.log(formData.get('file'))
+
+        fetch('/upload', {
+            method: 'POST',
+            body: formData
+        }).then(function (response) {
+            console.log("上传formData成功")
+
+        }).catch(function (err) {
+            console.log("上传失败")
+        });
+
+        // this.props.handleSubmit(formData)
+    }
+
 
     render() {
         return (
@@ -51,7 +75,7 @@ class FileTopIndicator extends Component {
                         <Col md={2}>
                             <Button id="btnUpload" bsClass="btn btn-upload to-m-left8"
                                     onClick={this.open.bind(this)}>上传</Button>
-                            <Button id="btnNew" bsClass="btn btn-default to-m-left20" >新建</Button>
+                            <Button id="btnNew" bsClass="btn btn-default to-m-left20">新建</Button>
                         </Col>
                         <Col md={2}> <FormGroup>
                             <InputGroup>
@@ -71,35 +95,39 @@ class FileTopIndicator extends Component {
                     <Modal.Header closeButton>
                         <Modal.Title> <span className="font-file-name">上传文件到云盘</span></Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <form onSubmit={this.submit}  >
+                        <Modal.Body>
 
-                        <form id="fileUploadForm">
                             <div><span className="font-file-list">上传到： &frasl;</span></div>
 
                             <div>
                                 <label htmlFor="fileUploadInput" className="btn btn-default btn-upload">
                                     <i className="fa fa-plus "></i> 添加文件
-                                </label>
-                                <input type="file" style={{display: 'none'}} id="fileUploadInput" name="fileUploadInput"
+                                <input type="file"  className="opacity50" ref={(c)=>{this.fileInput=c}}
+                                       name="fileUploadInput"
                                        multiple="multiple"/>
+                                </label>
+
                             </div>
                             <div>
-                                {/*<div id="dropbox">*/}
-                                {/*<span className="font-file-list">*/}
-                                {/*可以把文件拖到这里*/}
-                                {/*</span>*/}
+                                <div id="dropbox">
+                                <span className="font-file-list">
+                                可以把文件拖到这里
+                                </span>
 
-                                {/*</div>*/}
-                                <FileDropbox ></FileDropbox>
+                                </div>
+                                {/*<FileDropbox ></FileDropbox>*/}
                             </div>
-                        </form>
 
-                    </Modal.Body>
-                    <Modal.Footer id="uploadFooter">
-                        <Button onClick={this.close.bind(this)}>取消</Button>
-                        <Button onClick={this.close.bind(this)} bsClass="btn btn-upload ">上传</Button>
+                        </Modal.Body>
+                        <Modal.Footer id="uploadFooter">
+                            <Button onClick={this.close.bind(this)}>取消</Button>
+                            <button type='submit' className="btn btn-upload ">上传
+                            </button>
 
-                    </Modal.Footer>
+                        </Modal.Footer>
+                    </form>
+
                 </Modal>
 
             </div>
@@ -110,4 +138,6 @@ class FileTopIndicator extends Component {
 }
 
 
-export default FileTopIndicator
+export
+default
+FileTopIndicator

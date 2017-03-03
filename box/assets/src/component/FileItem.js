@@ -27,13 +27,13 @@ class FileItem extends React.Component {
 
     handleMouseOver() {
         // console.log('=====1' + event.target.className)
-        this.fid.className = 'opacity100';
+        this.fabDiv.className = 'opacity100';
     }
 
 
     handleMouseOut() {
         // console.log('=====2' + event.target.className)
-        this.fid.className = 'opacity0';
+        this.fabDiv.className = 'opacity0';
 
     }
 
@@ -54,7 +54,7 @@ class FileItem extends React.Component {
                         </Col>
                         <Col md={1}> </Col>
                         <Col md={3}>
-                            <div ref={(c)=>{this.fid = c}} onMouseOver={this.handleMouseOver}
+                            <div ref={(c)=>{this.fabDiv = c}} onMouseOver={this.handleMouseOver}
                                  onMouseLeave={this.handleMouseOut} className={comClass}>
                                 <FileItemFloating   />
                             </div>
