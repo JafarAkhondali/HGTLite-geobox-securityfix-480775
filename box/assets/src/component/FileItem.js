@@ -26,13 +26,13 @@ class FileItem extends React.Component {
     }
 
     handleMouseOver() {
-        console.log('=====1' + event.target.className)
+        // console.log('=====1' + event.target.className)
         this.fid.className = 'opacity100';
     }
 
 
     handleMouseOut() {
-        console.log('=====2' + event.target.className)
+        // console.log('=====2' + event.target.className)
         this.fid.className = 'opacity0';
 
     }
