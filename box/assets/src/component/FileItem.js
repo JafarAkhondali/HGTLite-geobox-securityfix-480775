@@ -1,43 +1,63 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import 'font-awesome/css/font-awesome.css'
-import   './FileList.scss';
-
 import React  from 'react';
-import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
+import fileUIActions from '../action/fileUIAction';
 import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
 
 import HRLine from './HRLine'
+import FileItemFloating from './FileItemFloating'
+import classNames from 'classnames';
 
+import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css'
 import   '../style/styles.scss';
+import   './FileList.scss';
 
 
 class FileItem extends React.Component {
 
-    shouldComponentUpdate(nextProps) {
-        return nextProps.state != this.props.state;
+    constructor() {
+        super()
+        this.handleMouseOver = this.handleMouseOver.bind(this);
+        this.handleMouseOut = this.handleMouseOut.bind(this);
+
+
+    }
+
+    handleMouseOver() {
+        console.log('=====1' + event.target.className)
+        this.fid.className = 'opacity100';
+    }
+
+
+    handleMouseOut() {
+        console.log('=====2' + event.target.className)
+        this.fid.className = 'opacity0';
+
     }
 
     render() {
 
-        let {fileItem} = this.props;
+        let {fileItem, showFAB, actions} = this.props;
+        // onMouseOver={actions.showFAB} onMouseLeave={actions.hideFAB}
+        let comClass = classNames(showFAB ? 'opacity100' : 'opacity0');
+
 
         return (
-            <div>
+            <div >
                 <Grid>
                     <Row >
-                        <Col md={3}><i className="fa fa-folder-open-o fa-2x fa-blue opacity75"></i>
-                            <a className="font-file-name to-m-left6" href="https://www.baidu.com"> {fileItem.name} </a></Col>
+                        <Col md={3}>
+                            <i className="fa fa-folder-open-o fa-2x fa-blue opacity75"></i>
+                            <span className="font-file-name to-m-left6" data-fid={fileItem.id}> {fileItem.name} </span>
+                        </Col>
                         <Col md={1}> </Col>
                         <Col md={3}>
-                            <span>
-                            <i className="fa fa-star-o fa-1x fa-blue opacity75 to-p-left-18"></i>
-                            <i className="fa fa-tag fa-1x fa-blue opacity75 to-p-left-18"></i>
-                            <i className="fa fa-share-alt fa-1x fa-blue opacity75 to-p-left-18"></i>
-                            <i className="fa fa-edit fa-1x fa-blue opacity75 to-p-left-18"></i>
-                            <i className="fa fa-sign-out fa-1x fa-blue opacity75 to-p-left-18"></i>
-                            <i className="fa fa-download fa-1x fa-blue opacity75 to-p-left-18"></i>
-                            </span>
+                            <div ref={(c)=>{this.fid = c}} onMouseOver={this.handleMouseOver}
+                                 onMouseLeave={this.handleMouseOut} className={comClass}>
+                                <FileItemFloating   />
+                            </div>
                         </Col>
                         <Col md={1}> </Col>
                         <Col md={1}> {fileItem.size}</Col>
@@ -53,8 +73,18 @@ class FileItem extends React.Component {
 }
 
 FileItem.propTypes = {
-    fileItem: React.PropTypes.object.isRequired     // 单个苹果的数据
+    fileItem: React.PropTypes.object.isRequired
 };
 
 
-export default FileItem;
+const mapStateToProps = state => ({
+    showFAB: state.fileFAB.showingFAB
+});
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(fileUIActions, dispatch)
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileItem);
+

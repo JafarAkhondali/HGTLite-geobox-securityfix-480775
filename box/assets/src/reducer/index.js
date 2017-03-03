@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import fileListReducer from './fileListReducer';
-import {  routerReducer} from 'react-router-redux'
+import fileFABReducer from './fileFABReducer';
+import {routerReducer} from 'react-router-redux'
 
 /**
  * 此处合并Reducer，这步在本项目中意义不大，因为只有一个appleBasketReducer，完全可以不合并
@@ -11,6 +12,7 @@ import {  routerReducer} from 'react-router-redux'
 
 const rootReducer = combineReducers({
     fileList: fileListReducer,
+    fileFAB: fileFABReducer,
     routing: routerReducer
 });
 

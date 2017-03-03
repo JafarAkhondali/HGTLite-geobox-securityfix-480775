@@ -1,26 +1,24 @@
 // import $ from 'jquery';
 
 
-let actions = {
+let fileBusinessActions = {
 
     fetchFile: function () {
 
         return function (dispatch, getState) {
-            /** 如果正在摘苹果，则结束这个thunk, 不执行摘苹果 */
             if (getState().fileList.isPicking) {
                 console.log("正在请求文件");
                 return;
             }
 
-            /** 通知开始摘苹果 */
-            dispatch(actions.fileFetchStart());
+            dispatch(fileBusinessActions.fileFetchStart());
             var listFileURL = 'https://api.github.com/users/uptonking';
             fetch(listFileURL, {
                 mode: 'cors'
             })
                 .then(res => {
                     if (res.status != 200) {
-                        dispatch(actions.fileFetchFailure(res.statusText));
+                        dispatch(fileBusinessActions.fileFetchFailure(res.statusText));
                     }
 
                     console.log(res.json())
@@ -36,10 +34,10 @@ let actions = {
                         modified: '2017-02-27'
                     }
 
-                    dispatch(actions.fileFetchSuccess(newFile));
+                    dispatch(fileBusinessActions.fileFetchSuccess(newFile));
 
                 }).catch(e => {
-                dispatch(actions.fileFetchFailure(e.statusText));
+                dispatch(fileBusinessActions.fileFetchFailure(e.statusText));
             });
 
         }
@@ -63,4 +61,4 @@ let actions = {
 
 };
 
-export default actions;
+export default fileBusinessActions;

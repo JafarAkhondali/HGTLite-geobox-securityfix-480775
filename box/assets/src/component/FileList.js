@@ -1,19 +1,17 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import 'font-awesome/css/font-awesome.css'
-import   './FileList.scss';
-
 import React  from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import actions from '../action/fileAction';
+import fileBusinessAction from '../action/fileBusinessAction';
 import FileItem from './FileItem';
 import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
 
 import HRLine from './HRLine'
 
+import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css'
+import   './FileList.scss';
 import   '../style/styles.scss';
-
 
 class FileList extends React.Component {
 
@@ -22,6 +20,7 @@ class FileList extends React.Component {
     }
 
     getFileItems(files) {
+        // console.log("获取文件数组："+files)
         let data = [];
         files.forEach(file => {
             data.push(<FileItem fileItem={file} key={file.id}/>)
@@ -33,10 +32,17 @@ class FileList extends React.Component {
     }
 
 
+    handleRowClick(event) {
+        console.log(event.target)
+        console.log(event.target.dataset.fid)
+
+
+        console.log('点击了一次')
+    }
+
     render() {
 
-        let {fileList, actions} = this.props;
-        let {files, isPicking} = fileList;
+        let {files, actions} = this.props;
 
         return (
             <div >
@@ -54,7 +60,7 @@ class FileList extends React.Component {
                     </Grid>
                     <HRLine/>
                 </div>
-                <div id="boxList">
+                <div id="boxList"  onClick={this.handleRowClick}>
                     {this.getFileItems(files)}
                 </div >
 
@@ -67,11 +73,11 @@ class FileList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    fileList: state.fileList
+    files: state.fileList.files
 });
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(fileBusinessAction, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileList);
