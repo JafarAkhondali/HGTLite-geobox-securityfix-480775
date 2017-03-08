@@ -7,6 +7,8 @@ import {Link} from 'react-router';
 import MapView from '../component/MapView';
 import MapShp from '../component/MapShp';
 import MapFile from '../component/MapFile';
+import MapFeature from '../component/MapFeature';
+import MapVector from '../component/MapVector';
 
 class MapPage extends Component {
     constructor() {
@@ -19,7 +21,7 @@ class MapPage extends Component {
         return (
             <div className="container bg-white">
                 <h1>leaflet 地图1</h1>
-                <MapFile />
+                <MapVector />
             </div>
         )
     }
