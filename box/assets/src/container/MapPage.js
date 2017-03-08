@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 
 import MapView from '../component/MapView';
+import MapShp from '../component/MapShp';
 
 class MapPage extends Component {
     constructor() {
@@ -15,9 +16,9 @@ class MapPage extends Component {
         console.log('render MapPage')
         // container bg-white
         return (
-            <div>
-                <h1>leaflet 地图</h1>
-                < MapView />
+            <div className="container bg-white">
+                <h1>leaflet 地图1</h1>
+                <MapShp />
             </div>
         )
     }

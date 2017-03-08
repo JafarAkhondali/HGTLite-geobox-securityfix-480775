@@ -20,8 +20,8 @@ class MapView extends React.Component {
     render() {
 
         // let {position, zoomLevel} = this.props;
-       let position = [51.505, -0.09];
-        let zoomLevel = 13;
+       let position = [30.52935 , 114.35485];
+        let zoomLevel = 18;
         console.log('render mapview')
 
         return (

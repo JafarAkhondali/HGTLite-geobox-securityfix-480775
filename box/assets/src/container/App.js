@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import TopNavbar from '../component/TopNavbar'
 
+import '../style/index.scss'
 import '../style/mapview.scss'
 
 class App extends Component {

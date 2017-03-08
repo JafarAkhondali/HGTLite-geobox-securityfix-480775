@@ -6,7 +6,7 @@
   "scripts": {
     "test": "react-scripts test --env=jsdom",
     "build": "webpack --progress --colors",
-    "start": "npm run build && cd dist && http-server -p 8889 && webpack --watch",
+    "start": "npm run build && cd dist && http-server -p 8889 & webpack --watch",
     "eject": "react-scripts eject"
   },
   "repository": {
@@ -26,6 +26,7 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "bootstrap-datepicker": "^1.6.0",
+    "catiline": "^2.9.3",
     "classnames": "^2.2.5",
     "d3": "^3.5.15",
     "font-awesome": "^4.7.0",
@@ -41,7 +42,8 @@
     "react-dom": "^15.3.2",
     "react-dropzone": "^3.11.0",
     "react-grid-layout": "^0.13.1",
-    "react-leaflet": "^1.1.1",
+    "react-leaflet": "1.0.3",
+    "react-leaflet-shapefile": "^2.0.0",
     "react-mixin": "^3.0.5",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.2",
@@ -52,6 +54,7 @@
     "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.1.0",
     "searchkit": "1.0.0-5",
+    "shpjs": "^3.3.2",
     "topojson": "^1.6.22",
     "victory": "^0.17.0"
   },
