@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import TopNavbar from '../component/TopNavbar'
 
+import '../style/mapview.scss'
+
 class App extends Component {
     constructor() {
         super()
@@ -9,7 +11,7 @@ class App extends Component {
 
     render() {
         return (
-            <div>
+            <div >
                 <TopNavbar/>
                 {this.props.children}
             </div>

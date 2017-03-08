@@ -8,8 +8,8 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: __dirname + '/dist',
-        filename: 'bundle_[name].js',
-        publicPath: 'http://localhost:8889/static/assets/dist'
+        filename: 'bundle_[name].js'
+        // publicPath: 'http://localhost:8889/static/assets/dist'
     },
     module: {
         loaders: [
@@ -27,8 +27,12 @@ module.exports = {
                 include: /src/,
                 loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'sass-loader'])
             },
+            // {
+            //     test: /\.(png|jpg|jpeg|gif)$/,
+            //     loader: 'url-loader'
+            // },
             {
-                test: /\.(eot|woff|ttf|woff2|svg)/,
+                test: /\.(eot|woff|ttf|woff2|svg|png)(\?v=\d+\.\d+\.\d+)?$/,
                 loader: "file-loader"
             }
         ]
