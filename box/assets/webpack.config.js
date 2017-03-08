@@ -11,6 +11,7 @@ module.exports = {
         path: __dirname + '/dist',
         filename: 'bundle_[name].js'
     },
+    node: {fs: 'empty'},
     module: {
         loaders: [
             {
@@ -32,7 +33,7 @@ module.exports = {
             //     loader: 'url-loader'
             // },
             {
-                test: /\.(eot|woff|ttf|woff2|svg|png)(\?v=\d+\.\d+\.\d+)?$/,
+                test: /\.(eot|woff|ttf|woff2|svg|png|json)(\?v=\d+\.\d+\.\d+)?$/,
                 loader: "file-loader"
             }
         ]
@@ -46,6 +47,10 @@ module.exports = {
         }),
         new ExtractTextPlugin('styles/[name].css'),
         new CopyWebpackPlugin([
+            {
+                from: __dirname + '/src/res/lib/shp.js',
+                to: __dirname + '/dist'
+            },
             {
                 from: __dirname + '/src/templates/favicon.ico',
                 to: __dirname + '/dist'
