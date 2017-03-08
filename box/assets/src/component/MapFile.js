@@ -2,7 +2,6 @@ import React from 'react';
 import {Map, Circle, TileLayer, LayersControl, FeatureGroup} from 'react-leaflet'
 import JQuery from 'jquery'
 import {ShapeFile} from 'react-leaflet-shapefile'
-// import FileAPI from 'file-api'
 
 const {BaseLayer, Overlay} = LayersControl;
 

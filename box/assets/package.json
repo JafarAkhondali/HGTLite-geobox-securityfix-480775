@@ -29,8 +29,6 @@
     "catiline": "^2.9.3",
     "classnames": "^2.2.5",
     "d3": "^3.5.15",
-    "file-api": "^0.10.4",
-    "filereader": "^0.10.3",
     "font-awesome": "^4.7.0",
     "immutable": "^3.8.1",
     "jquery": "^2.2.1",
