@@ -3,11 +3,13 @@ from random import random, randint
 import math
 import time
 
+
 try:
     from elasticsearch import Elasticsearch
     es = Elasticsearch()
 except ImportError:
     quit()
+
 
 es_index = 'esgeoindex'
 
