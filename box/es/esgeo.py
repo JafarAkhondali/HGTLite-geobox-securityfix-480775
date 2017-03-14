@@ -103,7 +103,7 @@ if __name__ == "__main__":
     create_index()
     # put(a['id'],a,'esgeotype')
     for i in range(0,100):
-	print '== {0:1d}'.format(i)
+	print '==== {0:1d}'.format(i)
         x = (random() - .5) * 1000
         y = (random() - .5) * 1000
         a = {'id': 'polygonid' + str(i),

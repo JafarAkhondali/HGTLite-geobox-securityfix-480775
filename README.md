@@ -1,14 +1,14 @@
 # geobox
 Geospatial Cloud Drive
 
-## basic drive  
+## basic drive
 - upload
 - download
 - update
-- query 
+- query
 
-## geospatial features   
-- timeline   
-- 2d map  
+## geospatial features  
+- timeline  
+- 2d map
 - 3d map
 - streaming population
