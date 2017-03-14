@@ -1,18 +1,18 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {Hits} from 'searchkit'
 
+class FileHits extends React.Component {
 
-class FileHits extends Hits {
+  render() {
+    const result = this.props.result;
+    console.log(result._source)
+            return (
 
-  renderResult(result:any) {
-
-        return (
-            <div key={result._id}>
-                    <div >文件id获取  {result._source.id}</div>
-            </div>
-        )
-    }
-
+                <div key={result._id}>
+                        <div >文件id获取  {result._source.id}</div>
+                </div>
+            )
+        }
 }
 
 export default FileHits

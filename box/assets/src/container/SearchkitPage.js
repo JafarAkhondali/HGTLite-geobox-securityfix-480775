@@ -17,9 +17,6 @@ import '../style/styles.scss'
 const host = "http://localhost:9200/esgeoindex"
 const searchkit = new SearchkitManager(host)
 
-
-
-
 class SearchkitPage extends Component {
     render() {
         return (
@@ -36,7 +33,7 @@ class SearchkitPage extends Component {
                         <SideBar>过滤器占位</SideBar>
 
                         <LayoutResults>
-                        <FileHits  hitsPerPage={4}/>
+                            <Hits hitsPerPage={3} itemComponent={FileHits} />
                         </LayoutResults>
 
                     </LayoutBody>
