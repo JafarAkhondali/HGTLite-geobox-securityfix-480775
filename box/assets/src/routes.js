@@ -7,12 +7,16 @@ import  FileListPage from './container/FileListPage'
 import  WelcomePage  from './container/WelcomePage'
 import SearchkitPage from './container/SearchkitPage'
 import MapPage from './container/MapPage'
+import TimelinePage from './container/TimelinePage'
+import FileMapPage from './container/FileMapPage'
 
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={FileListPage}/>
         <Route path="welcome" component={WelcomePage}/>
-        <Route path="map" component={MapPage}/>
+            <Route path="map" component={MapPage}/>
+            <Route path="filemap" component={FileMapPage}/>
+        <Route path="timeline" component={TimelinePage}/>
         <Route path="accounts" component={AccountPage}/>
         <Route path="search" component={SearchkitPage}/>
     </Route>

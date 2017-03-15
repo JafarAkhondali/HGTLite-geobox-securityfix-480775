@@ -1,9 +1,9 @@
 import   './HRLine.scss';
 
-import React, {Component} from 'react';
+import React from 'react';
 
 
-class HRLine extends Component {
+class HRLine extends React.Component {
 
     constructor() {
         super()

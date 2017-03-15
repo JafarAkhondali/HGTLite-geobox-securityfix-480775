@@ -34,7 +34,7 @@ class TopNavbar extends Component {
                             <MenuItem eventKey={2.5} href="/#/search">高级搜索</MenuItem>
                         </NavDropdown>
                         <NavDropdown eventKey={3} title="工具箱" id="basic-nav-dropdown">
-                            <MenuItem eventKey={3.1}>文件时间轴</MenuItem>
+                            <MenuItem eventKey={3.1}  href="/#/timeline">文件时间轴</MenuItem>
                             <MenuItem eventKey={3.2}>地理标签</MenuItem>
                             <MenuItem eventKey={3.3}>文件报告</MenuItem>
                             <MenuItem eventKey={3.4}>回收站</MenuItem>

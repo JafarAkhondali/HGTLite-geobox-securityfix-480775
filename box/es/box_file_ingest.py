@@ -2,6 +2,7 @@
 from uuid import uuid4
 from datetime import datetime
 from geometry_helper import createQuadrilateral
+from random import randint
 # from ../common/print_hepler
 try:
     from elasticsearch import Elasticsearch
@@ -23,11 +24,11 @@ def put_doc( index_name,type_name,uuid, body,es_conn=es):
                     body=body)
     return ret
 
-def create_box_file_doc(fid,file_dispaly_name,file_dir_name,upload_date):
+def create_box_file_doc(fid,file_display_name,file_dir_name,upload_date):
     uploadDate = upload_date
     fileObj = {
         "file_id": 'boxfid'+fid,
-        "file_dispaly_name":file_dispaly_name,
+        "file_display_name":file_display_name,
         "file_real_name":'boxfrname'+fid,
         "file_real_location":'boxfrloc'+fid,
         "file_dir":{
@@ -85,13 +86,12 @@ def create_vector_part_doc(ext,region):
     return vectorObj
 
 if __name__=="__main__":
-    # for i in range(0,100):
-        # print '{0:2}'.format(i)
-    fileId = str(uuid4()).replace('-','')
-    fileId = '5f7ce32c85b64b1da623fdcf3fce2aae'
-    upTime = datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')
-    boundShp = createQuadrilateral()
-    fileDoc = create_box_file_doc(fileId,"武汉影像2015.tif", "武汉数据", upTime)
-    rasterPartDoc = create_raster_part_doc(5,boundShp,"武汉")
-    # create_index("geoboxes","box_file",fileId,fileDoc,es)
-    put_doc("geoboxes","box_file",fileId,rasterPartDoc,es)
+    for i in range(0,100):
+        print '{0:1}'.format(i)
+        fileId = str(uuid4()).replace('-','')
+        upTime = datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')
+        boundShp = createQuadrilateral()
+        fileDoc = create_box_file_doc(fileId,"武汉影像"+str(i)+".tif", "武汉数据", upTime)
+        rasterPartDoc = create_raster_part_doc(randint(0,50),boundShp,"武汉"+str(i))
+        create_index("geoboxes","box_file",fileId,fileDoc,es)
+        put_doc("geoboxes","box_file",fileId,rasterPartDoc,es)

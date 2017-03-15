@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Link} from 'react-router';
 import {
     Grid,
@@ -17,7 +17,7 @@ import FileDropbox from'./FileDropbox'
 import '../style/styles.scss'
 import '../style/file-uploader.scss'
 
-class FileTopIndicator extends Component {
+class FileTopIndicator extends React.Component {
 
     constructor() {
         super()
@@ -70,8 +70,8 @@ class FileTopIndicator extends Component {
             <div>
                 <Grid>
                     <Row >
-                        <Col md={1}> <Button bsClass="btn btn-all-files opacity50">所有文件</Button></Col>
-                        <Col md={6}> </Col>
+                        <Col md={3}><a href="/#/filemap"><i className="fa fa-map-o"></i></a> <Button bsClass="btn btn-all-files opacity50" >所有文件</Button></Col>
+                        <Col md={4}> </Col>
                         <Col md={2}>
                             <Button id="btnUpload" bsClass="btn btn-upload to-m-left8"
                                     onClick={this.open.bind(this)}>上传</Button>
