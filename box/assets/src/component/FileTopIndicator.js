@@ -1,4 +1,5 @@
 import React  from 'react';
+import ReactDOM from 'react-dom'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -32,6 +33,7 @@ class FileTopIndicator extends React.Component {
         }
         this.submit = this.submit.bind(this);
         this.handleChangeTag = this.handleChangeTag.bind(this);
+        // this.handleChange2= this.handleChange2.bind(this);
     }
 
     close() {
@@ -42,33 +44,36 @@ class FileTopIndicator extends React.Component {
         this.setState({showModal: true});
     }
 
-    handleChange(e) {
-        this.setState({value: e.target.value});
-    }
-
 handleChangeTag(event){
     // console.log(event.target.value)
 this.props.actions.setInputFileTag(event.target.value);
 }
 
+// handleChange2(event){
+// this.myInput.value = event.target.value;
+// }
+
     submit(e) {
         e.preventDefault()
         // alert('点击了上传按钮')
         let formData = new FormData();
+        formData.append('file_tag',this.props.fTag)
+        formData.append('user_id','supersu')
+        // formData.append('input2',this.myInput.value)
+
         const filesToUpload = this.fileInput.files;
         console.log(filesToUpload)
-        formData.append('file_tag',this.props.fTag)
         formData.append('file', filesToUpload[0])
-        formData.append('file_type','影像')
 
         // console.log(formData.get('file'))
+        console.log(formData)
 
         fetch('/file/upload', {
             method: 'POST',
             body: formData
         }).then(function (response) {
             console.log("上传formData成功")
-            console.log(response);
+            console.log('响应结果',response);
 
         }).catch(function (err) {
             console.log("上传失败")
@@ -127,7 +132,8 @@ let{fTag,actions}=this.props;
 
                                 <div className="display-inline-block to-m-left8">
                                     <div><span className="font-file-list">添加标签：</span></div>
-                                    <input type="text"  value={fTag} onChange={this.handleChangeTag}/>
+                                        <input type="text"  value={fTag} onChange={this.handleChangeTag}/>
+                                    {/*<input type="text"  defaultValue="第二项input" ref=(i)=>this.myInput=i onChange=this.handleChange2/>*/}
 
                                 </div>
 
@@ -170,8 +176,6 @@ let{fTag,actions}=this.props;
     }
 
 }
-
-
 
 const mapStateToProps = state => ({
     fTag: state.fileTag.fTag

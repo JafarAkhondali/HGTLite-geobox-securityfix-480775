@@ -9,9 +9,17 @@ import json
 
 @app.route("/file/upload", methods=["POST"])
 def upload():
+    boxfile_base_dir='/usr/share/nginx/html/boxfiles'
     """Handle the upload of a file."""
     print '进入upload方法'
     form = request.form
+    formItems=form.items()
+
+    userId=formItems[0]
+    # print type(form)
+    # print type(formItems)
+    # print type(userId)
+    for i,el in enumerate()
 
     print 'form对象'
     print_obj(form)
@@ -24,13 +32,13 @@ def upload():
         is_ajax = True
 
     # Target folder for these uploads.
-    target = "box/static/uploads/{}".format(upload_key)
+    target = boxfile_base_dir+'/{}'.format(upload_key)
 
     print target
     os.mkdir(target)
 
     print "=== Form Data ==="
-    for key, value in form.items():
+    for key, value in formItems:
         print "接受到的form文件有"
         print key, "=>", value
 
