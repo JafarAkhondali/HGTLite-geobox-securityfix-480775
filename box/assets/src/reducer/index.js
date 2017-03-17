@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import fileListReducer from './fileListReducer';
 import fileFABReducer from './fileFABReducer';
+import fileTagReducer from './fileTagReducer';
 import {routerReducer} from 'react-router-redux'
 
 /**
@@ -13,8 +14,8 @@ import {routerReducer} from 'react-router-redux'
 const rootReducer = combineReducers({
     fileList: fileListReducer,
     fileFAB: fileFABReducer,
+    fileTag:fileTagReducer,
     routing: routerReducer
 });
 
 export default rootReducer;
-

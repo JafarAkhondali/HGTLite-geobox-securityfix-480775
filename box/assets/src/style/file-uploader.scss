@@ -1,3 +1,6 @@
+.file-input{
+    height:32px;
+}
 
 #fileUploadForm > div {
   margin-top: 10px;
@@ -21,14 +24,23 @@
 }
 
 .progress-trough {
-  border: 1px solid #000000;
-  height: 48px;
-  width: 100%;
+  border: 1px solid rgba(0,0,0,0.1);
+  height: 24px;
+  width: 480px;
   position: relative;
 }
 
 .progress-bar {
   width: 50%;
   height: 100%;
-  background-color: #0099FF;
+  background-color: rgba(176,176,176,0.5);
+}
+
+.progress-bar-text{
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.modal-body > div{
+    padding-top: 8px;
 }

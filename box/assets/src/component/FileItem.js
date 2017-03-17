@@ -21,8 +21,6 @@ class FileItem extends React.Component {
         super()
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleMouseOut = this.handleMouseOut.bind(this);
-
-
     }
 
     handleMouseOver() {
@@ -50,7 +48,7 @@ class FileItem extends React.Component {
                     <Row >
                         <Col md={3}>
                             <i className="fa fa-folder-open-o fa-2x fa-blue opacity75"></i>
-                            <span className="font-file-name to-m-left6" data-fid={fileItem.id} > {fileItem.name} </span>
+                            <span className="font-file-name to-m-left6" data-fid={fileItem.id}> {fileItem.name} </span>
                         </Col>
                         <Col md={1}> </Col>
                         <Col md={3}>
@@ -76,14 +74,14 @@ FileItem.propTypes = {
     fileItem: React.PropTypes.object.isRequired
 };
 
-
 const mapStateToProps = state => ({
     showFAB: state.fileFAB.showingFAB
 });
 
-const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(fileUIActions, dispatch)
+// const mapDispatchToProps = dispatch => ({
+//     actions: bindActionCreators(fileUIActions, dispatch)
+//
+// });
 
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FileItem);
+// export default connect(mapStateToProps, mapDispatchToProps)(FileItem);
+export default connect(mapStateToProps)(FileItem);

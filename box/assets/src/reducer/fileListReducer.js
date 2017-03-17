@@ -42,6 +42,7 @@ function fileListReducer(state = initialState, action) {
                 type: action.payload.type,
                 modified: action.payload.modified
             };
+
             return fromJS(state).update('files', list => list.push(newFile))
                 .set('isPicking', false)
                 .toJS();

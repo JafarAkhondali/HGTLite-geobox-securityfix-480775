@@ -9,7 +9,8 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: __dirname + '/dist',
-        filename: 'bundle_[name].js'
+        filename: 'bundle_[name].js',
+        publicPath: 'http://localhost:8889/static/assets/dist'
     },
     node: {fs: 'empty'},
     module: {

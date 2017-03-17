@@ -5,8 +5,8 @@
   "main": "bin/server.js",
   "scripts": {
     "test": "react-scripts test --env=jsdom",
-    "build": "webpack --progress --colors",
-    "start": "npm run build && cd dist && http-server -p 8889 & webpack --watch",
+    "build": "webpack --progress --colors & webpack --watch",
+    "start": "webpack --progress --colors && cd dist && http-server -p 8889 & webpack --watch",
     "eject": "react-scripts eject"
   },
   "repository": {

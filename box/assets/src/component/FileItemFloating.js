@@ -35,7 +35,4 @@ class FileItemFloating extends React.Component {
     }
 }
 
-
-
-
 export default FileItemFloating;
