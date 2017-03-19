@@ -16,6 +16,7 @@ import {
     Modal,
     FieldGroup
 } from 'react-bootstrap'
+import DragList from './DragList'
 
 import fileTagActions from '../action/fileTagAction'
 
@@ -55,18 +56,21 @@ this.props.actions.setInputFileTag(event.target.value);
 
     submit(e) {
         e.preventDefault()
-        // alert('点击了上传按钮')
+
         let formData = new FormData();
         formData.append('file_tag',this.props.fTag)
         formData.append('user_id','supersu')
         // formData.append('input2',this.myInput.value)
 
         const filesToUpload = this.fileInput.files;
-        console.log(filesToUpload)
-        formData.append('file', filesToUpload[0])
+        console.log(filesToUpload.length,filesToUpload)
+        for(let i=0,len=filesToUpload.length;i<len;i++){
+            formData.append('file', filesToUpload[i])
 
-        // console.log(formData.get('file'))
-        console.log(formData)
+        }
+
+        console.log(formData.get('file'))
+        // console.log(formData)
 
         fetch('/file/upload', {
             method: 'POST',
@@ -121,11 +125,9 @@ let{fTag,actions}=this.props;
 
                             <div>
                                 <div className="display-inline-block">
-                                    <label htmlFor="fileUploadInput" className="btn btn-default btn-upload">
+                                    <label htmlFor="file[]" className="btn btn-default btn-upload">
                                         <i className="fa fa-plus fa-1x"></i> &nbsp;&nbsp;添加文件
-                                    <input type="file"  className="file-input opacity0" ref={(c)=>{this.fileInput=c}}
-                                           name="fileUploadInput"
-                                           multiple="multiple"/>
+                                    <input type="file"  className="file-input opacity0" ref={(c)=>{this.fileInput=c}} name="file[]"   multiple/>
                                     </label>
                                 </div>
 
@@ -143,9 +145,13 @@ let{fTag,actions}=this.props;
                                 {/*<FileDropbox ></FileDropbox>*/}
 
                                 <div id="dropbox">
-                                    <span className="font-file-list">
-                                    可以把文件拖到这里
-                                    </span>
+                                    <div className="font-file-list">
+                                    <DragList>
+                                        <span>可以把文件拖到这里</span>
+                                            <span>无文件</span>
+                                        <span>上船吧</span>
+                                    </DragList>
+                                </div>
                                 </div>
                             </div>
 

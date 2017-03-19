@@ -19,10 +19,8 @@ def upload():
     # print type(form)
     # print type(formItems)
     # print type(userId)
-    for i,el in enumerate()
+    #for i,el in enumerate()
 
-    print 'form对象'
-    print_obj(form)
     # Create a unique "session ID" for this particular batch of uploads.
     upload_key = str(uuid4())
     print upload_key
@@ -33,7 +31,6 @@ def upload():
 
     # Target folder for these uploads.
     target = boxfile_base_dir+'/{}'.format(upload_key)
-
     print target
     os.mkdir(target)
 
@@ -42,7 +39,9 @@ def upload():
         print "接受到的form文件有"
         print key, "=>", value
 
-    for upload in request.files.getlist("file"):
+    fileLists = request.files.getlist("file");
+    print len(fileLists)
+    for upload in fileLists:
         filename = upload.filename.rsplit("/")[0]
         destination = "/".join([target, filename])
         print "Accept incoming file:", filename
