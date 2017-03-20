@@ -26,6 +26,8 @@ import {
     FieldGroup
 }
 from 'react-bootstrap'
+import {fromJS} from 'immutable';
+
 import DragList from './DragList'
 
 import fileTagActions from '../action/fileTagAction'
@@ -41,7 +43,7 @@ class FileTopIndicator extends React.Component {
             var fd = new FormData();
             fd.append('testname1', 'testvalue1');
             fd.append('testname1', 'testvalue2');
-            fd.append('file',null)
+            // fd.append('file',null)
             this.state = {
                 showModal: false,
                 uploadFormData: fd
@@ -83,7 +85,7 @@ class FileTopIndicator extends React.Component {
             for (let i = 0, len = filesToUpload.length; i < len; i++) {
                 formData.append('file', filesToUpload[i])
             }
-            console.log(formData.get('file'));
+            console.log('选择的文件有',formData.getAll('file'));
 
             this.setState({
                 uploadFormData: formData
@@ -114,21 +116,29 @@ class FileTopIndicator extends React.Component {
                 method: 'POST',
                 body: this.state.uploadFormData
             }).then(function(response) {
-                console.log("上传formData成功")
-                console.log('响应结果', response);
 
-            }).catch(function(err) {
+                console.log("上传成功")
+                console.log( response);
+
+                let formData1 =null;
+                this.setState({
+                    showModal:false,
+                    uploadFormData: formData1
+                });
+
+
+            }.bind(this)).catch(function(err) {
                 console.log("上传失败")
+                console.log(err);
             });
-
         }
-
 
         render() {
 
             let {
                 fTag, actions
             } = this.props;
+
 
             return ( < div >
                     < Grid >
@@ -146,8 +156,10 @@ class FileTopIndicator extends React.Component {
             bsClass = "btn btn-upload to-m-left8"
             onClick = {
                 this.open.bind(this)
-            } > 上传 < /Button> < Button id = "btnNew"
-            bsClass = "btn btn-default to-m-left20" > 新建 < /Button> < /Col > < Col md = {
+            } > 上传 < /Button>
+             < Button id = "btnNew"
+            bsClass = "btn btn-default to-m-left20" > 新建 < /Button> < /Col >
+             < Col md = {
                     2
                 } > < FormGroup >
                 < InputGroup >
@@ -171,7 +183,7 @@ class FileTopIndicator extends React.Component {
         this.handleUploadFormSubmit
     } >
     < Modal.Body >
-    < div > < span className = "font-file-list" > 上传到： & frasl; < /span></div >
+    < div > < span className = "font-file-list" > 上传到： &frasl; < /span></div >
 
 < div >
     < div className = "display-inline-block" >
@@ -213,7 +225,7 @@ onChange = {
 < div id = "dropbox" >
     < div className = "font-file-list" >
     < DragList inputFiles = {
-        this.state.uploadFormData.get('file')
+        this.state.uploadFormData
     } >
     < /DragList> < /div > < /div> < /div >
 
