@@ -46,6 +46,7 @@
     "react-leaflet-shapefile": "^2.0.0",
     "react-mixin": "^3.0.5",
     "react-redux": "^5.0.2",
+    "react-redux-toastr": "^5.0.0",
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.8",
     "react-select": "^1.0.0-rc.2",

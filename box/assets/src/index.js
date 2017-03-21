@@ -6,6 +6,8 @@ import { Router, hashHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import configureStore from './store/configureStore'
 import routes from './routes'
+import ReduxToastr from 'react-redux-toastr'
+
 
 import './style/index.scss'
 
@@ -14,8 +16,18 @@ const history = syncHistoryWithStore(hashHistory, store)
 
 ReactDOM.render(
   <Provider store={store}>
+      <div>
     <Router history={history} routes={routes}>
     </Router>
+    <ReduxToastr
+      timeOut={9000}
+      newestOnTop={true}
+      preventDuplicates={true}
+      position="top-right"
+      transitionIn="fadeIn"
+      transitionOut="fadeOut"
+      progressBar/>
+  </div>
   </Provider>
   ,
   document.getElementById('content')

@@ -26,19 +26,20 @@
 .progress-trough {
   border: 1px solid rgba(0,0,0,0.1);
   height: 24px;
-  width: 480px;
+  width: 512px;
   position: relative;
 }
 
 .progress-bar {
-  width: 50%;
+  width: 0%;
   height: 100%;
   background-color: rgba(176,176,176,0.5);
 }
 
 .progress-bar-text{
-    color: #fff;
-    font-size: 1.2rem;
+    color: #777;
+    font-size: 1.5rem;
+    padding-top: 1px;
 }
 
 .modal-body > div{

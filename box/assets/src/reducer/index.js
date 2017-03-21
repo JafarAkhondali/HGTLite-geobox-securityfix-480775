@@ -1,4 +1,7 @@
+
 import {combineReducers} from 'redux';
+import {reducer as toastrReducer} from 'react-redux-toastr'
+
 import fileListReducer from './fileListReducer';
 import fileFABReducer from './fileFABReducer';
 import fileTagReducer from './fileTagReducer';
@@ -12,6 +15,7 @@ import {routerReducer} from 'react-router-redux'
  */
 
 const rootReducer = combineReducers({
+    toastr: toastrReducer,
     fileList: fileListReducer,
     fileFAB: fileFABReducer,
     fileTag:fileTagReducer,

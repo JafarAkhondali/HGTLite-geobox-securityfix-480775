@@ -1,3 +1,8 @@
+import 'font-awesome/css/font-awesome.css'
+import 'react-redux-toastr/src/styles/index.scss'
+import '../style/styles.scss'
+import '../style/file-uploader.scss'
+
 import React from 'react';
 import ReactDOM from 'react-dom'
 import {
@@ -13,6 +18,8 @@ import {
     Link
 }
 from 'react-router';
+import {toastr} from 'react-redux-toastr'
+
 import {
     Grid,
     Row,
@@ -35,9 +42,7 @@ import DragList from './DragList'
 
 import fileTagActions from '../action/fileTagAction'
 
-import 'font-awesome/css/font-awesome.css'
-import '../style/styles.scss'
-import '../style/file-uploader.scss'
+
 
 class FileTopIndicator extends React.Component {
 
@@ -50,8 +55,10 @@ class FileTopIndicator extends React.Component {
         this.state = {
             showModal: false,
             isDragActive: false,
+            progressPercentage:0,
             uploadFormData: fd
         }
+
         this.handleUploadFileChange = this.handleUploadFileChange.bind(this);
         this.handleUploadFormSubmit = this.handleUploadFormSubmit.bind(this);
         this.handleChangeTag = this.handleChangeTag.bind(this);
@@ -85,7 +92,7 @@ class FileTopIndicator extends React.Component {
 
     handleUploadFileChange(event) {
         let fileNum = event.target.files.length;
-        console.log('选择的文件数目', fileNum);
+        // console.log('选择的文件数目', fileNum);
         let formData = this.state.uploadFormData;
 
         const filesToUpload = event.target.files;
@@ -95,6 +102,7 @@ class FileTopIndicator extends React.Component {
         }
         console.log('选择的文件有', formData.getAll('file'));
 
+
         this.setState({
             uploadFormData: formData
         });
@@ -102,6 +110,8 @@ class FileTopIndicator extends React.Component {
 
     handleUploadFormSubmit(event) {
         event.preventDefault()
+
+
 
         let formData = this.state.uploadFormData;
         formData.append('file_tag', this.props.fTag);
@@ -116,28 +126,87 @@ class FileTopIndicator extends React.Component {
             uploadFormData: formData
         });
 
-        console.log(this.state.uploadFormData.get('file'))
-            // console.log(formData)
 
-        fetch('/file/upload', {
-            method: 'POST',
-            body: this.state.uploadFormData
-        }).then(function(response) {
+        // fetch('/file/upload', {
+        //     method: 'POST',
+        //     body: this.state.uploadFormData
+        // }).then(function(response) {
+        //
+        //     console.log("上传成功")
+        //     console.log(response);
+        //
+        //     let formData1 = new FormData();
+        //     this.setState({
+        //         showModal: false,
+        //         uploadFormData: formData1
+        //     });
+        //
+        //
+        // }.bind(this)).catch(function(err) {
+        //     console.log("上传失败")
+        //     console.log(err);
+        // });
 
-            console.log("上传成功")
-            console.log(response);
+        console.log(this.state.uploadFormData.getAll('file'))
+            var allFiles=this.state.uploadFormData.getAll('file');
+            var filenames=[];
+            for(let i=0,len=allFiles.length;i<len;i++){
+                filenames.push(allFiles[i].name)
+            }
+            console.log('=====filenames1',filenames)
 
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            // console.log('上传成功', xhr.responseText);
+            console.log('=====filenames2',filenames);
+            let successInfo =filenames.join('\r\n');
+            successInfo +=('\r\n'+filenames.length+' 个文件上传成功')
+
+            toastr.success('成功',successInfo )
             let formData1 = new FormData();
+
             this.setState({
                 showModal: false,
+                progressPercentage:0,
                 uploadFormData: formData1
             });
 
+        }.bind(this);
 
-        }.bind(this)).catch(function(err) {
-            console.log("上传失败")
-            console.log(err);
-        });
+        xhr.onerror = function() {
+            // console.log('上传失败', xhr.responseText)
+            let errorInfo =filenames.join('\r\n');
+            errorInfo +=('\r\n'+filenames.length+' 个文件上传失败')
+
+            toastr.error('失败',errorInfo )
+        }
+        
+        xhr.onreadystatechange = function(){
+                  if(xhr.readyState === 4 && xhr.status === 200){
+                      console.log(xhr.responseText);
+                  }
+              }
+              //progess监听一定要放在open之前
+        xhr.upload.onprogress = function(event) {
+            console.log('运行progress')
+            var percent = 0;
+            var position = event.loaded || event.position;
+            var total = event.total;
+            if (event.lengthComputable) {
+                percent = Math.ceil(position / total * 100);
+            }
+            // console.log(percent);
+            this.setState({
+                progressPercentage:percent
+            })
+
+        }.bind(this)
+        xhr.open('POST', '/file/upload');
+
+
+        xhr.send(formData)
+
+
     }
 
 
@@ -166,7 +235,7 @@ class FileTopIndicator extends React.Component {
         let formData2 = this.state.uploadFormData;
 
         var dragFiles = event.dataTransfer.files;
-        console.log('拖拽文件数',dragFiles.length);
+        console.log('拖拽文件数', dragFiles.length);
         // console.log(filesToUpload.length, filesToUpload)
         for (let i = 0, len = dragFiles.length; i < len; i++) {
             formData2.append('file', dragFiles[i])
@@ -188,6 +257,9 @@ class FileTopIndicator extends React.Component {
             fTag, actions
         } = this.props;
 
+let progressBarStyle={
+    width:this.state.progressPercentage/100
+}
 
         return (
 
@@ -275,6 +347,7 @@ class FileTopIndicator extends React.Component {
 
     < div >
 
+
         < div id = "dropbox"
     onDragEnter = {
         this.handleDragEnter
@@ -292,25 +365,23 @@ class FileTopIndicator extends React.Component {
         < /DragList></div >
         < /div> < /div >
 
-    < div >
+        < div >
 
         < fieldset id = "progress"
-    style = {
-            {
-                display: 'inline'
-            }
-        } >
-        < div className = "progress-trough" >
+    >
+        < div className = "progress-trough display-inline-block " >
+
         < div id = "progress-bar"
-    className = "progress-bar" >
-        < span className = "progress-bar-text" > 0 % < /span></div >
-        < /div> < /fieldset > < /div>
+    className = "progress-bar " style={{width:this.state.progressPercentage+'%'}} >
+        </div >
+
+        < /div><div className="display-inline-block to-m-left1">< span className = "progress-bar-text" > {this.state.progressPercentage} % < /span></div> < /fieldset > < /div>
 
     < /Modal.Body> < Modal.Footer
     id = "uploadFooter" > < Button onClick = {
         this.close.bind(this)
     } > 取消 < /Button> < button
-    type ="submit"
+    type = "submit"
     className = "btn btn-upload " > 上传 < / button >
 
     < / Modal.Footer ></

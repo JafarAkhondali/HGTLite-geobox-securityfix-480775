@@ -14,9 +14,9 @@ class DragList extends React.Component {
         let {
             inputFiles
         } = this.props;
-        console.log('传过来的文件对象', inputFiles);
-        console.log(inputFiles.getAll('file'));
-        console.log(inputFiles.getAll('file') ? inputFiles.getAll('file').length : 'length null');
+        // console.log('传过来的文件对象', inputFiles);
+        // console.log(inputFiles.getAll('file'));
+        // console.log(inputFiles.getAll('file') ? inputFiles.getAll('file').length : 'length null');
 
         return (
             // <ul className = "list-group" > {this.generateChosenFiles(inputFiles)} </ul>
