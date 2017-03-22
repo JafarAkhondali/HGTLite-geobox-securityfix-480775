@@ -42,15 +42,13 @@ import DragList from './DragList'
 
 import fileTagActions from '../action/fileTagAction'
 
-
+import {formatDate} from '../script/DatetimeFormat'
 
 class FileTopIndicator extends React.Component {
 
     constructor() {
         super()
         var fd = new FormData();
-        fd.append('testname1', 'testvalue1');
-        fd.append('testname1', 'testvalue2');
         // fd.append('file',null)
         this.state = {
             showModal: false,
@@ -65,8 +63,6 @@ class FileTopIndicator extends React.Component {
         this.handleDragEnter = this.handleDragEnter.bind(this);
         this.handleDragOver = this.handleDragOver.bind(this);
         this.handleDrop = this.handleDrop.bind(this);
-
-        // this.handleChange2= this.handleChange2.bind(this);
     }
 
     close() {
@@ -86,10 +82,9 @@ class FileTopIndicator extends React.Component {
         this.props.actions.setInputFileTag(event.target.value);
     }
 
-    // handleChange2(event){
-    // this.myInput.value = event.target.value;
-    // }
-
+    /**
+     * 文件选取input事件方法
+     */
     handleUploadFileChange(event) {
         let fileNum = event.target.files.length;
         // console.log('选择的文件数目', fileNum);
@@ -100,33 +95,33 @@ class FileTopIndicator extends React.Component {
         for (let i = 0, len = filesToUpload.length; i < len; i++) {
             formData.append('file', filesToUpload[i])
         }
-        console.log('选择的文件有', formData.getAll('file'));
-
+        // console.log('选择的文件有', formData.getAll('file'));
 
         this.setState({
             uploadFormData: formData
         });
     }
 
+    /**
+     * 文件及form提交事件方法
+     */
     handleUploadFormSubmit(event) {
         event.preventDefault()
 
-
-
         let formData = this.state.uploadFormData;
-        formData.append('file_tag', this.props.fTag);
+
+        // 关于上传者
         formData.append('user_id', 'supersu');
-        // formData.append('input2',this.myInput.value)
-        // const filesToUpload = this.fileInput.files;
-        // console.log(filesToUpload.length, filesToUpload)
-        // for (let i = 0, len = filesToUpload.length; i < len; i++) {
-        //     formData.append('file', filesToUpload[i])
-        // }
+        formData.append('upload_date', formatDate());
+        // 关于上传指定信息
+        formData.append('file_dir_id', 'supersu');
+        formData.append('file_tag', this.props.fTag);
+
         this.setState({
             uploadFormData: formData
         });
 
-
+        // 使用fetch上传文件（备用）
         // fetch('/file/upload', {
         //     method: 'POST',
         //     body: this.state.uploadFormData
@@ -147,22 +142,22 @@ class FileTopIndicator extends React.Component {
         //     console.log(err);
         // });
 
-        console.log(this.state.uploadFormData.getAll('file'))
+        // 从FormData获取文件用于传输完成提示
             var allFiles=this.state.uploadFormData.getAll('file');
             var filenames=[];
             for(let i=0,len=allFiles.length;i<len;i++){
                 filenames.push(allFiles[i].name)
             }
-            console.log('=====filenames1',filenames)
 
+        // 创建发送xhr请求，并处理结果
         let xhr = new XMLHttpRequest();
+
         xhr.onload = function() {
             // console.log('上传成功', xhr.responseText);
-            console.log('=====filenames2',filenames);
             let successInfo =filenames.join('\r\n');
             successInfo +=('\r\n'+filenames.length+' 个文件上传成功')
 
-            toastr.success('成功',successInfo )
+            toastr.success('上传成功',successInfo )
             let formData1 = new FormData();
 
             this.setState({
@@ -170,25 +165,24 @@ class FileTopIndicator extends React.Component {
                 progressPercentage:0,
                 uploadFormData: formData1
             });
-
         }.bind(this);
 
         xhr.onerror = function() {
             // console.log('上传失败', xhr.responseText)
             let errorInfo =filenames.join('\r\n');
             errorInfo +=('\r\n'+filenames.length+' 个文件上传失败')
-
-            toastr.error('失败',errorInfo )
+            toastr.error('上传失败',errorInfo )
         }
-        
+
         xhr.onreadystatechange = function(){
                   if(xhr.readyState === 4 && xhr.status === 200){
                       console.log(xhr.responseText);
                   }
               }
+
               //progess监听一定要放在open之前
         xhr.upload.onprogress = function(event) {
-            console.log('运行progress')
+            // console.log('运行progress')
             var percent = 0;
             var position = event.loaded || event.position;
             var total = event.total;
@@ -199,13 +193,11 @@ class FileTopIndicator extends React.Component {
             this.setState({
                 progressPercentage:percent
             })
+        }.bind(this);
 
-        }.bind(this)
         xhr.open('POST', '/file/upload');
 
-
         xhr.send(formData)
-
 
     }
 

@@ -20,7 +20,7 @@ ReactDOM.render(
     <Router history={history} routes={routes}>
     </Router>
     <ReduxToastr
-      timeOut={9000}
+      timeOut={3500}
       newestOnTop={true}
       preventDuplicates={true}
       position="top-right"

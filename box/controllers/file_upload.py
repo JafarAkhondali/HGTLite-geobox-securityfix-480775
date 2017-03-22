@@ -5,13 +5,17 @@ from flask import Flask, request, redirect, url_for, render_template
 from uuid import uuid4
 import os
 import json
-
+import ConfigParser
 
 @app.route("/file/upload", methods=["POST"])
 def upload():
-    boxfile_base_dir='/usr/share/nginx/html/boxfiles'
-    """Handle the upload of a file."""
-    print '进入upload方法'
+    # 从配置文件获取文件存储路径
+    cf = ConfigParser.ConfigParser()
+    # cf.read('test.conf')
+    cf.readfp(open('application.conf'))
+    boxfile_base_dir=cf.get('file_server','file_dir')
+    # print boxfile_base_dir
+
     form = request.form
     formItems=form.items()
 
