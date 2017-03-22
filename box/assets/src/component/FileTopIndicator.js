@@ -121,6 +121,8 @@ class FileTopIndicator extends React.Component {
             uploadFormData: formData
         });
 
+        // console.log(this.state.uploadFormData.get('file_dir_id'))
+
         // 使用fetch上传文件（备用）
         // fetch('/file/upload', {
         //     method: 'POST',

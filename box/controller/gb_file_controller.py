@@ -2,6 +2,7 @@
 from box import app, db
 from flask import jsonify
 from box.model.gb_file_do import GbFile, GbFileSchema
+from datetime import datetime
 
 _BASE_URL = '/file'
 
@@ -14,24 +15,28 @@ def get_file_by_id(row_id):
 
 
 @app.route(_BASE_URL + '/all')
-def list_all_file_bundle():
+def list_all_file():
     all_file = GbFile.query.all()
     file_schema = GbFileSchema()
     return file_schema.jsonify(all_file, many=True)
 
-#
-# def save_obj_suffix_bundle(bundle_obj):
-#     db.session.add(bundle_obj)
-#     db.session.commit()
-#
-#
-# @app.route(_BASE_URL + '/add/<suffix_details>')
-# def save_suffix_bundle(suffix_details):
-#     print 'add01'
-#     bundle = GbSuffixBundle('id002', 'type002', 'topojson', suffix_details)
-#     print 'add02'
-#     save_obj_suffix_bundle(bundle)
-#
+
+def save_obj_file(file_obj):
+    db.session.add(file_obj)
+    db.session.commit()
+
+
+# @app.route(_BASE_URL + '/add/<notes>')
+@app.route(_BASE_URL + '/add')
+def save_file():
+    now=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    gbFile1 = GbFile('uuid','filename','filename','dirid','uploadKey','type016',1024, 'filename', 'tag', 0,now,'supersu',now,'supersu', 'supersu','notes', 'supersu', 0,'supersu', now, 0)
+    print gbFile1
+    print 'add01'
+    record = gbFile1
+    print 'add02'
+    save_obj_file(record)
+
 #
 # @app.route(_BASE_URL + '/update/id/<row_id>')
 # def update_by_id(row_id):

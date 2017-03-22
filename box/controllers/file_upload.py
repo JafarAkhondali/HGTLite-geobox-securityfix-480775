@@ -3,9 +3,12 @@
 from box import app, db
 from flask import Flask, request, redirect, url_for, render_template
 from uuid import uuid4
+from datetime import datetime
 import os
 import json
 import ConfigParser
+
+from box.model.gb_file_do import GbFile,GbFileSchema
 
 @app.route("/file/upload", methods=["POST"])
 def upload():
@@ -22,7 +25,7 @@ def upload():
     uploadDict={}
     for i,el in enumerate(formItems):
         uploadDict[el[0]] = el[1]
-    # print uploadDict
+    print uploadDict
 
     # 创建本次上传id，作为文件存储目录id
     uploadKey = str(uuid4())
@@ -34,17 +37,44 @@ def upload():
     # print targetPath
     os.makedirs(targetPath)
 
-    # for key, value in formItems:
-    #     print "接受到的form文件有"
-    #     print key, "=>", value
-
     fileLists = request.files.getlist("file");
     # print len(fileLists)
+    gbFileLists = []
     for upload in fileLists:
         filename = upload.filename.rsplit("/")[0]
         destination = "/".join([targetPath, filename])
         # print "Accept incoming file:", filename
         # print "Save it to:", destination
         upload.save(destination)
+        gbFile = GbFile(
+            file_id = str(uuid4()),
+            file_display_name = filename,
+            file_real_name = filename,
+            dir_id = uploadDict['file_dir_id'],
+            file_real_location = uploadKey,
+            file_type_id = 'type016',
+            file_size = 1024,
+            file_suffix =  upload.filename.rsplit('.')[-1],
+            file_tag = uploadDict['file_tag'],
+            is_public = 0,
+            create_date = None,
+            create_by = None,
+            update_date = None,
+            update_by = None,
+            file_hashcode = None,
+            notes = '',
+            user_id =None,
+            is_deleted = 0,
+            upload_by = uploadDict['user_id'],
+            upload_date = datetime.strptime(uploadDict['upload_date'],'%Y-%m-%d %H:%M:%S'  ),
+            is_starred = 0
+        )
+        print gbFile
+        gbFileLists.append(gbFile)
+
+    for f in gbFileLists:
+        db.session.add(f)
+
+    db.session.commit()
 
     return '上传完成'

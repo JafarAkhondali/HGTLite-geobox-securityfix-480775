@@ -21,10 +21,10 @@ class GbUser(db.Model):
     def __init__(self, user_id, user_name, user_nickname, user_password, user_type, user_tel,
                  user_email, notes, create_date, create_by, update_date, update_by,
                  is_deleted, user_avatar):
-        user_id = user_id
-        user_name = user_name
-        user_nickname = user_nickname
-        user_password = user_password
+        self.user_id = user_id
+        self.user_name = user_name
+        self.user_nickname = user_nickname
+        self.user_password = user_password
         user_type = user_type
         user_tel = user_tel
         user_email = user_email
