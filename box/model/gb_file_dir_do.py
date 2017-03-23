@@ -19,7 +19,6 @@ class GbFileDir(db.Model):
     def __repr__(self):
         return '<GbFileDir %r>' % self.dir_name
 
-
 class GbFileDirSchema(ma.ModelSchema):
     class Meta:
         model = GbFileDir

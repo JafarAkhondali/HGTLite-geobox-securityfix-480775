@@ -28,7 +28,7 @@ def upload():
     print uploadDict
 
     # 创建本次上传id，作为文件存储目录id
-    uploadKey = str(uuid4())
+    uploadKey = str(uuid4()).replace('-','')
     # print upload_key
 
     # 创建文件存储真实文件夹，默认全部存储在第二层文件夹

@@ -1,6 +1,6 @@
 # _*_ coding: utf-8 _*_
 from box import app, db
-from flask import jsonify
+from flask import jsonify,request
 from box.model.gb_file_dir_do import GbFileDir, GbFileDirSchema
 
 _BASE_URL = '/dir'
@@ -21,6 +21,26 @@ def list_all_dir():
     # print all_suffix[0]
     # return all_suffix[0].suffix_details
     # return jsonify(suffix_schema.dump(all_suffix).data)
+    return dir_schema.jsonify(all_dir, many=True)
+
+@app.route(_BASE_URL + '/<user_id>/all')
+@app.route(_BASE_URL + '/<user_id>/all/<page_num>/<page_size>')
+def list_all_dir_by_user_id(user_id,page_num=1,page_size=2):
+    pid =  request.args.get('parent_id')
+
+    if(pid is None):
+        page = GbFileDir.query.filter_by(user_id=user_id).paginate(int(page_num),int(page_size),False)
+        # print all_dir
+
+    else:
+        filters = {
+            GbFileDir.user_id == user_id,
+            GbFileDir.parent_id == pid
+        }
+        page = GbFileDir.query.filter(*filters).paginate(int(page_num),int(page_size),False)
+
+    all_dir = page.items
+    dir_schema = GbFileDirSchema()
     return dir_schema.jsonify(all_dir, many=True)
 
 #
