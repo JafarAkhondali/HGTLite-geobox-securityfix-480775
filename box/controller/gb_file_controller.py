@@ -1,8 +1,10 @@
 # _*_ coding: utf-8 _*_
 from box import app, db
-from flask import jsonify
-from box.model.gb_file_do import GbFile, GbFileSchema
+from flask import jsonify,request
 from datetime import datetime
+
+from box.model.gb_file_do import GbFile, GbFileSchema
+
 
 _BASE_URL = '/file'
 
@@ -14,15 +16,38 @@ def get_file_by_id(row_id):
     return jsonify(file_schema.dump(file_record).data)
 
 
-@app.route(_BASE_URL + '/all')
-def list_all_file():
-    all_file = GbFile.query.all()
+@app.route(_BASE_URL + '/<user_id>/all')
+@app.route(_BASE_URL + '/<user_id>/all/<page_num>/<page_size>')
+def list_all_file(user_id,page_num=1,page_size=8):
+    pid =  request.args.get('parent_id')
+
+    if(pid is None):
+        page = GbFile.query.filter_by(user_id=user_id).paginate(int(page_num),int(page_size),False)
+    else:
+        filters = {
+            GbFile.user_id == user_id,
+            GbFile.parent_id == pid
+        }
+        page = GbFile.query.filter(*filters).paginate(int(page_num),int(page_size),False)
+
+    all_file = page.items
+    print type(all_file)
     file_schema = GbFileSchema()
     return file_schema.jsonify(all_file, many=True)
 
+'''插入单条记录
 
+'''
 def save_obj_file(file_obj):
     db.session.add(file_obj)
+    db.session.commit()
+
+'''插入多条记录
+
+'''
+def save_list_obj_file(file_obj):
+    for o in file_obj:
+        db.session.add(o)
     db.session.commit()
 
 

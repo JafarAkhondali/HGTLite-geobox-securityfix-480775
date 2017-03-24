@@ -19,4 +19,6 @@ from box.controller import gb_suffix_bundle_controller
 from box.controller import gb_file_controller
 from box.controller import gb_file_dir_controller
 
-from box.controllers import file_upload
+from box.controllers import file_upload_controller
+from box.controllers import file_by_user_controller
+from box.controllers import file_extent_controller

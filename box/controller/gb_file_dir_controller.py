@@ -25,13 +25,11 @@ def list_all_dir():
 
 @app.route(_BASE_URL + '/<user_id>/all')
 @app.route(_BASE_URL + '/<user_id>/all/<page_num>/<page_size>')
-def list_all_dir_by_user_id(user_id,page_num=1,page_size=2):
+def list_all_dir_by_user_id(user_id,page_num=1,page_size=8):
     pid =  request.args.get('parent_id')
 
     if(pid is None):
         page = GbFileDir.query.filter_by(user_id=user_id).paginate(int(page_num),int(page_size),False)
-        # print all_dir
-
     else:
         filters = {
             GbFileDir.user_id == user_id,
