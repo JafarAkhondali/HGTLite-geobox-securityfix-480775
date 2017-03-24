@@ -3,6 +3,7 @@ import {Route, IndexRoute, Link} from 'react-router'
 
 import App from './container/App'
 import AccountPage from './container/AccountPage'
+import NoLoginPage from './container/NoLoginPage'
 import  FileListPage from './container/FileListPage'
 import  WelcomePage  from './container/WelcomePage'
 import SearchkitPage from './container/SearchkitPage'
@@ -14,10 +15,13 @@ export default (
     <Route path="/" component={App}>
         <IndexRoute component={FileListPage}/>
         <Route path="welcome" component={WelcomePage}/>
-            <Route path="map" component={MapPage}/>
-            <Route path="filemap" component={FileMapPage}/>
+
+        <Route path="map" component={MapPage}/>
+        <Route path="filemap" component={FileMapPage}/>
         <Route path="timeline" component={TimelinePage}/>
-        <Route path="accounts" component={AccountPage}/>
+        <Route path="account" component={AccountPage}/>
+        <Route path="nobody" component={NoLoginPage}/>
+
         <Route path="search" component={SearchkitPage}/>
     </Route>
 );

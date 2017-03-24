@@ -34,8 +34,6 @@ def list_all_file_by_user(user_id,page_num=1,page_size=8):
         resultFolderList.append(GbFileDir(*folder))
 
 
-
-
     # pid =  request.args.get('parent_id')
     #
     # if(pid is None):

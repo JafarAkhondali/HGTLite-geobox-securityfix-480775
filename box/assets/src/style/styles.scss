@@ -1,5 +1,18 @@
 @import "./global.scss";
 
+.font-file-list {
+  color: #999;
+}
+
+.font-file-name {
+  color: #333;
+  margin-top: 15px;
+}
+
+.font-size-jumbotron{
+    font-size: 36px;
+}
+
 .bg-white {
   background-color: #fff;
   height: 960px;
@@ -14,6 +27,15 @@
   color: $blue-base;
 
 }
+.btn-upload {
+  color: #fff;
+  background: $blue-base;
+}
+
+.btn-all-files {
+  color: #fff;
+  background: $grey-05;
+}
 
 .rgb-white-pure {
   color: #fff;
@@ -27,9 +49,25 @@
     float: left;
 }
 
+.position-relative{
+    position: relative;
+}
+
+.position-absolute{
+    position: absolute;
+}
+
 .display-inline-block{
     display: inline-block;
 
+}
+
+.text-align-center{
+    text-align: center;
+}
+
+.vertical-align-middle{
+    vertical-align: middle;
 }
 
 .visible-false{
@@ -44,29 +82,41 @@
   color: #000;
 }
 
-.to-p-left-18 {
-  padding-left: 24px;
+.to-top42{
+    top:42%
 }
+
 .to-p-left-12 {
   padding-left: 12px;
 }
 
+.to-p-left-18 {
+  padding-left: 24px;
+}
+
+
+.to-m-top-8{
+    margin-top: 8px;
+}
 
 .to-m-top-12{
     margin-top: 12px;
 }
-.to-m-top-8{
-    margin-top: 8px;
+
+.to-m-top-18 {
+  margin-top: 18px;
 }
-.to-m-left1 {
-  margin-left: 1%;
-}
+
 .to-m-left-18 {
   margin-left: 18px;
 }
 
 .to-m-left-36 {
   margin-left: 36px;
+}
+
+.to-m-left1 {
+  margin-left: 1%;
 }
 
 .to-m-left4 {
@@ -96,8 +146,6 @@
   margin-left: 24%;
 }
 
-
-
 .to-m-left28 {
   margin-left: 28%;
 }
@@ -106,28 +154,52 @@
   margin-left: 48%;
 }
 
-.to-m-top-18 {
-  margin-top: 18px;
-}
 
-.btn-upload {
-  color: #fff;
-  background: $blue-base;
-}
 
-.btn-all-files {
-  color: #fff;
-  background: $grey-05;
-}
+
 
 .height-20 {
   height: 20px;
 }
-.opacity0 {
-  opacity: 0;
+
+.height-180 {
+  height: 180px;
+}
+
+.height-240 {
+  height: 240px;
 }
 
 
+.height24 {
+  height: 24%;
+}
+
+.height42{
+  height: 42%;
+}
+
+.height75 {
+  height: 75%;
+}
+
+.height100 {
+  height: 100%;
+}
+.width24{
+    width:24%;
+}
+.width75{
+    width:75%;
+}
+
+.width100{
+    width:100%;
+}
+
+.opacity0 {
+  opacity: 0;
+}
 .opacity25 {
   opacity: 0.25;
 }
@@ -139,12 +211,4 @@
 }
 .opacity100 {
   opacity: 1;
-}
-.font-file-list {
-  color: #999;
-}
-
-.font-file-name {
-  color: #333;
-  margin-top: 15px;
 }

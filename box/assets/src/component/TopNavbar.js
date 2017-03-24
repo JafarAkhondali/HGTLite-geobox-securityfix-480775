@@ -25,7 +25,7 @@ class TopNavbar extends Component {
                 <Navbar.Collapse>
                     <Nav>
                         <NavItem eventKey={1} href="#">收藏夹</NavItem>
-                        <NavDropdown eventKey={2} title="文件分类" id="basic-nav-dropdown">
+                        <NavDropdown eventKey={2} title="文件分类" id="basic-nav-dropdown-classify">
                             <MenuItem eventKey={2.1}>ArcGIS</MenuItem>
                             <MenuItem eventKey={2.2}>CAD</MenuItem>
                             <MenuItem eventKey={2.3}>矢量</MenuItem>
@@ -33,7 +33,7 @@ class TopNavbar extends Component {
                             <MenuItem divider/>
                             <MenuItem eventKey={2.5} href="/#/search">高级搜索</MenuItem>
                         </NavDropdown>
-                        <NavDropdown eventKey={3} title="工具箱" id="basic-nav-dropdown">
+                        <NavDropdown eventKey={3} title="工具箱" id="basic-nav-dropdown-kits">
                             <MenuItem eventKey={3.1}  href="/#/timeline">文件时间轴</MenuItem>
                             <MenuItem eventKey={3.2}>地理标签</MenuItem>
                             <MenuItem eventKey={3.3}>文件报告</MenuItem>
@@ -42,9 +42,10 @@ class TopNavbar extends Component {
                         </NavDropdown>
                     </Nav>
                     <Nav pullRight>
-                        <NavItem eventKey={1} href="/#/accounts">
-                            用户设置
-                        </NavItem>
+                        <NavDropdown eventKey={4} title="supersu" id="basic-nav-dropdown-user">
+                            <MenuItem eventKey={4.1}  href="/#/account" >用户设置</MenuItem>
+                            <MenuItem eventKey={4.2} href="/#/nobody">退出</MenuItem>
+                        </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
