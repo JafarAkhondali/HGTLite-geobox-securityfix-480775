@@ -14,13 +14,14 @@ class NoLoginPage extends Component {
 
     render() {
         return (
-            <div className="container bg-white">
+            <div className="container ">
 
-                <div  className="position-absolute text-align-center to-top42" >
+                <div  className="position-absolute text-align-center to-top36" >
 
-                <Grid  >
+                <Grid >
 
                     <Row className="height42">
+
                        <Col   md={2}></Col>
                        <Col   md={8}>
                                 <span className="font-file-list font-size-jumbotron" >矢量、影像、文档，一盘搞定</span>
@@ -34,9 +35,9 @@ class NoLoginPage extends Component {
 
                      <Row className="show-grid">
                         <Col   md={1}></Col>
-                        <Col   md={4}> <Button bsSize="large" >注册</Button></Col>
+                        <Col   md={4}> <Button bsSize="large"  block href="/#/login">注册</Button></Col>
                         <Col   md={2}></Col>
-                        <Col   md={4}> <Button bsStyle="success" bsSize="large">登录</Button></Col>
+                        <Col   md={4}> <Button bsStyle="success" bsSize="large" block href="/#/login">登录</Button></Col>
                         <Col   md={1}></Col>
                       </Row>
 
