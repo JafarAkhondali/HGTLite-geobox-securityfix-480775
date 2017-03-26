@@ -1,4 +1,4 @@
-@import "./global.scss";
+@import "global.scss";
 
 .font-file-list {
   color: #999;
@@ -9,8 +9,12 @@
   margin-top: 15px;
 }
 
-.font-size-jumbotron{
+.font-size-36{
     font-size: 36px;
+}
+
+.font-size-48{
+    font-size: 48px;
 }
 
 .bg-white {
@@ -19,19 +23,25 @@
   margin-top: -24px;
 }
 
+.c-white-pure{
+    color: $pure_white;
+}
+
 .no-border {
   border: none;
 }
 
 .fa-blue {
   color: $blue-base;
-
 }
 .btn-upload {
   color: #fff;
   background: $blue-base;
 }
 
+.bg-blue-base{
+    background-color: $blue-base;
+}
 .btn-all-files {
   color: #fff;
   background: $grey-05;
@@ -80,6 +90,10 @@
 
 .rgb-black-pure {
   color: #000;
+}
+
+.letter-space-8{
+    letter-spacing: 8px
 }
 
 .to-top18{

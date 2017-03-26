@@ -44,7 +44,7 @@ class TopNavbar extends Component {
                     <Nav pullRight>
                         <NavDropdown eventKey={4} title="supersu" id="basic-nav-dropdown-user">
                             <MenuItem eventKey={4.1}  href="/#/account" >用户设置</MenuItem>
-                            <MenuItem eventKey={4.2} href="/#/nobody">退出</MenuItem>
+                            <MenuItem eventKey={4.2} href="/#/welcome">退出</MenuItem>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
