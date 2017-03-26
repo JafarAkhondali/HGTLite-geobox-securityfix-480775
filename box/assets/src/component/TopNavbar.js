@@ -14,6 +14,9 @@ class TopNavbar extends Component {
     }
 
     render() {
+
+
+
         return (
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
@@ -42,10 +45,14 @@ class TopNavbar extends Component {
                         </NavDropdown>
                     </Nav>
                     <Nav pullRight>
+
                         <NavDropdown eventKey={4} title="supersu" id="basic-nav-dropdown-user">
-                            <MenuItem eventKey={4.1}  href="/#/account" >用户设置</MenuItem>
-                            <MenuItem eventKey={4.2} href="/#/welcome">退出</MenuItem>
+                            <MenuItem eventKey={4.1}  href="/#/account"  style={{display:'none'}}>用户设置</MenuItem>
+                                <MenuItem eventKey={4.2} href="/#/welcome">退出</MenuItem>
+                            <MenuItem eventKey={4.3} href="/#/about">关于</MenuItem>
+
                         </NavDropdown>
+
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
