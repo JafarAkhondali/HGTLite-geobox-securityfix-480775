@@ -18,6 +18,7 @@ class LoginPage extends Component {
 
         this.handleLoginFormSubmit = this.handleLoginFormSubmit.bind(this);
         this.handleForgetPassword = this.handleForgetPassword.bind(this);
+        this.handleSignupFormSubmit = this.handleSignupFormSubmit.bind(this);
 
     }
 
@@ -39,6 +40,14 @@ class LoginPage extends Component {
         this.props.actions.fetchLogin(loginFormData);
 
     }
+
+
+    handleSignupFormSubmit(event){
+        event.preventDefault();
+        
+        alert('register')
+    }
+
 
     handleForgetPassword(event){
         event.preventDefault();
@@ -80,12 +89,12 @@ class LoginPage extends Component {
                      <Row >
                         <Col   md={5}>
                             <div className="card-block">
-                                 <form id="signupForm" method="post" action="/signup">
+                                 <form id="signupForm" onSubmit = {this.handleSignupFormSubmit}>
                                    <h1><span className="letter-space-8"> 注册  </span></h1>
-                                   <input name="user[name]" type="text" placeholder="用户名" pattern="^[\w]{3,16}$" autoFocus="autofocus" required="required" className="input pass"/>
-                                   <input name="user[password]" type="password" placeholder="设置密码" required="required" className="input pass"/>
-                                   <input name="user[password2]" type="password" placeholder="确认密码" required="required" className="input pass"/>
-                                   <input name="user[email]" type="email" placeholder="邮箱" className="input pass"/>
+                                   <input name="rName" type="text" placeholder="用户名" pattern="^[\w]{3,16}$"  required="required" className="input pass"/>
+                                   <input name="rPassword" type="password" placeholder="设置密码" required="required" className="input pass"/>
+                                   <input name="rPassword2" type="password" placeholder="确认密码" required="required" className="input pass"/>
+                                   <input name="rEmail" type="email" placeholder="邮箱" className="input pass"/>
                                    <input type="submit" defaultValue="注  册" className="inputButton"/>
                                    <div className="text-center">
 
@@ -100,7 +109,7 @@ class LoginPage extends Component {
                             <div  className="card-block">
                               <form id="loginForm" onSubmit={this.handleLoginFormSubmit} >
                                 <h1><span className="letter-space-8"> 登录  </span></h1>
-                                <input name="userName" type="text" placeholder="用户名或邮箱" className="input pass" ref={(lName)=>this.loginNameInput=lName}/>
+                                <input name="userName" type="text" placeholder="用户名或邮箱" className="input pass" autoFocus="autofocus" ref={(lName)=>this.loginNameInput=lName}/>
                                 <input name="userPassword" type="password" placeholder="密码" required="required" className="input pass" ref={(lPass)=>this.loginPassInput=lPass}/>
                                 <input type="submit" defaultValue="登  录" className="inputButton" />
                                 <div className="text-center">
