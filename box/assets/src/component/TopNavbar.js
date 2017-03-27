@@ -15,7 +15,8 @@ class TopNavbar extends Component {
 
     render() {
 
-
+        let {stateUserName,}
+        stateUserName = this.state.username;
 
         return (
             <Navbar inverse collapseOnSelect>
@@ -46,7 +47,7 @@ class TopNavbar extends Component {
                     </Nav>
                     <Nav pullRight>
 
-                        <NavDropdown eventKey={4} title="supersu" id="basic-nav-dropdown-user">
+                        <NavDropdown eventKey={4} title={stateUserName} id="basic-nav-dropdown-user">
                             <MenuItem eventKey={4.1}  href="/#/account"  style={{display:'none'}}>用户设置</MenuItem>
                                 <MenuItem eventKey={4.2} href="/#/welcome">退出</MenuItem>
                             <MenuItem eventKey={4.3} href="/#/about">关于</MenuItem>

@@ -1,7 +1,8 @@
-import React from 'react';
-
 import 'bootstrap/dist/css/bootstrap.css';
 import '../style/styles.scss'
+
+import React from 'react';
+
 
 class DragList extends React.Component {
 

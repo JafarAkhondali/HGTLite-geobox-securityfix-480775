@@ -1,13 +1,13 @@
 let userNameNavActions = {
-    showFAB: (fid) => (
+    showUserName: (uid) => (
         {
-            type: 'SHOW_FAB',
+            type: 'SHOW_USER_NAME',
             payload: fid
         }
     ),
-    hideFAB: (fid) => (
+    hideUserName: (uid) => (
         {
-            type: 'HIDE_FAB',
+            type: 'HIDE_USER_NAME',
             payload: fid
         }
     )

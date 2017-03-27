@@ -1,9 +1,10 @@
+import '../style/mapview.scss'
+
 import React from 'react';
 import {Link} from 'react-router';
 
 import {Map, TileLayer, Marker, Popup, GeoJson} from 'react-leaflet';
 
-import '../style/mapview.scss'
 
 const statesData = {
     "type": "FeatureCollection", "features": [

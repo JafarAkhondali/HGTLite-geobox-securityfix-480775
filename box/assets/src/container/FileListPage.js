@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import '../style/styles.scss'
 
 import React  from 'react';
 import {Link} from 'react-router';
@@ -6,7 +7,6 @@ import {Link} from 'react-router';
 import FileTopIndicator from '../component/FileTopIndicator'
 import FileList from '../component/FileList'
 
-import '../style/styles.scss'
 
 class FileListPage extends React.Component {
     constructor() {

@@ -19,6 +19,7 @@ const rootReducer = combineReducers({
     fileList: fileListReducer,
     fileFAB: fileFABReducer,
     fileTag:fileTagReducer,
+    login:loginReducer,
     routing: routerReducer
 });
 

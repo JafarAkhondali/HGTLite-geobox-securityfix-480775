@@ -1,11 +1,13 @@
 
+import 'bootstrap/dist/css/bootstrap.css';
+import '../style/styles.scss'
+
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
 
 
-import 'bootstrap/dist/css/bootstrap.css';
-import '../style/styles.scss'
+
 
 class WelcomePage extends Component {
     constructor() {

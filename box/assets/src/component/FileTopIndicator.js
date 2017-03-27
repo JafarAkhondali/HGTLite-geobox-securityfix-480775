@@ -374,7 +374,8 @@ let progressBarStyle={
     < /Modal.Body> < Modal.Footer
     id = "uploadFooter" > < Button onClick = {
         this.close.bind(this)
-    } > 取消 < /Button> < button
+    } > 取消 < /Button>
+    < button
     type = "submit"
     className = "btn btn-upload " > 上传 < / button >
 

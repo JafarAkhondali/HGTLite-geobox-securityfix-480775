@@ -1,9 +1,10 @@
+import '../style/mapview.scss'
+
 import React from 'react';
 import {Link} from 'react-router';
 
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet';
 
-import '../style/mapview.scss'
 
 class MapView extends React.Component {
     constructor() {

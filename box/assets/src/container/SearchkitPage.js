@@ -1,3 +1,5 @@
+import '../style/search-page.scss'
+
 import React, {Component} from 'react'
 import {extend} from 'lodash'
 import {
@@ -10,7 +12,6 @@ import {
     Layout, TopBar, LayoutBody, LayoutResults,
     ActionBar, ActionBarRow, SideBar
 } from 'searchkit'
-import '../style/search-page.scss'
 
 // const host = "http://demo.searchkit.co/api/movies"
 const host = "http://localhost:9200/geoboxes"
