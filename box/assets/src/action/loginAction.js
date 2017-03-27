@@ -26,10 +26,12 @@ let loginActions = {
                     method: 'POST',
                     body: formData
                 }).then(function(response) {
+                    // console.log('===res status',res.status)
+                    // console.log('===res statusText',res.statusText)
+                    // console.log('===res ok',res.ok)
                     return response.json();
                 })
                 .then(function(json) {
-
                     // console.log('登录成功')
 
                     // if (res.status != 200) {
@@ -41,8 +43,18 @@ let loginActions = {
                     // console.log('=====login',loginResponseJson)
                     let loginResult = {};
                     loginResult.userName = loginResponseJson.user_name;
-                    loginResult.msg = loginResponseJson.validate_result;
-                    console.log(loginResult)
+                    //设置注册结果的小卡片不显示
+                    loginResult.signupCode = true;
+                    loginResult.loginCode = loginResponseJson.validate_result;
+                    if(loginResult.loginCode){
+                        loginResult.msg = loginResult.userName+ ' 登录成功，密码验证通过';
+
+
+                    }else{
+                        loginResult.msg = loginResult.userName+ ' 登录失败，用户名或密码错误';
+
+                    }
+                    // console.log(loginResult)
 
                     dispatch(loginActions.loginFetchSuccess(loginResult));
 

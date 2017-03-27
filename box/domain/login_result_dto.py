@@ -12,4 +12,4 @@ class LoginResult(object):
 
 class LoginResultSchema(Schema):
     user_name = fields.Str()
-    validate_result = fields.Str()
+    validate_result = fields.Bool()

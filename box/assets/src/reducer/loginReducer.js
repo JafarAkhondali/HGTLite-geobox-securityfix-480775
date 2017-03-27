@@ -3,7 +3,9 @@ import {fromJS} from 'immutable';
 const initialState = {
     isLogging: false,
     loginResult: {
-        msg:''
+        msg:'',
+        loginCode:true,
+        signupCode:true
     }
 };
 
@@ -16,7 +18,7 @@ function loginReducer(state = initialState, action) {
 
         case 'LOGIN_FETCH_SUCCESS':
             let successMsg =action.payload;
-            console.log(successMsg)
+            // console.log(successMsg)
 
             return fromJS(state).set('loginResult', successMsg)
                 .set('isLogging', false)

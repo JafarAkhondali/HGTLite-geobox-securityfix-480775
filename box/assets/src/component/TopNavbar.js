@@ -1,9 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import './TopNavbar.scss';
+import '../style/styles.scss'
 
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import classNames from 'classnames';
 
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 
@@ -16,7 +18,11 @@ class TopNavbar extends React.Component {
     render() {
 
         let {stateLogged,stateUserName} = this.props;
-        // console.log('=====',this.props)
+        console.log('=====',this.props)
+
+        let accountMenuItemClass = classNames({
+            'display-none':!stateLogged
+        })
 
         return (
             <Navbar inverse collapseOnSelect>
@@ -48,8 +54,8 @@ class TopNavbar extends React.Component {
                     <Nav pullRight>
 
                         <NavDropdown eventKey={4} title={stateUserName} id="basic-nav-dropdown-user">
-                            <MenuItem eventKey={4.1}  href="/#/account"  style={{display:'none'}}>用户设置</MenuItem>
-                                <MenuItem eventKey={4.2} href="/#/welcome">退出</MenuItem>
+                            <MenuItem eventKey={4.1}  href="/#/account"  className={accountMenuItemClass}>用户设置</MenuItem>
+                            <MenuItem eventKey={4.2} href="/#/welcome"  className={accountMenuItemClass}>退出</MenuItem>
                             <MenuItem eventKey={4.3} href="/#/about">关于</MenuItem>
 
                         </NavDropdown>

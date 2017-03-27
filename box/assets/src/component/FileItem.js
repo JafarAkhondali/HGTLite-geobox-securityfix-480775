@@ -53,13 +53,12 @@ class FileItem extends React.Component {
                             <span className="font-file-name to-m-left6" data-fid={fileItem.id}> {fileItem.name} </span>
                         </Col>
                         <Col md={1}> </Col>
-                        <Col md={3}>
+                        <Col md={4}>
                             <div ref={(c)=>{this.fabDiv = c}} onMouseOver={this.handleMouseOver}
                                  onMouseLeave={this.handleMouseOut} className={comClass}>
                                 <FileItemFloating   />
                             </div>
                         </Col>
-                        <Col md={1}> </Col>
                         <Col md={1}> {fileItem.size}</Col>
                         <Col md={1}>{fileItem.type} </Col>
                         <Col md={2}> {fileItem.modified}  </Col>

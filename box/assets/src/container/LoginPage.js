@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-
+import classNames from 'classnames'
 import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
 
 import loginAction from '../action/loginAction';
@@ -17,8 +17,10 @@ class LoginPage extends Component {
         super()
 
         this.handleLoginFormSubmit = this.handleLoginFormSubmit.bind(this);
+        this.handleForgetPassword = this.handleForgetPassword.bind(this);
 
     }
+
 
 
     handleLoginFormSubmit(event){
@@ -29,7 +31,7 @@ class LoginPage extends Component {
         let lName = this.loginNameInput.value;
         let lPass = this.loginPassInput.value;
 
-        console.log(lName,lPass);
+        // console.log(lName,lPass);
 
         loginFormData.append('user_name',lName);
         loginFormData.append('user_password',lPass);
@@ -38,9 +40,34 @@ class LoginPage extends Component {
 
     }
 
+    handleForgetPassword(event){
+        event.preventDefault();
+        event.stopPropagation();
+        alert('请从以下链接联系官网客服\nhttp://www.dx-tech.com/index.asp');
+    }
+
     render() {
 
         let {loginResult,actions}  = this.props;
+
+        var miniCardClassSignup = classNames(
+            'card-block',
+            'mini-card-block',
+            {
+            'visible-false':loginResult.signupCode
+            }
+        )
+
+        var miniCardClassLogin = classNames(
+            'card-block',
+            'mini-card-block',
+            {
+            'visible-false':loginResult.loginCode
+            }
+        )
+
+        // console.log(this.props.loginResult  )
+
 
         return (
             <div className="container">
@@ -59,7 +86,7 @@ class LoginPage extends Component {
                                    <input name="user[password]" type="password" placeholder="设置密码" required="required" className="input pass"/>
                                    <input name="user[password2]" type="password" placeholder="确认密码" required="required" className="input pass"/>
                                    <input name="user[email]" type="email" placeholder="邮箱" className="input pass"/>
-                                   <input type="submit" defaultValue="提交" className="inputButton"/>
+                                   <input type="submit" defaultValue="注  册" className="inputButton"/>
                                    <div className="text-center">
 
                                    </div>
@@ -75,9 +102,9 @@ class LoginPage extends Component {
                                 <h1><span className="letter-space-8"> 登录  </span></h1>
                                 <input name="userName" type="text" placeholder="用户名或邮箱" className="input pass" ref={(lName)=>this.loginNameInput=lName}/>
                                 <input name="userPassword" type="password" placeholder="密码" required="required" className="input pass" ref={(lPass)=>this.loginPassInput=lPass}/>
-                                <input type="submit" defaultValue="登录" className="inputButton" />
+                                <input type="submit" defaultValue="登  录" className="inputButton" />
                                 <div className="text-center">
-                                    <a href="#"  >忘记密码</a>
+                                    <a href="#" onClick={this.handleForgetPassword}>忘记密码</a>
                                 </div>
                               </form>
                             </div>
@@ -88,15 +115,15 @@ class LoginPage extends Component {
 
                       <Row >
                          <Col   md={5}>
-                             <div className="card-block mini-card-block">
-                                  注册结果
-                                </div>
+                             <div className={miniCardClassSignup}>
+                                  {loginResult.msg}
+                            </div>
 
 
                           </Col>
                          <Col   md={1}></Col>
                          <Col   md={5}>
-                             <div  className="card-block mini-card-block">
+                             <div  className={miniCardClassLogin}>
                                {loginResult.msg}
                              </div>
                          </Col>

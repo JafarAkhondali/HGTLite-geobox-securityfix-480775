@@ -16,9 +16,7 @@ def user_login_validate():
     print '上传  '
     print uploadDict
 
-
-
-    loginResult  = LoginResult(uploadDict['user_name'],'验证通过')
+    loginResult  = LoginResult(uploadDict['user_name'],True)
     print loginResult.__dict__
     loginResultSchema = LoginResultSchema()
     return jsonify(loginResultSchema.dump(loginResult).data)

@@ -26,19 +26,19 @@ class WelcomePage extends Component {
 
                        <Col   md={2}></Col>
                        <Col   md={8}>
-                                <span className="font-file-list font-size-48" >矢量、影像、文档，一盘搞定</span>
+                                <span className="font-file-list font-size-40" >矢量、影像、文档，一盘搞定</span>
                        </Col>
                        <Col   md={2}></Col>
                      </Row>
 
-                     <Row className="height-240 opacity75">
+                     <Row className="height-180 opacity75">
 
                       </Row>
 
                      <Row >
                         <Col   md={1}></Col>
                         <Col   md={4}>
-                             <Button bsSize="large"  block href="/#/login"  style={{borderRadius:'0px',border:'none',color:'#777'}}>
+                             <Button bsSize="large"  block href="/#/login"  style={{backgroundColor:'#eee',borderRadius:'0px',border:'none',color:'#777'}}>
                                  <span  className="letter-space-8">注册</span>
                              </Button>
 

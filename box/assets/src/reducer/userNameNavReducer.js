@@ -8,7 +8,7 @@ const initialState = {
 function userNameNavReducer(state = initialState, action) {
     switch (action.type) {
         case 'LOGIN_FETCH_SUCCESS':
-            // console.log(action.payload)
+            console.log(action.payload)
             let uName = action.payload.userName
             return fromJS(state).set('logged', true).set('userName',uName).toJS();
         case 'LOG_OUT':
