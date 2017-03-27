@@ -4,6 +4,9 @@ import '../style/login.scss';
 
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
 import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
 
 import loginAction from '../action/loginAction';
@@ -14,7 +17,6 @@ class LoginPage extends Component {
         super()
 
         this.handleLoginFormSubmit = this.handleLoginFormSubmit.bind(this);
-
 
     }
 
@@ -32,8 +34,7 @@ class LoginPage extends Component {
         loginFormData.append('user_name',lName);
         loginFormData.append('user_password',lPass);
 
-
-
+        this.props.actions.fetchLogin(loginFormData);
 
     }
 
@@ -96,7 +97,7 @@ class LoginPage extends Component {
                          <Col   md={1}></Col>
                          <Col   md={5}>
                              <div  className="card-block mini-card-block">
-                               登录结果{loginResult.msg}
+                               {loginResult.msg}
                              </div>
                          </Col>
                          <Col   md={1}></Col>
@@ -117,7 +118,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(loginActions, dispatch)
+    actions: bindActionCreators(loginAction, dispatch)
 
 });
 

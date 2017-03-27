@@ -1,13 +1,13 @@
-
 import 'bootstrap/dist/css/bootstrap.css';
 import './TopNavbar.scss';
 
-import React, {Component} from 'react';
+import React from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
 
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 
-class TopNavbar extends Component {
+class TopNavbar extends React.Component {
 
     constructor() {
         super()
@@ -15,8 +15,8 @@ class TopNavbar extends Component {
 
     render() {
 
-        let {stateUserName,}
-        stateUserName = this.state.username;
+        let {stateLogged,stateUserName} = this.props;
+        // console.log('=====',this.props)
 
         return (
             <Navbar inverse collapseOnSelect>
@@ -62,4 +62,15 @@ class TopNavbar extends Component {
 
 }
 
-export default TopNavbar
+const mapStateToProps = state => ({
+    stateLogged: state.userNameNav.logged,
+    stateUserName:state.userNameNav.userName
+
+});
+
+// const mapDispatchToProps = dispatch => ({
+//     actions: bindActionCreators(loginActions, dispatch)
+//
+// });
+
+export default connect(mapStateToProps)(TopNavbar);

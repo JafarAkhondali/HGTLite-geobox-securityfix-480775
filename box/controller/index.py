@@ -1,3 +1,4 @@
+# _*_ coding: utf-8 _*_
 from box import app
 from flask import render_template
 

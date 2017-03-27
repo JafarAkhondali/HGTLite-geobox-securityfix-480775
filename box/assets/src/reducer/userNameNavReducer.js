@@ -1,12 +1,18 @@
 import {fromJS} from 'immutable';
 
-function userNameNavReducer(state = {showingUserName: false}, action) {
+const initialState = {
+    logged: false,
+    userName:'请登陆'
+};
+
+function userNameNavReducer(state = initialState, action) {
     switch (action.type) {
-        case 'SHOW_USER_NAME':
-            // console.log(action.paylod)
-            return {showingFAB: true};
-        case 'HIDE_FAB':
-            return {showingFAB: false};
+        case 'LOGIN_FETCH_SUCCESS':
+            // console.log(action.payload)
+            let uName = action.payload.userName
+            return fromJS(state).set('logged', true).set('userName',uName).toJS();
+        case 'LOG_OUT':
+            return fromJS(state).set('logged', false).set('userName','请登陆').toJS();
         default:
             return state;
     }

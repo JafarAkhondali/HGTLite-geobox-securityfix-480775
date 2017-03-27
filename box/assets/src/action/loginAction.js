@@ -1,43 +1,61 @@
-
 import BASE_URL from '../script/BaseUrl';
 import VERSION from '../script/Version';
 
 let loginActions = {
 
-    fetchLogin: function () {
+    fetchLogin: function(formData) {
 
-        return function (dispatch, getState) {
 
-            if (getState().login.islogining) {
+
+        return function(dispatch, getState) {
+
+            const state = getState();
+            // console.log(state);
+
+            if (state.login.islogining) {
                 console.log("正在发送登录请求");
                 return;
             }
 
+
             dispatch(loginActions.loginFetchStart());
 
-            var loginURL = BASE_URL.localServer +'/'+VERSION.api+ '/user/login';
+            var loginURL = BASE_URL.localServer + '/' + VERSION.api + '/user/login';
             fetch(loginURL, {
-                mode: 'cors'
-            })
-                .then(res => {
-                    if (res.status != 200) {
-                        dispatch(loginActions.loginFetchFailure(res.statusText));
-                    }
+                    mode: 'cors',
+                    method: 'POST',
+                    body: formData
+                }).then(function(response) {
+                    return response.json();
+                })
+                .then(function(json) {
 
-                    console.log(res.json())
+                    // console.log('登录成功')
 
-                    /** 备注这里的url只是测试用的，这个是之前hacker news的api, 这里只是确保接口是通的，至于数据还是自己mock */
-                    let weight = Math.floor(200 + Math.random() * 50);
+                    // if (res.status != 200) {
+                    //     dispatch(loginActions.loginFetchFailure(res.statusText));
+                    // }
 
-                    let loginJson = {
-                        msg:'登录成功'
-                    }
+                    let loginResponseJson = json;
 
-                    dispatch(loginActions.loginFetchSuccess(loginJson));
+                    // console.log('=====login',loginResponseJson)
+                    let loginResult = {};
+                    loginResult.userName = loginResponseJson.user_name;
+                    loginResult.msg = loginResponseJson.validate_result;
+                    console.log(loginResult)
+
+                    dispatch(loginActions.loginFetchSuccess(loginResult));
+
 
                 }).catch(e => {
-                dispatch(loginActions.loginFetchFailure(e.statusText));
-            });
+                    // console.log('登录失败')
+
+                    // console.log( e)
+                    let loginResult = {};
+                    loginResult.msg = '登录失败：' + e.message;
+
+                    dispatch(loginActions.loginFetchFailure(loginResult));
+                });
 
         }
     },
@@ -51,9 +69,9 @@ let loginActions = {
         payload: loginResult
     }),
 
-    loginFetchFailure: errMsg => ({
+    loginFetchFailure: loginResult => ({
         type: 'LOGIN_FETCH_FAILURE',
-        payload: new Error(errMsg),
+        payload: loginResult,
         error: true
     }),
 

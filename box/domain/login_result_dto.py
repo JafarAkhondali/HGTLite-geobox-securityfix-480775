@@ -1,24 +1,15 @@
 # _*_ coding: utf-8 _*_
-from box import db, ma
+from marshmallow import Schema, fields
 
-
-class UserLoginBundle():
-    __tablename__ = 'gb_suffix_bundle'
-    bundle_id = db.Column(db.String(32), primary_key=True)
-    type_id = db.Column(db.String(32))
-    file_suffix = db.Column(db.String(256))
-    suffix_details = db.Column(db.String(256))
-
-    def __init__(self, bundle_id, type_id, file_suffix, suffix_details):
-        self.bundle_id = bundle_id
-        self.type_id = type_id
-        self.file_suffix = file_suffix
-        self.suffix_details = suffix_details
+class LoginResult(object):
+    def __init__(self, user_name, validate_result):
+        self.user_name = user_name
+        self.validate_result = validate_result
 
     def __repr__(self):
-        return '<GbSuffixBundle %r>' % self.file_suffix
+        return '<LoginResult %r>' % self.user_name
 
 
-class GbSuffixBundleSchema(ma.ModelSchema):
-    class Meta:
-        model = GbSuffixBundle
+class LoginResultSchema(Schema):
+    user_name = fields.Str()
+    validate_result = fields.Str()

@@ -5,6 +5,8 @@ import {reducer as toastrReducer} from 'react-redux-toastr'
 import fileListReducer from './fileListReducer';
 import fileFABReducer from './fileFABReducer';
 import fileTagReducer from './fileTagReducer';
+import loginReducer from './loginReducer';
+import userNameNavReducer from './userNameNavReducer';
 import {routerReducer} from 'react-router-redux'
 
 /**
@@ -20,6 +22,7 @@ const rootReducer = combineReducers({
     fileFAB: fileFABReducer,
     fileTag:fileTagReducer,
     login:loginReducer,
+    userNameNav:userNameNavReducer,
     routing: routerReducer
 });
 
