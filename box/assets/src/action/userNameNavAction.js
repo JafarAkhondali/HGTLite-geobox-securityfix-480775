@@ -1,14 +1,8 @@
 let userNameNavActions = {
-    showUserName: (uid) => (
+
+    logOut: () => (
         {
-            type: 'SHOW_USER_NAME',
-            payload: fid
-        }
-    ),
-    hideUserName: (uid) => (
-        {
-            type: 'HIDE_USER_NAME',
-            payload: fid
+            type: 'LOG_OUT'
         }
     )
 }

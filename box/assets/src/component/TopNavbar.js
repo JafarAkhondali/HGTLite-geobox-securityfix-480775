@@ -5,9 +5,14 @@ import '../style/styles.scss'
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
 import classNames from 'classnames';
 
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
+
+
+import userNameNavAction from '../action/userNameNavAction'
 
 class TopNavbar extends React.Component {
 
@@ -17,8 +22,8 @@ class TopNavbar extends React.Component {
 
     render() {
 
-        let {stateLogged,stateUserName} = this.props;
-        console.log('=====',this.props)
+        let {stateLogged,stateUserName,actions} = this.props;
+        // console.log('=====',this.props)
 
         let accountMenuItemClass = classNames({
             'display-none':!stateLogged
@@ -53,9 +58,9 @@ class TopNavbar extends React.Component {
                     </Nav>
                     <Nav pullRight>
 
-                        <NavDropdown eventKey={4} title={stateUserName} id="basic-nav-dropdown-user">
+                        <NavDropdown eventKey={4} title={stateUserName} id="basic-nav-dropdown-user"  href="/#/login" >
                             <MenuItem eventKey={4.1}  href="/#/account"  className={accountMenuItemClass}>用户设置</MenuItem>
-                            <MenuItem eventKey={4.2} href="/#/welcome"  className={accountMenuItemClass}>退出</MenuItem>
+                            <MenuItem eventKey={4.2} href="/#/welcome"  className={accountMenuItemClass} onClick={actions.logOut}>退出</MenuItem>
                             <MenuItem eventKey={4.3} href="/#/about">关于</MenuItem>
 
                         </NavDropdown>
@@ -74,9 +79,9 @@ const mapStateToProps = state => ({
 
 });
 
-// const mapDispatchToProps = dispatch => ({
-//     actions: bindActionCreators(loginActions, dispatch)
-//
-// });
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(userNameNavAction, dispatch)
 
-export default connect(mapStateToProps)(TopNavbar);
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(TopNavbar);

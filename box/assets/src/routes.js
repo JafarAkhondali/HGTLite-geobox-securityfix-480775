@@ -2,6 +2,7 @@ import React from 'react'
 import {Route, IndexRoute, Link} from 'react-router'
 
 import App from './container/App'
+import AboutPage from './container/AboutPage'
 import AccountPage from './container/AccountPage'
 import LoginPage from './container/LoginPage'
 import  FileListPage from './container/FileListPage'
@@ -21,6 +22,7 @@ export default (
 
         <Route path="welcome" component={WelcomePage}/>
         <Route path="account" component={AccountPage}/>
+        <Route path="about" component={AboutPage}/>
         <Route path="login" component={LoginPage}/>
 
         <Route path="search" component={SearchkitPage}/>
