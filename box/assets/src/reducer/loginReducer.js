@@ -4,8 +4,7 @@ const initialState = {
     isLogging: false,
     loginResult: {
         msg:'',
-        loginCode:true,
-        signupCode:true
+        loginCode:true
     }
 };
 

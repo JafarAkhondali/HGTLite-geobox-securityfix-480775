@@ -44,8 +44,26 @@ class LoginPage extends Component {
 
     handleSignupFormSubmit(event){
         event.preventDefault();
-        
-        alert('register')
+
+        // alert('register')
+
+        let rFormData = new FormData();
+        let rName = this.rNameInput.value;
+        let rPass = this.rPassInput.value;
+        let rPass2  = this.rPass2Input.value;
+        let rEmail = this.rEmailInput.value;
+
+        if(rPass!=rPass2){
+            alert('两次输入的密码不相等');
+            return;
+        }
+
+        rFormData.append('user_name',rName);
+        rFormData.append('user_password',rPass);
+        rFormData.append('user_email',rEmail);
+
+        this.props.actions.fetchRegister(rFormData);
+
     }
 
 
@@ -57,13 +75,13 @@ class LoginPage extends Component {
 
     render() {
 
-        let {loginResult,actions}  = this.props;
+        let {loginResult,registerResult,actions}  = this.props;
 
         var miniCardClassSignup = classNames(
             'card-block',
             'mini-card-block',
             {
-            'visible-false':loginResult.signupCode
+            'visible-false':registerResult.registerCode
             }
         )
 
@@ -75,7 +93,7 @@ class LoginPage extends Component {
             }
         )
 
-        // console.log(this.props.loginResult  )
+        // console.log(this.props.registerResult  )
 
 
         return (
@@ -91,10 +109,10 @@ class LoginPage extends Component {
                             <div className="card-block">
                                  <form id="signupForm" onSubmit = {this.handleSignupFormSubmit}>
                                    <h1><span className="letter-space-8"> 注册  </span></h1>
-                                   <input name="rName" type="text" placeholder="用户名" pattern="^[\w]{3,16}$"  required="required" className="input pass"/>
-                                   <input name="rPassword" type="password" placeholder="设置密码" required="required" className="input pass"/>
-                                   <input name="rPassword2" type="password" placeholder="确认密码" required="required" className="input pass"/>
-                                   <input name="rEmail" type="email" placeholder="邮箱" className="input pass"/>
+                                   <input name="rName" type="text" placeholder="用户名" pattern="^[\w]{3,16}$" ref={(rName)=>this.rNameInput=rName}  required="required" className="input pass"/>
+                                   <input name="rPassword" type="password" placeholder="设置密码" ref={(rPass)=>this.rPassInput=rPass} required="required" className="input pass"/>
+                                   <input name="rPassword2" type="password" placeholder="确认密码" ref={(rPass2)=>this.rPass2Input=rPass2} required="required" className="input pass"/>
+                                   <input name="rEmail" type="email" placeholder="邮箱"  ref={(rEmail)=>this.rEmailInput=rEmail} className="input pass"/>
                                    <input type="submit" defaultValue="注  册" className="inputButton"/>
                                    <div className="text-center">
 
@@ -125,7 +143,7 @@ class LoginPage extends Component {
                       <Row >
                          <Col   md={5}>
                              <div className={miniCardClassSignup}>
-                                  {loginResult.msg}
+                                  {registerResult.msg}
                             </div>
 
 
@@ -150,7 +168,8 @@ class LoginPage extends Component {
 }
 
 const mapStateToProps = state => ({
-    loginResult: state.login.loginResult
+    loginResult: state.login.loginResult,
+    registerResult:state.register.registerResult
 });
 
 const mapDispatchToProps = dispatch => ({
