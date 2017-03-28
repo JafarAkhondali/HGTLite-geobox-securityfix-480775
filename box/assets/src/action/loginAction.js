@@ -1,5 +1,6 @@
 import BASE_URL from '../script/BaseUrl';
 import VERSION from '../script/Version';
+import {push } from 'react-router-redux'
 
 let loginActions = {
 
@@ -54,7 +55,7 @@ let loginActions = {
                     // console.log(loginResult)
 
                     dispatch(loginActions.loginFetchSuccess(loginResult));
-
+                    dispatch(push('/'))
 
                 }).catch(e => {
                     // console.log('登录失败')

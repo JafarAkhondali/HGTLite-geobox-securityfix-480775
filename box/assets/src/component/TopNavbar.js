@@ -58,7 +58,7 @@ class TopNavbar extends React.Component {
                     </Nav>
                     <Nav pullRight>
 
-                        <NavDropdown eventKey={4} title={stateUserName} id="basic-nav-dropdown-user"  href="/#/login" >
+                        <NavDropdown eventKey={4} title={stateUserName} id="basic-nav-dropdown-user"   >
                             <MenuItem eventKey={4.1}  href="/#/account"  className={accountMenuItemClass}>用户设置</MenuItem>
                             <MenuItem eventKey={4.2} href="/#/welcome"  className={accountMenuItemClass} onClick={actions.logOut}>退出</MenuItem>
                             <MenuItem eventKey={4.3} href="/#/about">关于</MenuItem>
