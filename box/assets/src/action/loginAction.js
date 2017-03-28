@@ -1,6 +1,7 @@
 import BASE_URL from '../script/BaseUrl';
 import VERSION from '../script/Version';
-import {push } from 'react-router-redux'
+import {push } from 'react-router-redux';
+import fileListActions from './fileListAction'
 
 let loginActions = {
 
@@ -53,9 +54,35 @@ let loginActions = {
 
                     }
                     // console.log(loginResult)
-
+                    // 在mini card上显示登录fetch消息，默认不显示
                     dispatch(loginActions.loginFetchSuccess(loginResult));
-                    dispatch(push('/'))
+
+                    // 获取当前用户的文件
+                    let weight = Math.floor(200 + Math.random() * 50);
+
+                    let newFiles = [{
+                        fileId: "file00"+weight,
+                        style:'fa-folder-o',
+                        name: '武汉市地图' + weight,
+                        size: '456.7 MB',
+                        typeId: '文件夹',
+                        tags: '老河口',
+                        modified: '2017-02-28'
+                    },
+                    {
+                        fileId: "file00"+(weight+1),
+                        style:'fa-folder-o',
+                        name: '武汉市地图' + (weight+1),
+                        size: '456.7 MB',
+                        typeId: '文件夹',
+                        tags: '老河口',
+                        modified: '2017-02-28'
+                    }]
+
+                    dispatch(fileListActions.fileFetchSuccess(newFiles));
+
+                    // URL跳转
+                    dispatch(push('/disk'));
 
                 }).catch(e => {
                     // console.log('登录失败')

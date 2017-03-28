@@ -6,6 +6,8 @@ from flask_marshmallow import Marshmallow
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:111111@localhost:3306/geobox?charset=utf8'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
+# 设置session加密key
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
@@ -25,3 +27,5 @@ from box.controllers import file_upload_controller
 from box.controllers import file_by_user_controller
 from box.controllers import file_extent_controller
 from box.controllers import user_account_controller
+
+from box.tests import cookie_session_controller

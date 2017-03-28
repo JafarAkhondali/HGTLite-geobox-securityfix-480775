@@ -1,29 +1,19 @@
 import {fromJS} from 'immutable';
 
+// {
+//     fileId: "file001",
+//     style:'fa-folder-o',
+//     name: '武汉市地图',
+//     size: '456.7 MB',
+//     typeId: '文件夹',
+//     tags: '老河口',
+//     modified: '2017-02-28',
+//     clickHref:'www.baidu.com'
+// }
+
 const initialState = {
     isPicking: false,
     files: [
-        {
-            id: "file000001",
-            name: '武汉市地图',
-            size: '456.7 MB',
-            type: '文件夹',
-            modified: '2017-02-28'
-        },
-        {
-            id: "file000002",
-            name: '武汉市地图2',
-            size: '456.7 MB',
-            type: '文件夹',
-            modified: '2017-02-28'
-        },
-        {
-            id: "file000003",
-            name: '老河口地理国情数据',
-            size: '8.6 GB',
-            type: '文件夹',
-            modified: '2017-02-28'
-        }
     ]
 };
 
@@ -35,15 +25,21 @@ function fileListReducer(state = initialState, action) {
             return fromJS(state).set('isPicking', true).toJS();
 
         case 'FILE_FETCH_SUCCESS':
-            let newFile = {
-                id: action.payload.id,
-                name: action.payload.name,
-                size: action.payload.size,
-                type: action.payload.type,
-                modified: action.payload.modified
-            };
+            // let newFile = {
+            //     fileId: action.payload.fileId,
+            //     style: action.payload.style,
+            //     name: action.payload.name,
+            //     size: action.payload.size,
+            //     typeId: action.payload.typeId,
+            //     tags: action.payload.tags,
+            //     modified: action.payload.modified,
+            //     clickHref:action.payload.clickHref
+            // };
+            let newFiles = action.payload;
+            console.log(newFiles)
 
-            return fromJS(state).update('files', list => list.push(newFile))
+
+            return fromJS(state).set('files', newFiles)
                 .set('isPicking', false)
                 .toJS();
 

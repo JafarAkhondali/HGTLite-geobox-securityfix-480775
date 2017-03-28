@@ -278,12 +278,19 @@ let progressBarStyle={
         bsClass = "btn btn-default to-m-left20" > 新建 < /Button> </Col >
             < Col md = {
                 2
-            } > < FormGroup >
+            } >
+
+            < FormGroup >
             < InputGroup >
+            < FormControl type = "text"
+           placeholder = "输入文件名" / >
             < InputGroup.Button >
-            < Button > 搜索 < /Button> </InputGroup.Button > < FormControl type = "text"
-        placeholder = "输入文件名" / >
-            < /InputGroup> </FormGroup > < /Col> < Col md={
+            < Button > 搜索 < /Button> </InputGroup.Button >
+
+            < /InputGroup>
+         </FormGroup >
+
+             < /Col> < Col md={
         1
     } > < /Col> </Row > < /Grid>
 

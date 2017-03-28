@@ -1,18 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import 'font-awesome/css/font-awesome.css'
-import   './FileList.scss';
+import 'font-awesome/css/font-awesome.css';
 import   '../style/styles.scss';
+import   './FileList.scss';
 
 import React  from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import fileBusinessAction from '../action/fileBusinessAction';
-import FileItem from './FileItem';
 import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
 
+import FileItem from './FileItem';
 import HRLine from './HRLine'
 
+import fileListAction from '../action/fileListAction';
 
 class FileList extends React.Component {
 
@@ -24,10 +24,10 @@ class FileList extends React.Component {
         // console.log("获取文件数组："+files)
         let data = [];
         files.forEach(file => {
-            data.push(<FileItem fileItem={file} key={file.id}/>)
+            data.push(<FileItem fileItem={file} key={file.fileId}/>)
         });
 
-        if (!data.length) data.push(<div >云盘空空如也</div>);
+        if (!data.length) data.push(<div className="font-grey-barely font-size-40 text-align-center to-m-top32 letter-space-8" key={files.length} >云盘空空</div>);
 
         return data;
     }
@@ -55,7 +55,6 @@ class FileList extends React.Component {
                             <Col md={1}> 大小</Col>
                             <Col md={1}>类型 </Col>
                             <Col md={2}> 修改时间
-                                <button onClick={actions.fetchFile}>请求</button>
                             </Col>
                         </Row>
                     </Grid>
@@ -78,7 +77,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(fileBusinessAction, dispatch)
+    actions: bindActionCreators(fileListAction, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileList);

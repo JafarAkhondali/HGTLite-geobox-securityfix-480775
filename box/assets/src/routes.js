@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, IndexRoute, Link} from 'react-router'
+import {Route, IndexRoute, IndexRedirect,Link} from 'react-router'
 
 import App from './container/App'
 import AboutPage from './container/AboutPage'
@@ -14,7 +14,8 @@ import FileMapPage from './container/FileMapPage'
 
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={FileListPage}/>
+        <IndexRedirect to="/welcome"/>
+        <Route path="disk" component={FileListPage}/>
 
         <Route path="map" component={MapPage}/>
         <Route path="filemap" component={FileMapPage}/>
