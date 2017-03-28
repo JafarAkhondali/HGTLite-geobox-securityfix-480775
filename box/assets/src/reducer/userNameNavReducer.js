@@ -2,7 +2,7 @@ import {fromJS} from 'immutable';
 
 const initialState = {
     logged: false,
-    userName:'请登陆'
+    userName: localStorage.getItem('gbuser')||'请登陆'
 };
 
 function userNameNavReducer(state = initialState, action) {

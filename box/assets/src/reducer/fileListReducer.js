@@ -1,4 +1,7 @@
-import {fromJS} from 'immutable';
+import {
+    fromJS
+}
+from 'immutable';
 
 // {
 //     fileId: "file001",
@@ -13,9 +16,18 @@ import {fromJS} from 'immutable';
 
 const initialState = {
     isPicking: false,
-    files: [
-    ]
+    files: JSON.parse(localStorage.getItem('gbUserFiles')) || [ ]
 };
+
+// function getInitialState() {
+//     console.log(localStorage.getItem('gbUserFiles'));
+//     var files1 = JSON.parse(localStorage.getItem('gbUserFiles')) || [];
+//
+//     return {
+//         isPicking: false,
+//         files: files1
+//     };
+// }
 
 function fileListReducer(state = initialState, action) {
 
