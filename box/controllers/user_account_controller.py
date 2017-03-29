@@ -1,12 +1,12 @@
 # _*_ coding: utf-8 _*_
-from box import app
+from box import geobox
 from flask import render_template,jsonify,request
 from box.constant.version import pyconst
 
 from box.domain.login_result_dto import  LoginResult,LoginResultSchema
 from box.domain.register_result_dto import  RegisterResult,RegisterResultSchema
 
-@app.route('/'+pyconst.VERSION +'/user/login',methods=["POST"])
+@geobox.route('/'+pyconst.VERSION +'/user/login',methods=["POST"])
 def user_login_validate():
     #formItems类型是list，转为dict方便取值
     form = request.form
@@ -23,7 +23,7 @@ def user_login_validate():
     return jsonify(loginResultSchema.dump(loginResult).data)
 
 
-@app.route('/'+pyconst.VERSION +'/user/register',methods=["POST"])
+@geobox.route('/'+pyconst.VERSION +'/user/register',methods=["POST"])
 def user_login_register():
     #formItems类型是list，转为dict方便取值
     form = request.form

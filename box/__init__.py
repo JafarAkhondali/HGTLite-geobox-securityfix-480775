@@ -2,15 +2,23 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from werkzeug.contrib.fixers import ProxyFix
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:111111@localhost:3306/geobox?charset=utf8'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
+def create_app():
+  # 这个工厂方法可以从你的原有的 `__init__.py` 或者其它地方引入。
+  app = Flask(__name__)
+  return app
+
+geobox = create_app()
+geobox.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:111111@localhost:3306/geobox?charset=utf8'
+geobox.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
 # 设置session加密key
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+geobox.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
-db = SQLAlchemy(app)
-ma = Marshmallow(app)
+# geobox.wsgi_app = ProxyFix(geobox.wsgi_app)
+
+db = SQLAlchemy(geobox)
+ma = Marshmallow(geobox)
 
 from box.model.gb_suffix_bundle_do import GbSuffixBundle, GbSuffixBundleSchema
 from box.model.gb_file_do import GbFile, GbFileSchema

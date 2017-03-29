@@ -18,7 +18,7 @@ import {
     Link
 }
 from 'react-router';
-import {toastr} from 'react-redux-toastr'
+import {toastr} from 'react-redux-toastr';
 
 import {
     Grid,

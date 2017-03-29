@@ -1,56 +1,32 @@
-import 'babel-polyfill'
-import React from 'react'
-import ReactDOM from 'react-dom'
+import './style/index.scss';
+
+import 'babel-polyfill';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import {
     Provider
 }
-from 'react-redux'
+from 'react-redux';
 import {
-    Router, hashHistory
+    Router, hashHistory, browserHistory
 }
-from 'react-router'
+from 'react-router';
 import {
     syncHistoryWithStore
 }
-from 'react-router-redux'
-import configureStore from './store/configureStore'
-import routes from './routes'
-import ReduxToastr from 'react-redux-toastr'
+from 'react-router-redux';
+import configureStore from './store/configureStore';
+import ReduxToastr from 'react-redux-toastr';
 
+import routes from './routes';
 
-import './style/index.scss'
+const store = configureStore();
+const history = syncHistoryWithStore(hashHistory, store);
 
-const store = configureStore()
-const history = syncHistoryWithStore(hashHistory, store)
-
-ReactDOM.render(
-    < Provider store = {
-        store
-    } >
-    < div >
-
-        < Router history = {
-            history
-        }
-        routes = {
-            routes
-        } >
-        < /Router>
-
-        < ReduxToastr timeOut = {
-            3500
-        }
-        newestOnTop = {
-            true
-        }
-        preventDuplicates = {
-            true
-        }
-        position = "top-right"
-        transitionIn = "fadeIn"
-        transitionOut = "fadeOut"
-        progressBar />
-    < /div>
-    < /Provider>,
-    document.getElementById('content')
-)
+ReactDOM.render(<Provider store = {store}>
+    <div>
+        <Router history = {history} routes = {routes} > </Router>
+        <ReduxToastr timeOut = {3500} newestOnTop = {true} preventDuplicates = {true} position = "top-right" transitionIn = "fadeIn"  transitionOut = "fadeOut"  progressBar />
+    </div>
+    </Provider>,
+    document.getElementById('content'))

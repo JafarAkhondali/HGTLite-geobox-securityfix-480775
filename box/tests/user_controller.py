@@ -1,10 +1,10 @@
 # _*_ coding: utf-8 _*_
-from box import app
+from box import geobox
 from flask import jsonify
 from . import user_model as user
 
 
-@app.route('/user')
+@geobox.route('/user')
 def get_all_user():
     print '===before'
     all_user = user.User.query.all()
@@ -15,4 +15,4 @@ def get_all_user():
     # return jsonify(user_schema.dump(all_user[(len(all_user) - 1)]).data).encode('utf-8')
 
 # if __name__ == '__main__':
-#     app.run(host='0.0.0.0', debug=True)
+#     geobox.run(host='0.0.0.0', debug=True)

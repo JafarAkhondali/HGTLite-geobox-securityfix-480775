@@ -7,8 +7,6 @@ import {Link} from 'react-router';
 import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
 
 
-
-
 class WelcomePage extends Component {
     constructor() {
         super()
@@ -38,7 +36,7 @@ class WelcomePage extends Component {
                      <Row >
                         <Col   md={1}></Col>
                         <Col   md={4}>
-                             <Button bsSize="large"  block href="/#/login"  style={{backgroundColor:'#eee',borderRadius:'0px',border:'none',color:'#777'}}>
+                             <Button bsSize="large"  block href="/login"  style={{backgroundColor:'#eee',borderRadius:'0px',border:'none',color:'#777'}}>
                                  <span  className="letter-space-8">注册</span>
                              </Button>
 
@@ -46,7 +44,7 @@ class WelcomePage extends Component {
                         <Col   md={2}></Col>
                         <Col   md={4}>
                             <Button bsStyle="success" bsSize="large" block href="/#/login"  style={{backgroundColor:'#34a6ff',borderRadius:'0px',border:'none',opacity:'0.80'}}>
-                                <span  className="letter-space-8">登录</span>
+                                <span  className="letter-space-8 c-white-pure">登录</span>
                             </Button>
 
                         </Col>

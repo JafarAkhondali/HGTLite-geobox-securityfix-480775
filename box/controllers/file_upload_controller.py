@@ -1,6 +1,6 @@
 # _*_ coding: utf-8 _*_
 
-from box import app, db
+from box import geobox, db
 from flask import Flask, request, redirect, url_for, render_template
 from uuid import uuid4
 from datetime import datetime
@@ -10,7 +10,7 @@ import ConfigParser
 
 from box.model.gb_file_do import GbFile,GbFileSchema
 
-@app.route("/file/upload", methods=["POST"])
+@geobox.route("/file/upload", methods=["POST"])
 def upload():
     # 从配置文件获取文件存储路径
     cf = ConfigParser.ConfigParser()

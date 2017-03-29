@@ -4,6 +4,7 @@ import   '../style/styles.scss';
 import   './FileList.scss';
 
 import React  from 'react';
+import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import classNames from 'classnames';
@@ -43,7 +44,6 @@ class FileItem extends React.Component {
         let {fileItem, showFAB, actions} = this.props;
         // onMouseOver={actions.showFAB} onMouseLeave={actions.hideFAB}
         let fabClass = classNames(showFAB ? 'opacity100' : 'opacity0');
-
         let itemIconClass = classNames('fa', 'fa-2x', 'fa-blue', 'opacity75',fileItem.style);
 
 
@@ -54,7 +54,7 @@ class FileItem extends React.Component {
                     <Row >
                         <Col md={3}>
                             <span className="width-36 display-inline-block"> <i className={itemIconClass}></i>  </span>
-                            <span className="font-file-name " data-fid={fileItem.fileId}> {fileItem.name} </span>
+                            <span className="font-file-name " data-fid={fileItem.fileId}>  <Link to='account'>  {fileItem.name}</Link> </span>
                         </Col>
                         <Col md={2}> </Col>
                         <Col md={4}>
@@ -63,7 +63,7 @@ class FileItem extends React.Component {
                                 <FileItemFloating   />
                             </div>
                         </Col>
-                        <Col md={1}> {fileItem.size}</Col>
+                        <Col md={1}> {fileItem.size} </Col>
                         <Col md={2}> {fileItem.modified}  </Col>
                     </Row>
                 </Grid>

@@ -13,9 +13,9 @@ class TimelinePage extends React.Component {
         return (
             <div className="container bg-white">
                 <h1 className="text-center text-success">文件时间轴
-    <p className="lead">云盘用户A</p>
-  </h1>
-<Timeline />
+                    <p className="lead">云盘用户A</p>
+                  </h1>
+                <Timeline />
             </div>
         )
     }

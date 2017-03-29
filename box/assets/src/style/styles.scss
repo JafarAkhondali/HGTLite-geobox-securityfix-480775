@@ -282,8 +282,14 @@
   opacity: 1;
 }
 
+a {
+    text-decoration: none;
+    color: #555;
+}
+
 a:link{
     text-decoration: none;
+    color: #555;
 }
 a:visited{
     text-decoration: none;

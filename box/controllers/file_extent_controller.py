@@ -1,5 +1,5 @@
 # _*_ coding: utf-8 _*_
-from box import app, db
+from box import geobox, db
 from flask import jsonify,request
 from datetime import datetime
 
@@ -8,8 +8,8 @@ from box.model.gb_file_do import GbFile, GbFileSchema
 
 _BASE_URL = '/extent'
 
-@app.route(_BASE_URL + '/<user_id>/all')
-@app.route(_BASE_URL + '/<user_id>/all/<page_num>/<page_size>')
+@geobox.route(_BASE_URL + '/<user_id>/all')
+@geobox.route(_BASE_URL + '/<user_id>/all/<page_num>/<page_size>')
 def list_all_file_extent(user_id,page_num=1,page_size=8):
     pid =  request.args.get('parent_id')
 
