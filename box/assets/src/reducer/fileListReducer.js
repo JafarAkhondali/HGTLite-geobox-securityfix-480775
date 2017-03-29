@@ -16,7 +16,7 @@ from 'immutable';
 
 const initialState = {
     isPicking: false,
-    files: JSON.parse(localStorage.getItem('gbUserFiles')) || [ ]
+    files: JSON.parse(sessionStorage.getItem('gbUserFiles')) || [ ]
 };
 
 // function getInitialState() {

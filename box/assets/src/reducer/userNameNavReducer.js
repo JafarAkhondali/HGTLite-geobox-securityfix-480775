@@ -2,7 +2,7 @@ import {fromJS} from 'immutable';
 
 const initialState = {
     logged: false,
-    userName: localStorage.getItem('gbuser')||'请登陆'
+    userName: sessionStorage.getItem('gbUser')||'请登陆'
 };
 
 function userNameNavReducer(state = initialState, action) {
@@ -12,6 +12,8 @@ function userNameNavReducer(state = initialState, action) {
             let uName = action.payload.userName
             return fromJS(state).set('logged', true).set('userName',uName).toJS();
         case 'LOG_OUT':
+        sessionStorage.removeItem('gbUser');
+            sessionStorage.removeItem('gbUserFiles');
             return fromJS(state).set('logged', false).set('userName','请登陆').toJS();
         default:
             return state;

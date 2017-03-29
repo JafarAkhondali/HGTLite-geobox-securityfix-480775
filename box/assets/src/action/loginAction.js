@@ -85,8 +85,8 @@ let loginActions = {
                     dispatch(push('/disk'));
 
                     // 保存用户信息
-                    localStorage.setItem('gbuser',loginResult.userName);
-                    localStorage.setItem('gbUserFiles',JSON.stringify(newFiles));
+                    sessionStorage.setItem('gbUser',loginResult.userName);
+                    sessionStorage.setItem('gbUserFiles',JSON.stringify(newFiles));
 
                 }).catch(e => {
                     // console.log('登录失败')
