@@ -1,6 +1,6 @@
 import BASE_URL from '../script/BaseUrl';
 import VERSION from '../script/Version';
-import {push } from 'react-router-redux';
+import {push} from 'react-router-redux';
 import fileListActions from './fileListAction'
 
 let loginActions = {
@@ -17,7 +17,6 @@ let loginActions = {
                 return;
             }
 
-
             dispatch(loginActions.loginFetchStart());
 
             var loginURL = BASE_URL.localServer + '/' + VERSION.api + '/user/login';
@@ -26,12 +25,15 @@ let loginActions = {
                     method: 'POST',
                     body: lFormData
                 }).then(function(response) {
+                    // console.log('response1');
+
                     // console.log('===res status',res.status)
                     // console.log('===res statusText',res.statusText)
                     // console.log('===res ok',res.ok)
                     return response.json();
                 })
                 .then(function(json) {
+                    // console.log('json1')
                     // console.log('登录成功')
 
                     // if (res.status != 200) {
@@ -45,46 +47,70 @@ let loginActions = {
                     loginResult.userName = loginResponseJson.user_name;
                     //设置注册结果的小卡片不显示
                     loginResult.loginCode = loginResponseJson.validate_result;
-                    if(loginResult.loginCode){
-                        loginResult.msg = loginResult.userName+ ' 登录成功，密码验证通过';
+                    if (loginResult.loginCode) {
+                        loginResult.msg = loginResult.userName + ' 登录成功，密码验证通过';
+                        // console.log(' 登录成功，密码验证通过');
+
+                        // 保存用户信息
+                        sessionStorage.setItem('gbUser', loginResult.userName);
+                        sessionStorage.setItem('gbUserLogged', 'true');
+
+                        console.log('sessionStorage已保存');
+
+                        // 获取用户根目录
+                        var userRootURL = BASE_URL.localServer + '/' + VERSION.api + '/files/' + loginResult.userName + '/0/all';
+
+                        dispatch(loginActions.loginFetchSuccess(loginResult));
+
+                        return fetch(userRootURL, { mode: 'cors'});
 
 
-                    }else{
-                        loginResult.msg = loginResult.userName+ ' 登录失败，用户名或密码错误';
-
+                    } else {
+                        loginResult.msg = loginResult.userName + ' 登录失败，用户名或密码错误';
                     }
-                    // console.log(loginResult)
+                    console.log('在mini card上显示登录fetch消息',loginResult)
                     // 在mini card上显示登录fetch消息，默认不显示
                     dispatch(loginActions.loginFetchSuccess(loginResult));
 
+
+
+                }).then(function(response2) {
+                    // console.log('response2');
+                    // console.log('===res status',res.status)
+                    // console.log('===res statusText',res.statusText)
+                    // console.log('===res ok',res.ok)
+                    return response2.json();
+                }).then(function(json2) {
+                    // console.log('json2')
+
+                    let userRootList = json2;
+                    console.log('获取用户根目录', userRootList);
+
                     // 获取当前用户的文件
                     let weight = Math.floor(200 + Math.random() * 50);
-
-                    let newFiles = [{
-                        fileId: "file00"+weight,
-                        style:'fa-folder-open-o',
+                    let newFileList = [{
+                        file_id: "file00" + weight,
+                        style: 'fa-folder-open-o',
                         name: '武汉市地图' + weight,
                         size: '456.7 MB',
-                        typeId: '文件夹',
+                        type_id: '文件夹',
                         tags: '老河口',
                         modified: '2017-02-28'
-                    },
-                    {
-                        fileId: "file00"+(weight+1),
-                        style:'fa-file-o',
-                        name: '武汉市地图' + (weight+1),
+                    }, {
+                        file_id: "file00" + (weight + 1),
+                        style: 'fa-file-o',
+                        name: '武汉市地图' + (weight + 1),
                         size: '456.7 MB',
-                        typeId: '文件夹',
+                        type_id: '文件夹',
                         tags: '老河口',
                         modified: '2017-02-28'
                     }]
 
-                    dispatch(fileListActions.fileFetchSuccess(newFiles));
+                    console.log('更新文件列表之前');
 
-                    // 保存用户信息
-                    sessionStorage.setItem('gbUser',loginResult.userName);
-                    sessionStorage.setItem('gbUserFiles',JSON.stringify(newFiles));
-                    sessionStorage.setItem('gbUserLogged','true');
+                    sessionStorage.setItem('gbUserFiles', JSON.stringify(userRootList));
+
+                    dispatch(fileListActions.fileFetchSuccess(userRootList));
 
                     // URL跳转
                     dispatch(push('/disk'));
@@ -144,10 +170,10 @@ let loginActions = {
                     //设置注册结果的小卡片不显示
                     registerResult.registerCode = true;
                     registerResult.registerCode = registerResponseJson.register_result;
-                    if(registerResult.registerCode){
-                        registerResult.msg = registerResult.userName+ ' 注册成功，请登陆';
-                    }else{
-                        registerResult.msg = registerResult.userName+ ' 注册失败';
+                    if (registerResult.registerCode) {
+                        registerResult.msg = registerResult.userName + ' 注册成功，请登陆';
+                    } else {
+                        registerResult.msg = registerResult.userName + ' 注册失败';
                     }
                     // console.log(registerResult)
 

@@ -24,7 +24,7 @@ class FileList extends React.Component {
         // console.log("获取文件数组："+files)
         let data = [];
         files.forEach(file => {
-            data.push(<FileItem fileItem={file} key={file.fileId}/>)
+            data.push(<FileItem fileItem={file} key={file.file_id}/>)
         });
 
         if (!data.length) {
@@ -53,8 +53,8 @@ class FileList extends React.Component {
                     <Grid>
                         <Row >
                             <Col md={3}><i className="fa fa-2x"></i> <span className="to-m-left16">文件名</span> </Col>
-                            <Col md={6}> </Col>
-                            <Col md={1}> 大小</Col>
+                            <Col md={5}> </Col>
+                            <Col md={2}> 大小</Col>
                             <Col md={2}> 修改时间
                             </Col>
                         </Row>

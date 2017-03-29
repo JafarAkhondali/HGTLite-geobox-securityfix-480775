@@ -3,7 +3,7 @@ from marshmallow import Schema, fields
 
 class FileList(object):
     def __init__(self, file_id, file_name,style, size,type_id,modified,tags):
-        self.fileId = file_id
+        self.file_id = file_id
         self.name = file_name
         self.style = style
         self.size = size
@@ -14,9 +14,8 @@ class FileList(object):
     def __repr__(self):
         return '<FileList %r>' % self.name
 
-
 class FileListSchema(Schema):
-    fileId = fields.Str()
+    file_id = fields.Str()
     name = fields.Str()
     style = fields.Str()
     size = fields.Str()

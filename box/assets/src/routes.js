@@ -1,6 +1,5 @@
 import React from 'react'
 import {Route, IndexRoute, IndexRedirect,Link} from 'react-router'
-
 import App from './container/App'
 import AboutPage from './container/AboutPage'
 import AccountPage from './container/AccountPage'
@@ -12,9 +11,16 @@ import MapPage from './container/MapPage'
 import TimelinePage from './container/TimelinePage'
 import FileMapPage from './container/FileMapPage'
 
+function checkLogin(nextState, replace) {
+  if (sessionStorage.getItem('gbUser')) {
+    replace({
+      pathname: '/disk',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
 
-
-    export default  (
+export default  (
     <Route path="/" component={App}>
         <IndexRedirect to="/welcome"/>
         <Route path="disk" component={FileListPage}/>
@@ -30,14 +36,4 @@ import FileMapPage from './container/FileMapPage'
 
         <Route path="search" component={SearchkitPage}/>
     </Route>
-    )
-
-    function checkLogin(nextState, replace) {
-
-      if (sessionStorage.getItem('gbUser')) {
-        replace({
-          pathname: '/disk',
-          state: { nextPathname: nextState.location.pathname }
-        })
-      }
-    }
+)

@@ -17,16 +17,17 @@ import {
 from 'react-router-redux';
 import configureStore from './store/configureStore';
 import ReduxToastr from 'react-redux-toastr';
-
 import routes from './routes';
 
 const store = configureStore();
-const history = syncHistoryWithStore(hashHistory, store);
+const syncHistory = syncHistoryWithStore(hashHistory, store);
 
-ReactDOM.render(<Provider store = {store}>
+ReactDOM.render(<Provider store={store}>
     <div>
-        <Router history = {history} routes = {routes} > </Router>
-        <ReduxToastr timeOut = {3500} newestOnTop = {true} preventDuplicates = {true} position = "top-right" transitionIn = "fadeIn"  transitionOut = "fadeOut"  progressBar />
+        <Router history={syncHistory} routes={routes}>
+            
+        </Router>
+        <ReduxToastr timeOut={3500} newestOnTop={true} preventDuplicates={true} positio="top-right" transitionIn="fadeIn"  transitionOut="fadeOut" progressBar/>
     </div>
     </Provider>,
     document.getElementById('content'))

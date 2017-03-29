@@ -48,8 +48,9 @@ function fileListReducer(state = initialState, action) {
             //     clickHref:action.payload.clickHref
             // };
             let newFiles = action.payload;
-            console.log(newFiles)
+            // console.log(newFiles)
 
+            console.log('=======fileListReducer, newFiles')
 
             return fromJS(state).set('files', newFiles)
                 .set('isPicking', false)

@@ -17,8 +17,6 @@ import FileItemFloating from './FileItemFloating'
 import fileUIActions from '../action/fileUIAction';
 
 
-
-
 class FileItem extends React.Component {
 
     constructor() {
@@ -36,7 +34,6 @@ class FileItem extends React.Component {
     handleMouseOut() {
         // console.log('=====2' + event.target.className)
         this.fabDiv.className = 'opacity0';
-
     }
 
     render() {
@@ -53,17 +50,19 @@ class FileItem extends React.Component {
                 <Grid>
                     <Row >
                         <Col md={3}>
-                            <span className="width-36 display-inline-block"> <i className={itemIconClass}></i>  </span>
-                            <span className="font-file-name " data-fid={fileItem.fileId}>  <Link to='account'>  {fileItem.name}</Link> </span>
+                            <div className="to-p-left-18">
+                                <span className="width-36 display-inline-block"> <i className={itemIconClass}></i>  </span>
+                                <span className="font-file-name " data-fid={fileItem.file_id}>  <Link to='account'>  {fileItem.name}</Link> </span>
+                            </div>
                         </Col>
                         <Col md={2}> </Col>
-                        <Col md={4}>
+                        <Col md={3}>
                             <div ref={(c)=>{this.fabDiv = c}} onMouseOver={this.handleMouseOver}
                                  onMouseLeave={this.handleMouseOut} className={fabClass}>
                                 <FileItemFloating   />
                             </div>
                         </Col>
-                        <Col md={1}> {fileItem.size} </Col>
+                        <Col md={2}> {fileItem.size} </Col>
                         <Col md={2}> {fileItem.modified}  </Col>
                     </Row>
                 </Grid>
