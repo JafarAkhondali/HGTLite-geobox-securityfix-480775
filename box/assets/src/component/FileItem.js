@@ -42,11 +42,10 @@ class FileItem extends React.Component {
 
         let {fileItem, showFAB, actions} = this.props;
         // onMouseOver={actions.showFAB} onMouseLeave={actions.hideFAB}
-        let comClass = classNames(showFAB ? 'opacity100' : 'opacity0');
+        let fabClass = classNames(showFAB ? 'opacity100' : 'opacity0');
 
-        let itemIconClass = classNames({
-            
-        })
+        let itemIconClass = classNames('fa', 'fa-2x', 'fa-blue', 'opacity75',fileItem.style);
+
 
 
         return (
@@ -54,18 +53,17 @@ class FileItem extends React.Component {
                 <Grid>
                     <Row >
                         <Col md={3}>
-                            <i className="fa fa-folder-open-o fa-2x fa-blue opacity75"></i>
-                            <span className="font-file-name to-m-left6" data-fid={fileItem.fileId}> {fileItem.name} </span>
+                            <span className="width-36 display-inline-block"> <i className={itemIconClass}></i>  </span>
+                            <span className="font-file-name " data-fid={fileItem.fileId}> {fileItem.name} </span>
                         </Col>
-                        <Col md={1}> </Col>
+                        <Col md={2}> </Col>
                         <Col md={4}>
                             <div ref={(c)=>{this.fabDiv = c}} onMouseOver={this.handleMouseOver}
-                                 onMouseLeave={this.handleMouseOut} className={comClass}>
+                                 onMouseLeave={this.handleMouseOut} className={fabClass}>
                                 <FileItemFloating   />
                             </div>
                         </Col>
                         <Col md={1}> {fileItem.size}</Col>
-                        <Col md={1}>{fileItem.typeId} </Col>
                         <Col md={2}> {fileItem.modified}  </Col>
                     </Row>
                 </Grid>

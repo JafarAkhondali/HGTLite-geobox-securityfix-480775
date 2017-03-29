@@ -27,7 +27,9 @@ class FileList extends React.Component {
             data.push(<FileItem fileItem={file} key={file.fileId}/>)
         });
 
-        if (!data.length) data.push(<div className="font-grey-barely font-size-40 text-align-center to-m-top32 letter-space-8" key={files.length} >云盘空空</div>);
+        if (!data.length) {
+            data.push(<div className="font-grey-barely font-size-40 text-align-center to-m-top32 letter-space-8" key={files.length} >云盘空空</div>);
+        }
 
         return data;
     }
@@ -51,9 +53,8 @@ class FileList extends React.Component {
                     <Grid>
                         <Row >
                             <Col md={3}><i className="fa fa-2x"></i> <span className="to-m-left16">文件名</span> </Col>
-                            <Col md={5}> </Col>
+                            <Col md={6}> </Col>
                             <Col md={1}> 大小</Col>
-                            <Col md={1}>类型 </Col>
                             <Col md={2}> 修改时间
                             </Col>
                         </Row>

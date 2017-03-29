@@ -62,7 +62,7 @@ let loginActions = {
 
                     let newFiles = [{
                         fileId: "file00"+weight,
-                        style:'fa-folder-o',
+                        style:'fa-folder-open-o',
                         name: '武汉市地图' + weight,
                         size: '456.7 MB',
                         typeId: '文件夹',
@@ -71,7 +71,7 @@ let loginActions = {
                     },
                     {
                         fileId: "file00"+(weight+1),
-                        style:'fa-folder-o',
+                        style:'fa-file-o',
                         name: '武汉市地图' + (weight+1),
                         size: '456.7 MB',
                         typeId: '文件夹',
@@ -81,12 +81,14 @@ let loginActions = {
 
                     dispatch(fileListActions.fileFetchSuccess(newFiles));
 
-                    // URL跳转
-                    dispatch(push('/disk'));
-
                     // 保存用户信息
                     sessionStorage.setItem('gbUser',loginResult.userName);
                     sessionStorage.setItem('gbUserFiles',JSON.stringify(newFiles));
+                    sessionStorage.setItem('gbUserLogged','true');
+
+                    // URL跳转
+                    dispatch(push('/disk'));
+
 
                 }).catch(e => {
                     // console.log('登录失败')

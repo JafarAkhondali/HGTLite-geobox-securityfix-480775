@@ -1,3 +1,4 @@
+// import userNameNavActions from './userNameNavAction'
 
 let fileListActions = {
 
@@ -42,6 +43,8 @@ let fileListActions = {
                     }]
 
                     dispatch(fileListActions.fileFetchSuccess(newFile));
+
+
 
                 }).catch(e => {
                 dispatch(fileListActions.fileFetchFailure(e.statusText));
