@@ -10,7 +10,8 @@ import {bindActionCreators} from 'redux';
 import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
 
 import FileItem from './FileItem';
-import HRLine from './HRLine'
+import HRLine from './HRLine';
+import ToggleMapButton from './ToggleMapButton';
 
 import fileListAction from '../action/fileListAction';
 
