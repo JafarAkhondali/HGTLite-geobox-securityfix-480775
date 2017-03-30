@@ -33,10 +33,8 @@ import {
     FieldGroup
 }
 from 'react-bootstrap'
-import {
-    fromJS
-}
-from 'immutable';
+
+import CurrentDir from './CurrentDir'
 
 import DragList from './DragList'
 
@@ -267,7 +265,9 @@ let progressBarStyle={
                 所有文件 < /Button></Col >
                 < Col md = {
                     4
-                } > < /Col> <Col md={
+                } >
+                <CurrentDir />
+                < /Col> <Col md={
                 2
             } >
             < Button id = "btnUpload"
