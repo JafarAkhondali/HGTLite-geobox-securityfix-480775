@@ -2,7 +2,11 @@
 from flask import jsonify,request
 from datetime import datetime
 from sqlalchemy import text
+from pypinyin import lazy_pinyin
+
 from box.constant.version import pyconst
+from box.common.sorting import sort_chinese_list
+from box.common.char_type import is_chinese
 
 from box import geobox, db
 from box.model.gb_file_do import GbFile, GbFileSchema
@@ -16,34 +20,72 @@ _BASE_URL = '/files'
 # @geobox.route(_BASE_URL + '/<user_id>/<dir_id>/all/<page_num>/<page_size>')
 # def list_all_by_user_dir(user_id,dir_id,page_num=1,page_size=8):
 def list_all_by_user_dir(user_id,dir_id):
+    print user_id, dir_id
     # 结果占位
     resultList = []
-    # 获取用户根目录文件
-    filters4File = {
-        GbFile.user_id == user_id,
-        GbFile.dir_id == '0'
-    }
-    fileRecords = GbFile.query.filter(*filters4File).all
-    print fileRecords;
 
     # 获取用户根目录文件夹
     filters4Dir = {
         GbFileDir.user_id == user_id,
-        GbFileDir.parent_id == '0'
+        GbFileDir.parent_id == dir_id
     }
-    dirRecords = GbFileDir.query.filter(*filters4Dir).all
-    print dirRecords;
+    dirRecords = GbFileDir.query.filter(*filters4Dir).all()
+    # print dirRecords
+    dirRecords1 = sorted(dirRecords,key=lambda item:item.dir_name.lower())
+    dirStyle='fa-folder-open-o'
+    dirSize=''
+    dirTypeId=''
+    dirTags=''
+    cDirList=[]
+    for dir in dirRecords1:
+        r1 = FileList(dir.dir_id, dir.dir_name, dirStyle,dirSize,dirTypeId, dir.update_date, dirTags )
+        if is_chinese( dir.dir_name[0]) :
+            cDirList.append(r1)
+        else:
+            resultList.append(r1)
+        # print dir.__dict__
+    # for iic in resultList:
+    #     print iic.__dict__
 
-    f1 = FileList('file098', 'fname', 'fa-file-o','245.65 GB', 'type001', '2017-03-26', '武汉' )
-    f2 = FileList('file099', 'fname2', 'fa-folder-open-o','245.66 GB', 'type002', '2017-03-28', '武汉' )
-    resultList.append(f1);
-    resultList.append(f2);
-    print resultList;
+    cDirList.sort(key=lambda char: lazy_pinyin(char.name)[0][0])
+    resultList += cDirList
+    # for iii in resultList:
+    #     print iii.__dict__
 
+
+    # 获取用户根目录文件
+    filters4File = {
+        GbFile.user_id == user_id,
+        GbFile.dir_id == dir_id
+    }
+    fileRecords = GbFile.query.filter(*filters4File).all()
+
+    # for fRecord in fileRecords:
+    #     print fRecord.__dict__
+
+    fileRecords1 = sorted(fileRecords,key=lambda itemF:itemF.file_display_name.lower())
+    fStyle='fa-file-o'
+    fTags =''
+    cFileList = []
+    for file in fileRecords1:
+        r2 = FileList(file.file_id,file.file_display_name,fStyle,file.file_size, file.file_type_id, file.update_date,fTags )
+        if is_chinese( file.file_display_name[0]) :
+            cFileList.append(r2)
+        else:
+            resultList.append(r2)
+        # print file.__dict__
+    cFileList.sort(key=lambda char2:lazy_pinyin(char2.name)[0][0])
+    resultList += cFileList
+
+
+    # f1 = FileList('file098', 'fname', 'fa-file-o','245.65 GB', 'type001', '2017-03-26', '武汉' )
+
+    # print resultList
     resultSchema = FileListSchema()
     return jsonify(resultSchema.dump(resultList,many=True).data)
 
 
+'''备用'''
 @geobox.route(_BASE_URL + '/<user_id>/all')
 @geobox.route(_BASE_URL + '/<user_id>/all/<page_num>/<page_size>')
 def list_all_file_by_user(user_id,page_num=1,page_size=8):

@@ -22,8 +22,6 @@ class LoginPage extends Component {
 
     }
 
-
-
     handleLoginFormSubmit(event){
         event.preventDefault();
 
