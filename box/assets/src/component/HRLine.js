@@ -1,4 +1,4 @@
-import   './HRLine.scss';
+import   '../style/HRLine.scss';
 
 import React from 'react';
 

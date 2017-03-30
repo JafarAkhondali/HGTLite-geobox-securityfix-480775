@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import './TopNavbar.scss';
+import '../style/TopNavbar.scss';
 import '../style/styles.scss'
 
 import React from 'react';

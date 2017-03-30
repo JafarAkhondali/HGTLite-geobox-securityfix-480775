@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import './TopNavbar.scss';
 import '../style/styles.scss'
 
 import React from 'react';
@@ -30,17 +29,19 @@ class CurrentDir extends React.Component {
         // })
 
         return (
-            <Breadcrumb>
-              <Breadcrumb.Item href="#">
-                /
-              </Breadcrumb.Item>
-              <Breadcrumb.Item href="http://www.baidu.com">
-                影像
-              </Breadcrumb.Item>
-              <Breadcrumb.Item active>
-                原始数据
-              </Breadcrumb.Item>
-            </Breadcrumb>
+
+                <Breadcrumb >
+                  <Breadcrumb.Item href="#">
+                      根目录
+                  </Breadcrumb.Item>
+                  <Breadcrumb.Item href="http://www.baidu.com">
+                    影像
+                  </Breadcrumb.Item>
+                  <Breadcrumb.Item active>
+                    原始数据
+                  </Breadcrumb.Item>
+                </Breadcrumb>
+
     );
     }
 

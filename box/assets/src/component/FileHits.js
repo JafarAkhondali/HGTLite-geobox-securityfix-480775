@@ -9,7 +9,7 @@ class FileHits extends React.Component {
             return (
 
                 <div key={result._id}>
-                        <div >文件id获取  {result._source.id}</div>
+                        <div >文件id获取 {result._source.id}</div>
                 </div>
             )
         }

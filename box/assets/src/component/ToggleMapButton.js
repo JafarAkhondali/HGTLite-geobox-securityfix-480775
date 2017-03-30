@@ -1,8 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import '../style/toggle-map-btn.scss'
-
-import './TopNavbar.scss';
 import '../style/styles.scss'
+import '../style/toggle-map-btn.scss';
+
 
 import React from 'react';
 import {Link} from 'react-router';
@@ -32,7 +31,16 @@ class ToggleMapButton extends React.Component {
         // })
 
         return (
-            <button className="toggle-map-btn">点我</button>
+            <div className="toggle-map-btn">
+                <div className="floating-menu-btn">
+                   <div className="floating-menu-toggle-wrap">
+                     <div className="floating-menu-toggle">
+                        {/*<i className="fa fa-bars fa-blue fa-2x opacity75"></i> */}
+                       <i className="fa fa-map-o fa-blue fa-2x opacity75"></i>
+                     </div>
+                   </div>
+                 </div>
+            </div>
     );
     }
 

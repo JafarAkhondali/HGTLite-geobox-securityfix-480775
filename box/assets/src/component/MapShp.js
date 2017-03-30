@@ -13,14 +13,12 @@ export default class MapShp extends React.Component {
         this.handleFile = this.handleFile.bind(this);
         this.readerLoad = this.readerLoad.bind(this);
 
-
         this.state = {
             geodata: null,
             isadded: false
         }
     }
-
-
+    
     readerLoad(e) {
         this.setState({geodata: e.target.result});
         this.setState({isadded: true});

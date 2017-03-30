@@ -244,155 +244,99 @@ class FileTopIndicator extends React.Component {
 
 
     render() {
-
-        let {
-            fTag, actions
-        } = this.props;
-
-let progressBarStyle={
-    width:this.state.progressPercentage/100
-}
-
+        let {fTag, actions} = this.props;
+        let progressBarStyle={ width:this.state.progressPercentage/100};
         return (
+        <div>
 
-                < div >
-                < Grid >
-                < Row >
-                < Col md = {
-                    3
-                } > < a href = "/#/filemap" > < i className = "fa fa-map-marker fa-2x" > < /i></a > < Button bsClass =
-                "btn btn-all-files opacity75 to-m-left8" >
-                所有文件 < /Button></Col >
-                < Col md = {
-                    4
-                } >
-                <CurrentDir />
-                < /Col> <Col md={
-                2
-            } >
-            < Button id = "btnUpload"
-        bsClass = "btn btn-upload to-m-left8"
-        onClick = {
-            this.open.bind(this)
-        } > 上传 < /Button> < Button id = "btnNew"
-        bsClass = "btn btn-default to-m-left20" > 新建 < /Button> </Col >
-            < Col md = {
-                2
-            } >
+            <Grid>
+                <Row>
+                    <Col md = {7}>
+                            {/* <a href = "/#/filemap" > <i className = "fa fa-map-marker fa-2x" > </i> </a> */}
+                            <div>
+                                <div className="display-inline-block">
+                                    <button className = "btn btn-all-files opacity75 to-m-left8"> 所有文件 </button>
 
-            < FormGroup >
-            < InputGroup >
-            < FormControl type = "text"
-           placeholder = "输入文件名" / >
-            < InputGroup.Button >
-            < Button > 搜索 < /Button> </InputGroup.Button >
+                                </div>
+                                <div className="display-inline-block">
+                                    <CurrentDir />
+                                    
+                                </div>
 
-            < /InputGroup>
-         </FormGroup >
+                            </div>
+                        </Col>
+                        { /*<Col md = {4} >  </Col> */}
+                        <Col md={2}>
+                            <button id = "btnUpload"   className = "btn btn-upload to-m-left8 opacity75" onClick = { this.open.bind(this)} > 上传 </button>
+                            <button id = "btnNew"  className = "btn btn-default to-m-left20" > 新建 </button>
+                        </Col>
+                        <Col md = {2}>
+                        <FormGroup >
+                            <InputGroup >
+                            <FormControl type = "text" placeholder="输入文件名" />
+                            <InputGroup.Button>
+                                <Button > 搜索 </Button>
+                            </InputGroup.Button>
+                            </InputGroup>
+                         </FormGroup>
 
-             < /Col> < Col md={
-        1
-    } > < /Col> </Row > < /Grid>
+                         </Col>
+                         <Col md={1}> </Col>
+                 </Row>
+             </Grid>
 
+            <Modal show = {this.state.showModal} onHide = {this.close.bind(this)} >
+                <Modal.Header closeButton>
+                    <Modal.Title > <span className = "font-file-name" > 上传文件到云盘 </span></Modal.Title>
+                </Modal.Header>
 
-    < Modal
-    show = {
-        this.state.showModal
-    }
-    onHide = {
-            this.close.bind(this)
-        } >
-        < Modal.Header closeButton >
-        < Modal.Title > < span className = "font-file-name" > 上传文件到云盘 < /span></Modal.Title >
-        < /Modal.Header> < form
-    onSubmit = {
-            this.handleUploadFormSubmit
-        } >
-        < Modal.Body >
-        < div > < span className = "font-file-list" > 上传到： &frasl; < /span></div >
+                <form onSubmit = {this.handleUploadFormSubmit} >
+                <Modal.Body>
+                <div> <span className = "font-file-list" > 上传到： &frasl; </span></div>
+                <div >
+                    <div className = "display-inline-block" >
+                        <label htmlFor = "file" className = "btn btn-default btn-upload" >
+                            <i className = "fa fa-plus fa-1x" > </i> &nbsp;&nbsp;添加文件
+                            <input type="file" className = "file-input opacity0" ref={(c)=>{this.fileInput=c}}  name = "file" onChange={this.handleUploadFileChange} multiple/>
+                        </label>
+                    </div>
 
-    < div >
-        < div className = "display-inline-block" >
-        < label htmlFor = "file"
-    className = "btn btn-default btn-upload" >
-        < i className = "fa fa-plus fa-1x" > < /i> &nbsp;&nbsp;添加文件 < input type="file"
-    className = "file-input opacity0"
-    ref = {
-        (c) => {
-            this.fileInput = c
-        }
-    }
-    name = "file"
-    onChange = {
-        this.handleUploadFileChange
-    }
-    multiple / >
-        < /label></div >
+                    <div className="display-inline-block to-m-left8">
+                        <div> <span className="font-file-list" > 添加标签： </span></div>
+                        <input type = "text" value = {fTag} onChange={ this.handleChangeTag} />
+                        </div>
+                    </div>
 
+                    <div >
+                        <div id = "dropbox" onDragEnter = { this.handleDragEnter} onDragOver = { this.handleDragOver} onDrop = {this.handleDrop}>
+                        <div className = "font-file-list" >
+                            <DragList inputFiles = { this.state.uploadFormData }> </DragList>
+                        </div>
+                        </div>
+                    </div>
 
-        < div className = "display-inline-block to-m-left8" >
-        < div > < span className = "font-file-list" > 添加标签： < /span></div >
-        < input type = "text"
-    value = {
-        fTag
-    }
-    onChange = {
-        this.handleChangeTag
-    }
-    />
+                    <div >
+                        <fieldset id = "progress">
+                            <div className = "progress-trough display-inline-block ">
+                                <div id = "progress-bar"    className = "progress-bar " style={{width:this.state.progressPercentage+'%'}} >
+                                </div>
+                            </div>
+                            <div className="display-inline-block to-m-left1">
+                            <span className = "progress-bar-text" > {this.state.progressPercentage} % </span></div>
+                        </fieldset>
+                    </div>
 
+                </Modal.Body>
 
-    < /div>
+                 <Modal.Footer id = "uploadFooter" >
+                     <Button onClick = { this.close.bind(this) }> 取消 </Button>
+                <button type = "submit" className = "btn btn-upload "> 上传 </button>
+                </Modal.Footer>
 
-    < /div>
+                </form>
+        </Modal>
 
-    < div >
-
-
-        < div id = "dropbox"
-    onDragEnter = {
-        this.handleDragEnter
-    }
-    onDragOver = {
-        this.handleDragOver
-    }
-    onDrop = {
-            this.handleDrop
-        } >
-        < div className = "font-file-list" >
-        < DragList inputFiles = {
-            this.state.uploadFormData
-        } >
-        < /DragList></div >
-        < /div> < /div >
-
-        < div >
-
-        < fieldset id = "progress"
-    >
-        < div className = "progress-trough display-inline-block " >
-
-        < div id = "progress-bar"
-    className = "progress-bar " style={{width:this.state.progressPercentage+'%'}} >
-        </div >
-
-        < /div><div className="display-inline-block to-m-left1">< span className = "progress-bar-text" > {this.state.progressPercentage} % < /span></div> < /fieldset > < /div>
-
-    < /Modal.Body> < Modal.Footer
-    id = "uploadFooter" > < Button onClick = {
-        this.close.bind(this)
-    } > 取消 < /Button>
-    < button
-    type = "submit"
-    className = "btn btn-upload " > 上传 < / button >
-
-    < / Modal.Footer ></
-    form >
-
-        < / Modal >
-
-    < / div >
-
+    </div>
 )
 }
 

@@ -1,6 +1,5 @@
 import 'font-awesome/css/font-awesome.css'
 import   '../style/styles.scss';
-import   './FileList.scss';
 
 import React  from 'react';
 import classNames from 'classnames';

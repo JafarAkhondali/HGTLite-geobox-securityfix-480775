@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css'
 import   '../style/styles.scss';
-import   './FileList.scss';
 
 import React  from 'react';
 import {Link} from 'react-router';

@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 import   '../style/styles.scss';
-import   './FileList.scss';
+import   '../style/FileList.scss';
 
 import React  from 'react';
 import {connect} from 'react-redux';
