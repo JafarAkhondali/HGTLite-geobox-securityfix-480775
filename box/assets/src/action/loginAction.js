@@ -54,13 +54,15 @@ let loginActions = {
                         // 保存用户信息
                         sessionStorage.setItem('gbUser', loginResult.userName);
                         sessionStorage.setItem('gbUserLogged', 'true');
+                        
+                        dispatch(loginActions.loginFetchSuccess(loginResult));
+
 
                         // console.log('用户登录sessionStorage已保存');
 
                         // 获取用户根目录
                         var userRootURL = BASE_URL.localServer + '/' + VERSION.api + '/files/' + loginResult.userName + '/0/all';
 
-                        dispatch(loginActions.loginFetchSuccess(loginResult));
 
                         return fetch(userRootURL, { mode: 'cors'});
 

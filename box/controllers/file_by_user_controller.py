@@ -34,7 +34,7 @@ def list_all_by_user_dir(user_id,dir_id):
     dirRecords1 = sorted(dirRecords,key=lambda item:item.dir_name.lower())
     dirStyle='fa-folder-open-o'
     dirSize=''
-    dirTypeId=''
+    dirTypeId='dir'
     dirTags=''
     cDirList=[]
     for dir in dirRecords1:

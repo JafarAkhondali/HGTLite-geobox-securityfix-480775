@@ -1,8 +1,7 @@
 import {fromJS} from 'immutable';
 
 const initialState = {
-    dirLevelCount:0,
-    dirList: []
+    dirList: [['影像','dirid1'], ['武汉数据', 'dirid2']]
 };
 
 function currentDirReducer(state = initialState, action) {

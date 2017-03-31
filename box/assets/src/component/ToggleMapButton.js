@@ -26,8 +26,8 @@ class ToggleMapButton extends React.Component {
     render() {
 
         let {stateVisibleStyle,stateToggleStyle,actions} = this.props;
-        console.log('=====',this.props)
-        
+        // console.log('=====',this.props)
+
         let visibleClass = classNames(stateVisibleStyle);
 
         let iconClass = classNames('fa','fa-blue','fa-2x','opacity75',stateToggleStyle);

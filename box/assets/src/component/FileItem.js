@@ -45,13 +45,13 @@ class FileItem extends React.Component {
 
 
         return (
-            <div >
+            <div  >
                 <Grid>
                     <Row >
                         <Col md={3}>
-                            <div className="to-p-left-18">
+                            <div className="to-p-left-18" >
                                 <span className="width-36 display-inline-block"> <i className={itemIconClass}></i>  </span>
-                                <span className="font-file-name " data-fid={fileItem.file_id}>  <Link to='account'>  {fileItem.name}</Link> </span>
+                                <span className="font-file-name " >  <Link to='#'>  {fileItem.name}</Link> </span>
                             </div>
                         </Col>
                         <Col md={2}> </Col>

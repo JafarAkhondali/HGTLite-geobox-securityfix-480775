@@ -25,7 +25,7 @@ class FileList extends React.Component {
         // console.log("获取文件数组："+files)
         let data = [];
         files.forEach(file => {
-            data.push(<FileItem fileItem={file} key={file.file_id}/>)
+            data.push(<FileItem fileItem={file} key={file.file_id}  data-fid={file.file_id} onClick={this.handleRowClick}/>)
         });
 
         if (!data.length) {
@@ -39,7 +39,6 @@ class FileList extends React.Component {
     handleRowClick(event) {
         console.log(event.target)
         console.log(event.target.dataset.fid)
-
 
         console.log('点击了一次')
     }
@@ -62,7 +61,8 @@ class FileList extends React.Component {
                     </Grid>
                     <HRLine/>
                 </div>
-                <div id="boxList"  onClick={this.handleRowClick}>
+                {/*<div id="boxList"  onClick={this.handleRowClick}>*/}
+                <div id="boxList"  >
                     {this.getFileItems(files)}
                 </div >
 
