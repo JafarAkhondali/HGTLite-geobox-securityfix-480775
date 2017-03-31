@@ -28,21 +28,21 @@ let fileListActions = {
                     // console.log(res.json())
 
                     /** 备注这里的url只是测试用的，这个是之前hacker news的api, 这里只是确保接口是通的，至于数据还是自己mock */
-                    let weight = Math.floor(200 + Math.random() * 50);
-
-                    let newFile = [{
-
-                        fileId: "file00"+weight,
-                        style:'fa-folder-o',
-                        name: '武汉市地图' + weight,
-                        size: '456.7 MB',
-                        typeId: '文件夹',
-                        tags: '老河口',
-                        modified: '2017-02-28',
-                        clickHref:'www.baidu.com'
-                    }]
-
-                    dispatch(fileListActions.fileFetchSuccess(newFile));
+                    // let weight = Math.floor(200 + Math.random() * 50);
+                    // 
+                    // let newFile = [{
+                    //
+                    //     fileId: "file00"+weight,
+                    //     style:'fa-folder-o',
+                    //     name: '武汉市地图' + weight,
+                    //     size: '456.7 MB',
+                    //     typeId: '文件夹',
+                    //     tags: '老河口',
+                    //     modified: '2017-02-28',
+                    //     clickHref:'www.baidu.com'
+                    // }]
+                    //
+                    // dispatch(fileListActions.fileFetchSuccess(newFile));
 
 
 

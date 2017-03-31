@@ -29,7 +29,7 @@ let currentDirActions = {
                 // console.log('json2')
 
                 let newDirList = json;
-                console.log('获取用户根目录', newDirList);
+                // console.log('获取指定目录', newDirList);
 
                 sessionStorage.setItem('gbUserFiles', JSON.stringify(newDirList));
 

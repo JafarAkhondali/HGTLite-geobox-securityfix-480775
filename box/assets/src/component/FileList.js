@@ -6,6 +6,7 @@ import   '../style/FileList.scss';
 import React  from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import classNames from 'classnames';
 
 import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
 
@@ -14,11 +15,14 @@ import HRLine from './HRLine';
 import ToggleMapButton from './ToggleMapButton';
 
 import fileListAction from '../action/fileListAction';
+import newFolderAction from '../action/newFolderAction';
 
 class FileList extends React.Component {
 
     constructor() {
         super()
+        this.handleNewFolderOK=this.handleNewFolderOK.bind(this);
+        this.handleNewFolderNO=this.handleNewFolderNO.bind(this);
     }
 
     getFileItems(files) {
@@ -36,35 +40,65 @@ class FileList extends React.Component {
     }
 
 
-    handleRowClick(event) {
-        console.log(event.target)
-        console.log(event.target.dataset.fid)
+handleNewFolderOK(event){
+    let name=this.newFolderInput.value||'新建文件夹';
+    this.props.newFolderActions.fetchNewFolder(name);
+    this.newFolderInput.value='';
+}
 
-        console.log('点击了一次')
-    }
+handleNewFolderNO(event){
+    this.props.newFolderActions.cancelNewFolder();
+}
 
     render() {
 
-        let {files, actions} = this.props;
+        let {files, fileListActions,newFolderActions,stateNewFolderDisplay} = this.props;
+
+        // console.log('=====FileList属性',this.props);
+        //
+        // let newFolderClass = classNames({
+        //     'dispaly-none':stateNewDispalyNone
+        // });
+
+        let newFolderStyle = {display:stateNewFolderDisplay};
+
 
         return (
             <div >
+                {/*=================列表表头标题*/}
                 <div>
                     <Grid>
                         <Row >
-                            <Col md={3}><i className="fa fa-2x"></i> <span className="to-m-left16">文件名</span> </Col>
-                            <Col md={5}> </Col>
+                            <Col md={3}><i className="fa fa-2x"></i> <span className="to-m-left-18  ">文件名</span> </Col>
+                            <Col md={5}>  </Col>
                             <Col md={2}> 大小</Col>
-                            <Col md={2}> 修改时间
-                            </Col>
+                            <Col md={2}> 修改时间        </Col>
                         </Row>
                     </Grid>
                     <HRLine/>
                 </div>
-                {/*<div id="boxList"  onClick={this.handleRowClick}>*/}
-                <div id="boxList"  >
+
+                {/*===============新建文件夹头行*/}
+                    <div style={newFolderStyle}>
+                        <Grid>
+                            <Row>
+                                <Col md={3}><i className="fa fa-2x  fa-folder-open-o fa-blue to-p-left-18 "></i>
+                                    <input type = "text"  placeholder="请输入文件名" className="to-m-left-18" ref={(folder)=>{this.newFolderInput=folder}}/></Col>
+                                <Col md={3}>
+                                    <button className="btn btn-default border-none" onClick={this.handleNewFolderOK}><i className="fa fa-check fa-blue"></i></button>
+                                    <button className="btn btn-default border-none" onClick={this.handleNewFolderNO}><i className="fa fa-close fa-blue"></i></button>
+
+                                </Col>
+                                <Col md={6}></Col>
+                            </Row>
+                        </Grid>
+                        <HRLine/>
+                    </div>
+
+                {/*===============文件列表主体*/}
+                <div id="boxList">
                     {this.getFileItems(files)}
-                </div >
+                </div>
 
 
             </div>
@@ -75,11 +109,14 @@ class FileList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    files: state.fileList.files
+    files: state.fileList.files,
+    stateNewFolderDisplay:state.newFolder.newFolderDisplay
 });
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(fileListAction, dispatch)
+    fileListActions: bindActionCreators(fileListAction, dispatch),
+    newFolderActions: bindActionCreators(newFolderAction, dispatch),
+    dispatch:dispatch
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileList);

@@ -1,7 +1,5 @@
 import {fromJS} from 'immutable';
 
-
-
 function fileFABReducer(state = {showingFAB: false}, action) {
     switch (action.type) {
         case 'SHOW_FAB':

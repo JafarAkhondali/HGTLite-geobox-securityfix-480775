@@ -13,6 +13,10 @@
   margin-top: 15px;
 }
 
+.font-fa-2x{
+    font-size: 1.6em;
+}
+
 .font-size-36{
     font-size: 36px;
 }
@@ -31,6 +35,10 @@
   margin-top: -24px;
 }
 
+.input-border{
+    border-color: #ddd;
+}
+
 .bgc-white{
     background-color: #fff;
 }
@@ -39,9 +47,10 @@
     color: $pure_white;
 }
 
-.no-border {
+.border-none {
   border: none;
 }
+
 
 .fa-blue {
   color: $blue-base;

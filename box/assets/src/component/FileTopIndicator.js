@@ -17,6 +17,7 @@ import DragList from './DragList';
 
 import fileTagAction from '../action/fileTagAction';
 import currentDirAction from '../action/currentDirAction';
+import newFolderAction from '../action/newFolderAction';
 
 import {formatDate} from '../script/DatetimeFormat';
 
@@ -40,15 +41,18 @@ class FileTopIndicator extends React.Component {
         this.handleDragOver = this.handleDragOver.bind(this);
         this.handleDrop = this.handleDrop.bind(this);
         this.handleShowRootFiles = this.handleShowRootFiles.bind(this);
+        this.closeUploadModal=this.closeUploadModal.bind(this);
+        this.openUploadModal=this.openUploadModal.bind(this);
+        this.handleNewFolderClick = this.handleNewFolderClick.bind(this);
     }
 
-    close() {
+    closeUploadModal() {
         this.setState({
             showModal: false
         });
     }
 
-    open() {
+    openUploadModal() {
         this.setState({
             showModal: true
         });
@@ -225,12 +229,18 @@ class FileTopIndicator extends React.Component {
         this.props.currentDirActions.fetchSelectedDir(0);
     }
 
+    handleNewFolderClick(event){
+        this.props.newFolderActions.newFolderFirst();
+    }
+
     render() {
 
-        let {fTag, fileTagActions,currentDirActions} = this.props;
+        let {fTag, fileTagActions,currentDirActions,newFolderActions} = this.props;
         // console.log('=====FileTopIndicator属性',this.props)
 
         let progressBarStyle={ width:this.state.progressPercentage/100};
+
+
 
         return (
         <div>
@@ -250,8 +260,8 @@ class FileTopIndicator extends React.Component {
                             </div>
                         </Col>
                         <Col md={2}>
-                            <button id = "btnUpload"   className = "btn btn-upload to-m-left8 opacity75" onClick = { this.open.bind(this)} > 上传 </button>
-                            <button id = "btnNew"  className = "btn btn-default to-m-left20" > 新建 </button>
+                            <button id = "btnUpload"   className = "btn btn-upload to-m-left8 opacity75" onClick = { this.openUploadModal} > 上传 </button>
+                            <button id = "btnNew"  className = "btn btn-default to-m-left20"  onClick = {this.handleNewFolderClick}> 新建 </button>
                         </Col>
                         <Col md = {2}>
                         <FormGroup >
@@ -268,7 +278,7 @@ class FileTopIndicator extends React.Component {
                  </Row>
              </Grid>
 
-            <Modal show = {this.state.showModal} onHide = {this.close.bind(this)} >
+            <Modal show = {this.state.showModal} onHide = {this.closeUploadModal} >
                 <Modal.Header closeButton>
                     <Modal.Title > <span className = "font-file-name" > 上传文件到云盘 </span></Modal.Title>
                 </Modal.Header>
@@ -312,7 +322,7 @@ class FileTopIndicator extends React.Component {
                 </Modal.Body>
 
                  <Modal.Footer id = "uploadFooter" >
-                     <Button onClick = { this.close.bind(this) }> 取消 </Button>
+                     <Button onClick = { this.closeUploadModal }> 取消 </Button>
                 <button type = "submit" className = "btn btn-upload "> 上传 </button>
                 </Modal.Footer>
 
@@ -332,6 +342,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     fileTagActions: bindActionCreators(fileTagAction, dispatch),
     currentDirActions:bindActionCreators(currentDirAction, dispatch),
+    newFolderActions:bindActionCreators(newFolderAction, dispatch),
     dispatch:dispatch
 
 });

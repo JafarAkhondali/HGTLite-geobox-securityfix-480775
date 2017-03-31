@@ -7,6 +7,7 @@ import fileListReducer from './fileListReducer';
 import fileFABReducer from './fileFABReducer';
 import fileTagReducer from './fileTagReducer';
 import loginReducer from './loginReducer';
+import newFolderReducer from './newFolderReducer';
 import registerReducer from './registerReducer';
 import toggleMapReducer from './toggleMapReducer';
 import userNameNavReducer from './userNameNavReducer';
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     fileFAB: fileFABReducer,
     fileTag:fileTagReducer,
     login:loginReducer,
+    newFolder:newFolderReducer,
     register:registerReducer,
     userNameNav:userNameNavReducer,
     toggleMap:toggleMapReducer,
