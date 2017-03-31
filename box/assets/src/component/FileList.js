@@ -25,7 +25,7 @@ class FileList extends React.Component {
         // console.log("获取文件数组："+files)
         let data = [];
         files.forEach(file => {
-            data.push(<FileItem fileItem={file} key={file.file_id}  data-fid={file.file_id} onClick={this.handleRowClick}/>)
+            data.push(<FileItem fileItem={file} key={file.file_id}  />)
         });
 
         if (!data.length) {

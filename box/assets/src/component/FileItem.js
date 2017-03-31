@@ -13,7 +13,7 @@ import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} f
 import HRLine from './HRLine'
 import FileItemFloating from './FileItemFloating'
 
-import fileUIActions from '../action/fileUIAction';
+import fileItemAction from '../action/fileItemAction';
 
 
 class FileItem extends React.Component {
@@ -22,6 +22,24 @@ class FileItem extends React.Component {
         super()
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleMouseOut = this.handleMouseOut.bind(this);
+        this.handleNameClick = this.handleNameClick.bind(this);
+    }
+
+    handleNameClick(event){
+        console.log(event.target)
+        console.log(event.target.dataset.fid)
+        console.log(event.target.dataset.typeid)
+        let fId = event.target.dataset.fid;
+        let tId = event.target.dataset.typeid;
+        // console.log('--1')
+        console.log(tId)
+        if(tId =='dir'){
+            console.log('--2')
+            console.log(fId)
+            this.props.actions.fetchSelectedDir(fId);
+            return;
+        }
+        // console.log('--3')
     }
 
     handleMouseOver() {
@@ -42,7 +60,7 @@ class FileItem extends React.Component {
         let fabClass = classNames(showFAB ? 'opacity100' : 'opacity0');
         let itemIconClass = classNames('fa', 'fa-2x', 'fa-blue', 'opacity75',fileItem.style);
 
-
+        // console.log(fileItem);
 
         return (
             <div  >
@@ -50,8 +68,8 @@ class FileItem extends React.Component {
                     <Row >
                         <Col md={3}>
                             <div className="to-p-left-18" >
-                                <span className="width-36 display-inline-block"> <i className={itemIconClass}></i>  </span>
-                                <span className="font-file-name " >  <Link to='#'>  {fileItem.name}</Link> </span>
+                                <span className="width-36 display-inline-block"> <i className={itemIconClass}></i>  </span><Link to='#'>
+                                <span className="font-file-name "  data-fid={fileItem.file_id} data-typeid={fileItem.type_id} onClick={this.handleNameClick}>    {fileItem.name} </span></Link>
                             </div>
                         </Col>
                         <Col md={2}> </Col>
@@ -80,10 +98,10 @@ const mapStateToProps = state => ({
     showFAB: state.fileFAB.showingFAB
 });
 
-// const mapDispatchToProps = dispatch => ({
-//     actions: bindActionCreators(fileUIActions, dispatch)
-//
-// });
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(fileItemAction, dispatch)
 
-// export default connect(mapStateToProps, mapDispatchToProps)(FileItem);
-export default connect(mapStateToProps)(FileItem);
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileItem);
+// export default connect(mapStateToProps)(FileItem);
