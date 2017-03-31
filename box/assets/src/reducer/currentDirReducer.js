@@ -49,6 +49,8 @@ function currentDirReducer(state = initialState, action) {
             let newState2 = fromJS(state).set('dirList', newDirs2).toJS();
             console.log(newState2);
             return newState2;
+        case 'SET_CURRENT_ROOT':
+            return fromJS(state).set('dirList', []).toJS();
         default:
             return state;
     }

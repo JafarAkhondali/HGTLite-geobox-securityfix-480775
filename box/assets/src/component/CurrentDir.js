@@ -57,6 +57,8 @@ class CurrentDir extends React.Component {
         // console.log('=====',this.props)
         return (
                 <Breadcrumb >
+                    <Breadcrumb.Item href="#">
+                    </Breadcrumb.Item>
                  {this.getBreadcrumbItems(stateDirList)}
                 </Breadcrumb>
     );

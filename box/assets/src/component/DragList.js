@@ -29,7 +29,7 @@ class DragList extends React.Component {
                                     className="to-m-top-8"> {
                             file.name
                         } </div>
-                    }) : < span > 试试把文件拖到这里 </span>} </div>
+                    }) : <span > 试试把文件拖到这里 </span>} </div>
                 )
             }
 

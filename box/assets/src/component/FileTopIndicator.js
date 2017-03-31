@@ -5,42 +5,20 @@ import '../style/file-uploader.scss'
 
 import React from 'react';
 import ReactDOM from 'react-dom'
-import {
-    connect
-}
-from 'react-redux';
-import {
-    bindActionCreators
-}
-from 'redux';
-
-import {
-    Link
-}
-from 'react-router';
+import {connect} from 'react-redux';
+import { bindActionCreators} from 'redux';
+import {Link} from 'react-router';
 import {toastr} from 'react-redux-toastr';
 
-import {
-    Grid,
-    Row,
-    Col,
-    Button,
-    FormGroup,
-    InputGroup,
-    FormControl,
-    ControlLabel,
-    Modal,
-    FieldGroup
-}
-from 'react-bootstrap'
+import {Grid,Row,Col,Button,FormGroup,InputGroup,FormControl,ControlLabel,Modal,FieldGroup} from 'react-bootstrap';
 
-import CurrentDir from './CurrentDir'
+import CurrentDir from './CurrentDir';
+import DragList from './DragList';
 
-import DragList from './DragList'
+import fileTagAction from '../action/fileTagAction';
+import currentDirAction from '../action/currentDirAction';
 
-import fileTagActions from '../action/fileTagAction'
-
-import {formatDate} from '../script/DatetimeFormat'
+import {formatDate} from '../script/DatetimeFormat';
 
 class FileTopIndicator extends React.Component {
 
@@ -61,6 +39,7 @@ class FileTopIndicator extends React.Component {
         this.handleDragEnter = this.handleDragEnter.bind(this);
         this.handleDragOver = this.handleDragOver.bind(this);
         this.handleDrop = this.handleDrop.bind(this);
+        this.handleShowRootFiles = this.handleShowRootFiles.bind(this);
     }
 
     close() {
@@ -77,7 +56,7 @@ class FileTopIndicator extends React.Component {
 
     handleChangeTag(event) {
         // console.log(event.target.value)
-        this.props.actions.setInputFileTag(event.target.value);
+        this.props.fileTagActions.setInputFileTag(event.target.value);
     }
 
     /**
@@ -142,7 +121,7 @@ class FileTopIndicator extends React.Component {
         //     console.log(err);
         // });
 
-        // 从FormData获取文件用于传输完成提示
+        // 从FormData获取文件传输进度
             var allFiles=this.state.uploadFormData.getAll('file');
             var filenames=[];
             for(let i=0,len=allFiles.length;i<len;i++){
@@ -180,7 +159,7 @@ class FileTopIndicator extends React.Component {
                   }
               }
 
-              //progess监听一定要放在open之前
+        //progess监听一定要放在open之前
         xhr.upload.onprogress = function(event) {
             // console.log('运行progress')
             var percent = 0;
@@ -197,10 +176,9 @@ class FileTopIndicator extends React.Component {
 
         xhr.open('POST', '/file/upload');
 
-        xhr.send(formData)
+        xhr.send(formData);
 
     }
-
 
     handleDragEnter(event) {
         event.stopPropagation();
@@ -242,9 +220,16 @@ class FileTopIndicator extends React.Component {
 
     }
 
+    handleShowRootFiles(event){
+        this.props.currentDirActions.setCurrentRoot();
+        this.props.currentDirActions.fetchSelectedDir(0);
+    }
 
     render() {
-        let {fTag, actions} = this.props;
+
+        let {fTag, fileTagActions,currentDirActions} = this.props;
+        // console.log('=====FileTopIndicator属性',this.props)
+
         let progressBarStyle={ width:this.state.progressPercentage/100};
 
         return (
@@ -255,7 +240,7 @@ class FileTopIndicator extends React.Component {
                     <Col md = {7}>
                             <div>
                                 <div className="display-inline-block">
-                                    <button className = "btn btn-all-files opacity75 to-m-left8"> 所有文件 </button>
+                                    <button className = "btn btn-all-files opacity75 to-m-left8" onClick={this.handleShowRootFiles}> 所有文件 </button>
 
                                 </div>
                                 <div className="display-inline-block">
@@ -345,7 +330,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(fileTagActions, dispatch)
+    fileTagActions: bindActionCreators(fileTagAction, dispatch),
+    currentDirActions:bindActionCreators(currentDirAction, dispatch),
+    dispatch:dispatch
 
 });
 

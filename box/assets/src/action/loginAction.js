@@ -54,7 +54,7 @@ let loginActions = {
                         // 保存用户信息
                         sessionStorage.setItem('gbUser', loginResult.userName);
                         sessionStorage.setItem('gbUserLogged', 'true');
-                        
+
                         dispatch(loginActions.loginFetchSuccess(loginResult));
 
 
@@ -86,7 +86,7 @@ let loginActions = {
                     // console.log('json2')
 
                     let userRootList = json2;
-                    console.log('获取用户根目录', userRootList);
+                    // console.log('获取用户根目录', userRootList);
 
                     // 获取当前用户的文件
                     let weight = Math.floor(200 + Math.random() * 50);
@@ -108,7 +108,7 @@ let loginActions = {
                         modified: '2017-02-28'
                     }]
 
-                    console.log('更新文件列表之前');
+                    // console.log('更新文件列表之前');
 
                     sessionStorage.setItem('gbUserFiles', JSON.stringify(userRootList));
 

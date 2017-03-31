@@ -5,6 +5,8 @@ import {fromJS} from 'immutable';
 
 let currentDirActions = {
 
+    // TODO: 添加面包屑时要过滤待添加的目录id和dirList的末位元素相同的情况
+
     fetchSelectedDir: function(dirId) {
 
         return function(dispatch, getState) {
@@ -36,7 +38,7 @@ let currentDirActions = {
             }).catch(e => {
                 console.log('获取指定目录文件失败')
 
-                console.log(e)
+                // console.log(e)
                 console.log(e.message)
 
             });
@@ -51,7 +53,10 @@ let currentDirActions = {
     removeTailDir: (order) => ({
         type: "REMOVE_TAIL_DIR",
         payload: order
-    })
+    }),
+    setCurrentRoot:() => ({
+        type: "SET_CURRENT_ROOT"
+    }),
 }
 
 export default currentDirActions;
