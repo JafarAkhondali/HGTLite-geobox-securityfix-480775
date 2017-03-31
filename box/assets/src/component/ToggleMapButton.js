@@ -10,33 +10,36 @@ import {bindActionCreators} from 'redux';
 
 import classNames from 'classnames';
 
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem,Breadcrumb} from 'react-bootstrap';
-
-
-import userNameNavAction from '../action/userNameNavAction'
+import toggleMapAction from '../action/toggleMapAction'
 
 class ToggleMapButton extends React.Component {
 
     constructor() {
         super()
+        this.handleToggleClick = this.handleToggleClick.bind(this);
+    }
+
+    handleToggleClick(){
+        this.props.actions.toggleMapList();
     }
 
     render() {
 
-        // let {stateLogged,stateUserName,actions} = this.props;
-        // console.log('=====',this.props)
-        //
-        // let accountMenuItemClass = classNames({
-        //     'display-none':!stateLogged
-        // })
+        let {stateVisibleStyle,stateToggleStyle,actions} = this.props;
+        console.log('=====',this.props)
+        
+        let visibleClass = classNames(stateVisibleStyle);
+
+        let iconClass = classNames('fa','fa-blue','fa-2x','opacity75',stateToggleStyle);
 
         return (
-            <div className="toggle-map-btn">
+            <div className={visibleClass} onClick={this.handleToggleClick}>
+                {/*<div className="toggle-map-btn "> */}
                 <div className="floating-menu-btn">
                    <div className="floating-menu-toggle-wrap">
                      <div className="floating-menu-toggle">
                         {/*<i className="fa fa-bars fa-blue fa-2x opacity75"></i> */}
-                       <i className="fa fa-map-o fa-blue fa-2x opacity75"></i>
+                       <i className={iconClass}></i>
                      </div>
                    </div>
                  </div>
@@ -46,16 +49,16 @@ class ToggleMapButton extends React.Component {
 
 }
 
-// const mapStateToProps = state => ({
-//     stateLogged: state.userNameNav.logged,
-//     stateUserName:state.userNameNav.userName
-//
-// });
-//
-// const mapDispatchToProps = dispatch => ({
-//     actions: bindActionCreators(userNameNavAction, dispatch)
-//
-// });
+const mapStateToProps = state => ({
+    stateVisibleStyle: state.toggleMap.visibleStyle,
+    stateToggleStyle:state.toggleMap.toggleStyle
 
-// export default connect(mapStateToProps,mapDispatchToProps)(CurrentDir);
-export default  ToggleMapButton;
+});
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(toggleMapAction, dispatch)
+
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(ToggleMapButton);
+// export default  ToggleMapButton;

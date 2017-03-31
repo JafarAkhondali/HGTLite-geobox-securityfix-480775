@@ -260,7 +260,7 @@ class FileTopIndicator extends React.Component {
                                 </div>
                                 <div className="display-inline-block">
                                     <CurrentDir />
-                                    
+
                                 </div>
 
                             </div>

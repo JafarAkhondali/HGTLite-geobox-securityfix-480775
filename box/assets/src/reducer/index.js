@@ -2,29 +2,26 @@
 import {combineReducers} from 'redux';
 import {reducer as toastrReducer} from 'react-redux-toastr'
 
+import currentDirReducer from './currentDirReducer';
 import fileListReducer from './fileListReducer';
 import fileFABReducer from './fileFABReducer';
 import fileTagReducer from './fileTagReducer';
 import loginReducer from './loginReducer';
 import registerReducer from './registerReducer';
+import toggleMapReducer from './toggleMapReducer';
 import userNameNavReducer from './userNameNavReducer';
-import {routerReducer} from 'react-router-redux'
-
-/**
- * 此处合并Reducer，这步在本项目中意义不大，因为只有一个appleBasketReducer，完全可以不合并
- * 但是如果是为了扩展的话，比如不止一个AppleBasket组件，还有别的reducer就有意义了
- * 这步操作之后可以在容器组件传入数据的时候指定需要传入的数据
- * 比如在AppleBasket的mapStateToProp中传入state.appleBasket
- */
+import {routerReducer} from 'react-router-redux';
 
 const rootReducer = combineReducers({
     toastr: toastrReducer,
+    currentDir:currentDirReducer,
     fileList: fileListReducer,
     fileFAB: fileFABReducer,
     fileTag:fileTagReducer,
     login:loginReducer,
     register:registerReducer,
     userNameNav:userNameNavReducer,
+    toggleMap:toggleMapReducer,
     routing: routerReducer
 });
 
