@@ -23,25 +23,28 @@ class CurrentDir extends React.Component {
     handleItemClick(event){
 
         console.log('hello')
-        console.log(event.target.dataset.did)
+        // console.log(event.target.dataset.order)
 
         let selectedDirId=event.target.dataset.did;
+        let selectedOrder=event.target.dataset.order;
+
+        this.props.actions.removeTailDir(selectedOrder);
 
         this.props.actions.fetchSelectedDir(selectedDirId);
 
     }
 
     getBreadcrumbItems(items) {
-        // console.log("获取文件数组："+files)
+        // console.log("获取面包屑数组："+items)
         let data = [];
         items.forEach(item => {
-            data.push(<Breadcrumb.Item  data-did={item[1]} onClick={this.handleItemClick}  key={item[1]}>
+            data.push(<Breadcrumb.Item  data-did={item[1]} data-order={items.indexOf(item)} onClick={this.handleItemClick}  key={item[1]||Math.random()}>
                {item[0]}
              </Breadcrumb.Item>)
         });
 
         if (!data.length) {
-            data.push(<div></div>);
+            data.push(<div key={Math.random()}></div>);
         }
 
         return data;
@@ -52,11 +55,6 @@ class CurrentDir extends React.Component {
 
         let {stateDirList,actions} = this.props;
         // console.log('=====',this.props)
-        //
-        // let accountMenuItemClass = classNames({
-        //     'display-none':!stateLogged
-        // })
-
         return (
                 <Breadcrumb >
                  {this.getBreadcrumbItems(stateDirList)}

@@ -20,7 +20,7 @@ function toggleMapReducer(state = initialState, action) {
             sessionStorage.setItem('visibleStyle','visible-false');
             return fromJS(state).set('visibleStyle', 'visible-false').toJS();
         case 'SHOW_FILE_MAP':
-            console.log('执行没有')
+            // console.log('执行')
             sessionStorage.setItem('toggleStyle','fa-bars');
             sessionStorage.setItem('showingMap','true');
             return fromJS(state).set('toggleStyle', 'fa-bars').set('showingMap','true').toJS();

@@ -1,6 +1,7 @@
 import BASE_URL from '../script/BaseUrl';
 import VERSION from '../script/Version';
 import fileListActions from './fileListAction';
+import {fromJS} from 'immutable';
 
 let currentDirActions = {
 
@@ -14,7 +15,7 @@ let currentDirActions = {
             // console.log('显示地图状态', state.toggleMap.showingMap);
 
             // 获取用户根目录
-            var selectedDirURL = BASE_URL.localServer + '/' + VERSION.api + '/files/' + 'supersu' + '/dir_supersu_002/all';
+            var selectedDirURL = BASE_URL.localServer + '/' + VERSION.api + '/files/' + state.userNameNav.userName + '/'+dirId+'/all';
 
             fetch(selectedDirURL, {
                 mode: 'cors'
@@ -32,16 +33,25 @@ let currentDirActions = {
 
                 dispatch(fileListActions.fileFetchSuccess(newDirList));
 
-        }).catch(e => {
-            console.log('获取指定目录文件失败')
+            }).catch(e => {
+                console.log('获取指定目录文件失败')
 
-            console.log( e)
-            console.log(e.message)
+                console.log(e)
+                console.log(e.message)
 
-        });
-    }
+            });
+        }
 
-}
+    },
+
+    addDirBreadcrumb: (dName, dId) => ({
+        type: "ADD_DIR_BREADCRUMB",
+        payload: [dName, dId]
+    }),
+    removeTailDir: (order) => ({
+        type: "REMOVE_TAIL_DIR",
+        payload: order
+    })
 }
 
 export default currentDirActions;

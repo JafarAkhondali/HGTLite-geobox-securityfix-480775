@@ -29,7 +29,7 @@ class FileList extends React.Component {
         });
 
         if (!data.length) {
-            data.push(<div className="font-grey-barely font-size-40 text-align-center to-m-top32 letter-space-8" key={files.length} >云盘空空</div>);
+            data.push(<div className="font-grey-barely font-size-40 text-align-center to-m-top32 letter-space-8" key={files.length} >没有文件，赶紧上传吧</div>);
         }
 
         return data;

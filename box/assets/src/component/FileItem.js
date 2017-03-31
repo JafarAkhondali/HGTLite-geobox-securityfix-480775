@@ -14,6 +14,7 @@ import HRLine from './HRLine'
 import FileItemFloating from './FileItemFloating'
 
 import fileItemAction from '../action/fileItemAction';
+import currentDirAction from '../action/currentDirAction';
 
 
 class FileItem extends React.Component {
@@ -27,19 +28,24 @@ class FileItem extends React.Component {
 
     handleNameClick(event){
         console.log(event.target)
-        console.log(event.target.dataset.fid)
-        console.log(event.target.dataset.typeid)
+        // console.log(event.target.dataset.fid)
+        // console.log(event.target.dataset.typeid)
         let fId = event.target.dataset.fid;
+        let fName = event.target.dataset.fname;
         let tId = event.target.dataset.typeid;
-        // console.log('--1')
         console.log(tId)
         if(tId =='dir'){
-            console.log('--2')
-            console.log(fId)
-            this.props.actions.fetchSelectedDir(fId);
+            // console.log('---1')
+
+            this.props.currentDirActions.addDirBreadcrumb(fName,fId);
+            // console.log('---2')
+
+            this.props.fileItemActions.fetchSelectedDir(fId);
+            // console.log('---3')
+
+
             return;
         }
-        // console.log('--3')
     }
 
     handleMouseOver() {
@@ -55,7 +61,7 @@ class FileItem extends React.Component {
 
     render() {
 
-        let {fileItem, showFAB, actions} = this.props;
+        let {fileItem, showFAB, fileItemActions,currentDirActions} = this.props;
         // onMouseOver={actions.showFAB} onMouseLeave={actions.hideFAB}
         let fabClass = classNames(showFAB ? 'opacity100' : 'opacity0');
         let itemIconClass = classNames('fa', 'fa-2x', 'fa-blue', 'opacity75',fileItem.style);
@@ -69,7 +75,7 @@ class FileItem extends React.Component {
                         <Col md={3}>
                             <div className="to-p-left-18" >
                                 <span className="width-36 display-inline-block"> <i className={itemIconClass}></i>  </span><Link to='#'>
-                                <span className="font-file-name "  data-fid={fileItem.file_id} data-typeid={fileItem.type_id} onClick={this.handleNameClick}>    {fileItem.name} </span></Link>
+                                <span className="font-file-name "  data-fid={fileItem.file_id}  data-fname={fileItem.name} data-typeid={fileItem.type_id} onClick={this.handleNameClick}>    {fileItem.name} </span></Link>
                             </div>
                         </Col>
                         <Col md={2}> </Col>
@@ -99,8 +105,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(fileItemAction, dispatch)
-
+    fileItemActions: bindActionCreators(fileItemAction, dispatch),
+    currentDirActions:bindActionCreators(currentDirAction, dispatch),
+    dispatch:dispatch
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileItem);

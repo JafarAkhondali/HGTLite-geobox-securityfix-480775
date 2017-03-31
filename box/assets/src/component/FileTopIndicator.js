@@ -246,13 +246,13 @@ class FileTopIndicator extends React.Component {
     render() {
         let {fTag, actions} = this.props;
         let progressBarStyle={ width:this.state.progressPercentage/100};
+
         return (
         <div>
 
             <Grid>
                 <Row>
                     <Col md = {7}>
-                            {/* <a href = "/#/filemap" > <i className = "fa fa-map-marker fa-2x" > </i> </a> */}
                             <div>
                                 <div className="display-inline-block">
                                     <button className = "btn btn-all-files opacity75 to-m-left8"> 所有文件 </button>
@@ -260,12 +260,10 @@ class FileTopIndicator extends React.Component {
                                 </div>
                                 <div className="display-inline-block">
                                     <CurrentDir />
-
                                 </div>
 
                             </div>
                         </Col>
-                        { /*<Col md = {4} >  </Col> */}
                         <Col md={2}>
                             <button id = "btnUpload"   className = "btn btn-upload to-m-left8 opacity75" onClick = { this.open.bind(this)} > 上传 </button>
                             <button id = "btnNew"  className = "btn btn-default to-m-left20" > 新建 </button>
