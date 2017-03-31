@@ -14,6 +14,7 @@ import {Grid,Row,Col,Button,FormGroup,InputGroup,FormControl,ControlLabel,Modal,
 
 import CurrentDir from './CurrentDir';
 import DragList from './DragList';
+import UploadLocationPicker from './UploadLocationPicker';
 
 import fileTagAction from '../action/fileTagAction';
 import currentDirAction from '../action/currentDirAction';
@@ -285,7 +286,7 @@ class FileTopIndicator extends React.Component {
 
                 <form onSubmit = {this.handleUploadFormSubmit} >
                 <Modal.Body>
-                <div> <span className = "font-file-list" > 上传到： &frasl; </span></div>
+                <div> <span className = "font-file-list" > 上传到：</span><UploadLocationPicker /></div>
                 <div >
                     <div className = "display-inline-block" >
                         <label htmlFor = "file" className = "btn btn-default btn-upload" >

@@ -1,5 +1,6 @@
 import '../style/search-page.scss'
 
+
 import React, {Component} from 'react'
 import {extend} from 'lodash'
 import {
@@ -13,8 +14,11 @@ import {
     ActionBar, ActionBarRow, SideBar
 } from 'searchkit'
 
+import BASE_URL from '../script/BaseUrl';
+
 // const host = "http://demo.searchkit.co/api/movies"
-const host = "http://localhost:9200/geoboxes"
+const esIndexName='geoboxes';
+const host = BASE_URL.esServer+'/'+esIndexName;
 const searchkit = new SearchkitManager(host)
 
 const FileHitsGridItem = (props) => {

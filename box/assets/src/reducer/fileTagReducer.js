@@ -1,20 +1,24 @@
-import {fromJS} from 'immutable';
+import {
+    fromJS
+}
+from 'immutable';
 
 const initialState = {
-    fTag:"file_general"}
+    fTag: ""
+}
 
 function fileTagReducer(state = initialState, action) {
 
-        switch (action.type) {
+    switch (action.type) {
 
-            case 'INPUT_FILE_TAG':
-                let newTag = action.payload
-                return fromJS(state).set('fTag', newTag).toJS();
+        case 'INPUT_FILE_TAG':
+            let newTag = action.payload
+            return fromJS(state).set('fTag', newTag).toJS();
 
-            default:
-                return state;
-        }
+        default:
+            return state;
+    }
 
-    };
+};
 
-    export default fileTagReducer
+export default fileTagReducer
