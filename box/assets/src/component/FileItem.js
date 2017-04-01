@@ -33,7 +33,7 @@ class FileItem extends React.Component {
         let fId = event.target.dataset.fid;
         let fName = event.target.dataset.fname;
         let tId = event.target.dataset.typeid;
-        console.log(tId)
+        // console.log(tId)
         if(tId =='dir'){
             // console.log('---1')
 

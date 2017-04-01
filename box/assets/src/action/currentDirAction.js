@@ -10,7 +10,7 @@ let currentDirActions = {
     fetchSelectedDir: function(dirId) {
 
         return function(dispatch, getState) {
-            console.log(dirId);
+            // console.log(dirId);
 
             const state = getState();
 

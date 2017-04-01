@@ -75,7 +75,7 @@ class FileTopIndicator extends React.Component {
 
         const filesToUpload = event.target.files;
         let fileNum = filesToUpload.length;
-        console.log('选择的文件数目', fileNum);
+        console.log('文件选取input添加的文件数：', fileNum);
         // console.log(filesToUpload.length, filesToUpload)
         for (let i = 0, len = filesToUpload.length; i < len; i++) {
             formData.append('file', filesToUpload[i])
@@ -113,7 +113,7 @@ class FileTopIndicator extends React.Component {
         let formData2 = this.state.uploadFormData;
 
         var dragFiles = event.dataTransfer.files;
-        console.log('拖拽文件数', dragFiles.length);
+        console.log('拖拽添加的文件数：', dragFiles.length);
         // console.log(filesToUpload.length, filesToUpload)
         for (let i = 0, len = dragFiles.length; i < len; i++) {
             formData2.append('file', dragFiles[i])
@@ -139,10 +139,19 @@ class FileTopIndicator extends React.Component {
         // console.log('====user',curUserName)
 
         let formData = this.state.uploadFormData;
-        let curDirLoc = this.props.stateCurDirList;
-        let curLen = curDirLoc.length;
-        let targetDirId = curDirLoc[(curLen-1)][1];
-        console.log('======当前目录是',curDirLoc,targetDirId);
+        let curDirList = this.props.stateCurDirList;
+        let targetDirId ='';
+        // console.log('=====curDirList',curDirList)
+
+        if(curDirList==undefined||curDirList==null||curDirList.length==0){
+            targetDirId ='0';
+        }else{
+            // console.log(curDirList)
+            let curLen = curDirList.length;
+             targetDirId=curDirList[(curLen-1)][1];
+        }
+
+        // console.log('======当前目录是：',curDirList[(curLen-1)][0]);
         // console.log(typeof curDirLoc);
 
         let  targetLoc = this.props.stateUploadLoc;
@@ -150,16 +159,37 @@ class FileTopIndicator extends React.Component {
 
         if(targetLoc){
             targetDirId = targetLoc;
-            console.log('=====最终上传的目录ID是',targetDirId)
+            console.log('=====最终上传的目录ID是:',targetDirId);
         }
+
+        console.log('最终要上传的文件有：', formData.getAll('file'));
+
+
+        // 文件元信息列表，与上传接收到的顺序一致
+        let allFilesToUpload = formData.getAll('file');
+        let allLen = allFilesToUpload.length;
+        let fileInfoList = [];
+        for(let i=0;i<allLen;i++){
+            let f = {};
+            f.name = allFilesToUpload[i].name;
+            f.size = allFilesToUpload[i].size;
+            f.type = allFilesToUpload[i].type;
+            f.modifiedDate = formatDate(allFilesToUpload[i].lastModified);
+            fileInfoList.push(f);
+        }
+        // console.log(JSON.stringify(fileInfoList));
 
         // 关于上传者
         formData.append('user_id', curUserName);
         formData.append('upload_by', curUserName);
         formData.append('upload_date', formatDate());
-        // 关于上传指定信息
+        // 关于本次上传的指定信息
         formData.append('file_dir_id',targetDirId );
         formData.append('file_tag', this.props.fTag);
+
+        formData.append('fileInfoList',JSON.stringify(fileInfoList));
+
+
 
         this.setState({
             uploadFormData: formData

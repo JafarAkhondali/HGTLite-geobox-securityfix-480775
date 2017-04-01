@@ -30,6 +30,14 @@ def upload():
         uploadDict[el[0]] = el[1]
     print uploadDict
 
+    fInfoList = uploadDict['fileInfoList'];
+    # print type(fInfoList)
+    fInfoListJson = json.loads(fInfoList)
+    # print type(fInfoListJson)
+    print type(fInfoListJson[0])
+    print  fInfoListJson[0]['size']
+    print  type(fInfoListJson[0]['size'])
+
     # 创建本次上传id，作为文件存储目录id
     uploadKey = str(uuid4()).replace('-','')
     # print upload_key
@@ -43,14 +51,14 @@ def upload():
     fileLists = request.files.getlist("file");
     # print len(fileLists)
     gbFileLists = []
-    for upload in fileLists:
-        print type(upload)
+    for index,upload in enumerate(fileLists):
         filename = upload.filename.rsplit("/")[0]
+        print u'=====文件名是'+filename
         destination = "/".join([targetPath, filename])
         # print "Accept incoming file:", filename
         # print "Save it to:", destination
         upload.save(destination)
-        dateTime0 = datetime.strptime(uploadDict['upload_date'],'%Y-%m-%d %H:%M:%S')
+        uploadDateTime = datetime.strptime(uploadDict['upload_date'],'%Y-%m-%d %H:%M:%S')
         # print dateTime0
 
         gbFile = GbFile(
@@ -60,20 +68,20 @@ def upload():
             dir_id = uploadDict['file_dir_id'],
             file_real_location = uploadKey,
             file_type_id = 'type016',
-            file_size = 1024,
+            file_size =  fInfoListJson[index]['size'],
             file_suffix =  upload.filename.rsplit('.')[-1],
             file_tag = uploadDict['file_tag'],
             is_public = 0,
             create_date = None,
             create_by = None,
-            update_date = None,
-            update_by = None,
+            update_date = fInfoListJson[index]['modifiedDate'],
+            update_by = uploadDict['upload_by'],
             file_hashcode = None,
-            notes = '',
+            notes = fInfoListJson[index]['type'],
             user_id =uploadDict['user_id'],
             is_deleted = 0,
             upload_by = uploadDict['upload_by'],
-            upload_date = dateTime0,
+            upload_date = uploadDateTime,
             is_starred = 0
         )
         # print gbFile

@@ -15,7 +15,7 @@ let newFolderActions = {
                 console.log(typeof curDirList)
                 let parentDirId='';
 
-                if(curDirList==[]||curDirList==undefined||curDirList==null){
+                if(curDirList==undefined||curDirList==null||curDirList.length==0){
                     parentDirId ='0';
                 }else{
                     console.log(curDirList)
