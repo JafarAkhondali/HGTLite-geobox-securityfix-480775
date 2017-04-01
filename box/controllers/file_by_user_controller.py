@@ -27,7 +27,8 @@ def list_all_by_user_dir(user_id,dir_id):
     # 获取用户根目录文件夹
     filters4Dir = {
         GbFileDir.user_id == user_id,
-        GbFileDir.parent_id == dir_id
+        GbFileDir.parent_id == dir_id,
+        GbFileDir.is_deleted == 0
     }
     dirRecords = GbFileDir.query.filter(*filters4Dir).all()
     # print dirRecords
@@ -56,7 +57,8 @@ def list_all_by_user_dir(user_id,dir_id):
     # 获取用户根目录文件
     filters4File = {
         GbFile.user_id == user_id,
-        GbFile.dir_id == dir_id
+        GbFile.dir_id == dir_id,
+        GbFile.is_deleted == 0
     }
     fileRecords = GbFile.query.filter(*filters4File).all()
 
