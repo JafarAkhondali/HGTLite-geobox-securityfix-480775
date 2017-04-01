@@ -1,7 +1,11 @@
 # _*_ coding: utf-8 _*_
+from uuid import uuid4
+from datetime import datetime
+
 from box import geobox, db
 from flask import jsonify,request
 from box.model.gb_file_dir_do import GbFileDir, GbFileDirSchema
+from box.domain.new_folder_result_dto import NewFolderResult,NewFolderResultSchema
 
 _BASE_URL = '/dir'
 
@@ -41,19 +45,26 @@ def list_all_dir_by_user_id(user_id,page_num=1,page_size=8):
     dir_schema = GbFileDirSchema()
     return dir_schema.jsonify(all_dir, many=True)
 
-#
-# def save_obj_suffix_bundle(bundle_obj):
-#     db.session.add(bundle_obj)
-#     db.session.commit()
-#
-#
-# @geobox.route(_BASE_URL + '/add/<suffix_details>')
-# def save_suffix_bundle(suffix_details):
-#     print 'add01'
-#     bundle = GbSuffixBundle('id002', 'type002', 'topojson', suffix_details)
-#     print 'add02'
-#     save_obj_suffix_bundle(bundle)
-#
+
+def save_obj_dir(bundle_obj):
+    db.session.add(bundle_obj)
+    db.session.commit()
+
+
+@geobox.route(_BASE_URL + '/add/<user_id>/<parent_dir_id>/<dir_name>')
+def save_dir_by_name(user_id,parent_dir_id,dir_name):
+    # print 'add01'
+    new_dir_id = str(uuid4()).replace('-','')
+    new_dir = GbFileDir(new_dir_id, dir_name, parent_dir_id, 0,user_id,None,None,user_id,datetime.now())
+    # print 'add02'
+    db.session.add(new_dir)
+    db.session.commit()
+    result = NewFolderResult(user_id,True,new_dir_id)
+    result_schema = NewFolderResultSchema()
+    return jsonify(result_schema.dump(result).data)
+
+
+
 #
 # @geobox.route(_BASE_URL + '/update/id/<row_id>')
 # def update_by_id(row_id):

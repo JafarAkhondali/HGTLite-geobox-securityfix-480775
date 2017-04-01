@@ -15,6 +15,7 @@ function userNameNavReducer(state = initialState, action) {
             sessionStorage.removeItem('gbUser');
             sessionStorage.removeItem('gbUserFiles');
             sessionStorage.removeItem('gbUserLogged');
+            sessionStorage.removeItem('gbCurDir');
             return fromJS(state).set('logged', false).set('userName','请登陆').toJS();
         default:
             return state;

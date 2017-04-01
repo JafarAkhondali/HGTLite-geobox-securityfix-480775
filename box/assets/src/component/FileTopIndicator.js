@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css'
 import 'react-redux-toastr/src/styles/index.scss'
 import '../style/styles.scss'
@@ -59,20 +60,22 @@ class FileTopIndicator extends React.Component {
         });
     }
 
+    //给上传的文件添加标签
     handleChangeTag(event) {
         // console.log(event.target.value)
         this.props.fileTagActions.setInputFileTag(event.target.value);
     }
 
     /**
-     * 文件选取input事件方法
+     * 文件选取input添加文件事件
      */
     handleUploadFileChange(event) {
-        let fileNum = event.target.files.length;
-        // console.log('选择的文件数目', fileNum);
+
         let formData = this.state.uploadFormData;
 
         const filesToUpload = event.target.files;
+        let fileNum = filesToUpload.length;
+        console.log('选择的文件数目', fileNum);
         // console.log(filesToUpload.length, filesToUpload)
         for (let i = 0, len = filesToUpload.length; i < len; i++) {
             formData.append('file', filesToUpload[i])
@@ -83,6 +86,48 @@ class FileTopIndicator extends React.Component {
             uploadFormData: formData
         });
     }
+
+    handleDragEnter(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        this.setState({
+            isDragActive: true
+        })
+    }
+
+    handleDragOver(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        // this.setState(
+        //     {
+        //         isDragActive:false
+        //     }
+        // )
+    }
+
+    //拖拽添加文件事件
+    handleDrop(event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        let formData2 = this.state.uploadFormData;
+
+        var dragFiles = event.dataTransfer.files;
+        console.log('拖拽文件数', dragFiles.length);
+        // console.log(filesToUpload.length, filesToUpload)
+        for (let i = 0, len = dragFiles.length; i < len; i++) {
+            formData2.append('file', dragFiles[i])
+        }
+
+        // console.log('选择的文件有', formData2.getAll('file'));
+
+        this.setState({
+            isDragActive: false,
+            uploadFormData: formData2
+        });
+
+    }
+
 
     /**
      * 文件及form提交事件方法
@@ -164,7 +209,7 @@ class FileTopIndicator extends React.Component {
 
             toastr.success('上传成功',successInfo )
             let formData1 = new FormData();
-
+            //刷新文件列表
             this.props.currentDirActions.fetchSelectedDir(targetDirId);
 
             this.setState({
@@ -209,51 +254,13 @@ class FileTopIndicator extends React.Component {
 
     }
 
-    handleDragEnter(event) {
-        event.stopPropagation();
-        event.preventDefault();
-        this.setState({
-            isDragActive: true
-        })
-    }
-
-    handleDragOver(event) {
-        event.stopPropagation();
-        event.preventDefault();
-        // this.setState(
-        //     {
-        //         isDragActive:false
-        //     }
-        // )
-    }
-
-    handleDrop(event) {
-        event.stopPropagation();
-        event.preventDefault();
-
-        let formData2 = this.state.uploadFormData;
-
-        var dragFiles = event.dataTransfer.files;
-        console.log('拖拽文件数', dragFiles.length);
-        // console.log(filesToUpload.length, filesToUpload)
-        for (let i = 0, len = dragFiles.length; i < len; i++) {
-            formData2.append('file', dragFiles[i])
-        }
-
-        console.log('选择的文件有', formData2.getAll('file'));
-
-        this.setState({
-            isDragActive: false,
-            uploadFormData: formData2
-        });
-
-    }
-
+    //所有文件按钮事件
     handleShowRootFiles(event){
         this.props.currentDirActions.setCurrentRoot();
         this.props.currentDirActions.fetchSelectedDir(0);
     }
 
+    //新建文件夹按钮事件
     handleNewFolderClick(event){
         this.props.newFolderActions.newFolderFirst();
     }
@@ -264,8 +271,6 @@ class FileTopIndicator extends React.Component {
         // console.log('=====FileTopIndicator属性',this.props)
 
         let progressBarStyle={ width:this.state.progressPercentage/100};
-
-
 
         return (
         <div>

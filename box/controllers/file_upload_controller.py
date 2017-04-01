@@ -44,13 +44,17 @@ def upload():
     # print len(fileLists)
     gbFileLists = []
     for upload in fileLists:
+        print type(upload)
         filename = upload.filename.rsplit("/")[0]
         destination = "/".join([targetPath, filename])
         # print "Accept incoming file:", filename
         # print "Save it to:", destination
         upload.save(destination)
+        dateTime0 = datetime.strptime(uploadDict['upload_date'],'%Y-%m-%d %H:%M:%S')
+        # print dateTime0
+
         gbFile = GbFile(
-            file_id = str(uuid4()),
+            file_id = str(uuid4()).replace('-',''),
             file_display_name = filename,
             file_real_name = filename,
             dir_id = uploadDict['file_dir_id'],
@@ -69,10 +73,10 @@ def upload():
             user_id =uploadDict['user_id'],
             is_deleted = 0,
             upload_by = uploadDict['upload_by'],
-            upload_date = datetime.strptime(uploadDict['upload_date'],'%Y-%m-%d %H:%M:%S'  ),
+            upload_date = dateTime0,
             is_starred = 0
         )
-        print gbFile
+        # print gbFile
         gbFileLists.append(gbFile)
 
     for f in gbFileLists:
