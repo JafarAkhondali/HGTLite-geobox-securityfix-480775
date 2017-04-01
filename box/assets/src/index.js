@@ -25,9 +25,9 @@ const syncHistory = syncHistoryWithStore(hashHistory, store);
 ReactDOM.render(<Provider store={store}>
     <div>
         <Router history={syncHistory} routes={routes}>
-            
+
         </Router>
-        <ReduxToastr timeOut={3500} newestOnTop={true} preventDuplicates={true} positio="top-right" transitionIn="fadeIn"  transitionOut="fadeOut" progressBar/>
+        <ReduxToastr timeOut={3500} newestOnTop={true} preventDuplicates={true} positio="top-right" transitionIn="fadeIn"  transitionOut="fadeOut" />
     </div>
     </Provider>,
     document.getElementById('content'))

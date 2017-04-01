@@ -38,7 +38,7 @@ def list_all_by_user_dir(user_id,dir_id):
     dirTags=''
     cDirList=[]
     for dir in dirRecords1:
-        r1 = FileList(dir.dir_id, dir.dir_name, dirStyle,dirSize,dirTypeId, dir.update_date, dirTags )
+        r1 = FileList(dir.dir_id, dir.parent_id,dir.dir_name, dirStyle,dirSize,dirTypeId, dir.update_date, dirTags )
         if is_chinese( dir.dir_name[0]) :
             cDirList.append(r1)
         else:
@@ -68,7 +68,7 @@ def list_all_by_user_dir(user_id,dir_id):
     fTags =''
     cFileList = []
     for file in fileRecords1:
-        r2 = FileList(file.file_id,file.file_display_name,fStyle,get_size_nice_str(file.file_size), file.file_type_id, file.update_date,fTags )
+        r2 = FileList(file.file_id,file.file_real_location,file.file_display_name,fStyle,get_size_nice_str(file.file_size), file.file_type_id, file.update_date,fTags )
         if is_chinese( file.file_display_name[0]) :
             cFileList.append(r2)
         else:

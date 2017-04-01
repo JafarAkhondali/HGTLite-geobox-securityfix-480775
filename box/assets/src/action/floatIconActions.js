@@ -1,6 +1,6 @@
 let floatIconActions = {
-    // fetchNewFolder:function(folderName){
-    //     // TODO: 添加文件夹后台
+    // downloadFile:function(fid,pid){
+    //
     //          return function(dispatch, getState) {
     //
     //             const state = getState();
