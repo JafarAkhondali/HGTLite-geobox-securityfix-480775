@@ -11,7 +11,7 @@ function fileTagReducer(state = initialState, action) {
 
     switch (action.type) {
 
-        case 'INPUT_FILE_TAG':
+        case 'SET_INPUT_FILE_TAG':
             let newTag = action.payload
             return fromJS(state).set('fTag', newTag).toJS();
 

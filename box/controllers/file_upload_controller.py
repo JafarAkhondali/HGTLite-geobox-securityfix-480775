@@ -10,6 +10,9 @@ import ConfigParser
 
 from box.model.gb_file_do import GbFile,GbFileSchema
 
+'''上传文件
+todo: 重复文件提示
+'''
 @geobox.route("/file/upload", methods=["POST"])
 def upload():
     # 从配置文件获取文件存储路径
@@ -63,9 +66,9 @@ def upload():
             update_by = None,
             file_hashcode = None,
             notes = '',
-            user_id =None,
+            user_id =uploadDict['user_id'],
             is_deleted = 0,
-            upload_by = uploadDict['user_id'],
+            upload_by = uploadDict['upload_by'],
             upload_date = datetime.strptime(uploadDict['upload_date'],'%Y-%m-%d %H:%M:%S'  ),
             is_starred = 0
         )

@@ -14,7 +14,7 @@ import {Grid,Row,Col,Button,FormGroup,InputGroup,FormControl,ControlLabel,Modal,
 
 import CurrentDir from './CurrentDir';
 import DragList from './DragList';
-import UploadLocationPicker from './UploadLocationPicker';
+import UploadLocPicker from './UploadLocPicker';
 
 import fileTagAction from '../action/fileTagAction';
 import currentDirAction from '../action/currentDirAction';
@@ -90,13 +90,30 @@ class FileTopIndicator extends React.Component {
     handleUploadFormSubmit(event) {
         event.preventDefault()
 
+        let curUserName=this.props.stateUserName;
+        // console.log('====user',curUserName)
+
         let formData = this.state.uploadFormData;
+        let curDirLoc = this.props.stateCurDirList;
+        let curLen = curDirLoc.length;
+        let targetDirId = curDirLoc[(curLen-1)][1];
+        console.log('======当前目录是',curDirLoc,targetDirId);
+        // console.log(typeof curDirLoc);
+
+        let  targetLoc = this.props.stateUploadLoc;
+        // console.log('=====输入的上传目录是',targetLoc);
+
+        if(targetLoc){
+            targetDirId = targetLoc;
+            console.log('=====最终上传的目录ID是',targetDirId)
+        }
 
         // 关于上传者
-        formData.append('user_id', 'supersu');
+        formData.append('user_id', curUserName);
+        formData.append('upload_by', curUserName);
         formData.append('upload_date', formatDate());
         // 关于上传指定信息
-        formData.append('file_dir_id', 'supersu');
+        formData.append('file_dir_id',targetDirId );
         formData.append('file_tag', this.props.fTag);
 
         this.setState({
@@ -128,6 +145,10 @@ class FileTopIndicator extends React.Component {
 
         // 从FormData获取文件传输进度
             var allFiles=this.state.uploadFormData.getAll('file');
+            if(!allFiles.length){
+                toastr.error('请选择文件后再上传！')
+                return;
+            }
             var filenames=[];
             for(let i=0,len=allFiles.length;i<len;i++){
                 filenames.push(allFiles[i].name)
@@ -144,17 +165,20 @@ class FileTopIndicator extends React.Component {
             toastr.success('上传成功',successInfo )
             let formData1 = new FormData();
 
+            this.props.currentDirActions.fetchSelectedDir(targetDirId);
+
             this.setState({
                 showModal: false,
                 progressPercentage:0,
                 uploadFormData: formData1
             });
+
         }.bind(this);
 
         xhr.onerror = function() {
             // console.log('上传失败', xhr.responseText)
             let errorInfo =filenames.join('\r\n');
-            errorInfo +=('\r\n'+filenames.length+' 个文件上传失败')
+            errorInfo +=('\r\n'+filenames.length+' 个文件上传失败');
             toastr.error('上传失败',errorInfo )
         }
 
@@ -236,7 +260,7 @@ class FileTopIndicator extends React.Component {
 
     render() {
 
-        let {fTag, fileTagActions,currentDirActions,newFolderActions} = this.props;
+        let {fTag,stateUploadLoc,stateCurDirList,stateUserName,fileTagActions,currentDirActions,newFolderActions} = this.props;
         // console.log('=====FileTopIndicator属性',this.props)
 
         let progressBarStyle={ width:this.state.progressPercentage/100};
@@ -269,7 +293,7 @@ class FileTopIndicator extends React.Component {
                             <InputGroup >
                             <FormControl type = "text" placeholder="输入文件名" />
                             <InputGroup.Button>
-                                <Button > 搜索 </Button>
+                                <Button> 搜索 </Button>
                             </InputGroup.Button>
                             </InputGroup>
                          </FormGroup>
@@ -286,7 +310,7 @@ class FileTopIndicator extends React.Component {
 
                 <form onSubmit = {this.handleUploadFormSubmit} >
                 <Modal.Body>
-                <div> <span className = "font-file-list" > 上传到：</span><UploadLocationPicker /></div>
+                <div> <span className = "font-file-list" > 上传到：</span><UploadLocPicker /></div>
                 <div >
                     <div className = "display-inline-block" >
                         <label htmlFor = "file" className = "btn btn-default btn-upload" >
@@ -297,7 +321,7 @@ class FileTopIndicator extends React.Component {
 
                     <div className="display-inline-block to-m-left8">
                         <div> <span className="font-file-list" > 添加标签： </span></div>
-                        <input type = "text" value = {fTag} onChange={ this.handleChangeTag} />
+                        <input type = "text" value = {fTag} onChange={ this.handleChangeTag} placeholder="给文件加个特色标签吧" />
                         </div>
                     </div>
 
@@ -337,7 +361,10 @@ class FileTopIndicator extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    fTag: state.fileTag.fTag
+    fTag: state.fileTag.fTag,
+    stateUploadLoc:state.uploadLocPicker.uploadLoc,
+    stateCurDirList:state.currentDir.dirList,
+    stateUserName:state.userNameNav.userName
 });
 
 const mapDispatchToProps = dispatch => ({

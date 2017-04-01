@@ -11,6 +11,7 @@ import newFolderReducer from './newFolderReducer';
 import registerReducer from './registerReducer';
 import toggleMapReducer from './toggleMapReducer';
 import userNameNavReducer from './userNameNavReducer';
+import uploadLocPickerReducer from './uploadLocPickerReducer';
 import {routerReducer} from 'react-router-redux';
 
 const rootReducer = combineReducers({
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     newFolder:newFolderReducer,
     register:registerReducer,
     userNameNav:userNameNavReducer,
+    uploadLocPicker:uploadLocPickerReducer,
     toggleMap:toggleMapReducer,
     routing: routerReducer
 });

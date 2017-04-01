@@ -43,6 +43,7 @@ function currentDirReducer(state = initialState, action) {
             return newState2;
 
         case 'SET_CURRENT_ROOT':
+            sessionStorage.setItem("gbCurDir",JSON.stringify([]));
             return fromJS(state).set('dirList', []).toJS();
 
         default:

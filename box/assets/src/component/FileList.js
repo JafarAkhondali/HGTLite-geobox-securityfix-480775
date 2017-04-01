@@ -78,12 +78,12 @@ handleNewFolderNO(event){
                     <HRLine/>
                 </div>
 
-                {/*===============新建文件夹头行*/}
+                {/*===============新建文件夹头行，Toggle显示*/}
                     <div style={newFolderStyle}>
                         <Grid>
                             <Row>
                                 <Col md={3}><i className="fa fa-2x  fa-folder-open-o fa-blue to-p-left-18 "></i>
-                                    <input type = "text"  placeholder="请输入文件名" className="to-m-left-18" ref={(folder)=>{this.newFolderInput=folder}}/></Col>
+                                    <input type = "text"  placeholder="请输入文件夹名" className="to-m-left-18" ref={(folder)=>{this.newFolderInput=folder}}/></Col>
                                 <Col md={3}>
                                     <button className="btn btn-default border-none" onClick={this.handleNewFolderOK}><i className="fa fa-check fa-blue"></i></button>
                                     <button className="btn btn-default border-none" onClick={this.handleNewFolderNO}><i className="fa fa-close fa-blue"></i></button>

@@ -13,7 +13,7 @@ import classNames from 'classnames';
 
 // import currentDirAction from '../action/currentDirAction'
 
-class UploadLocationPicker extends React.Component {
+class FloatingActionsModal extends React.Component {
 
     constructor() {
         super()
@@ -34,7 +34,7 @@ class UploadLocationPicker extends React.Component {
         // let {stateDirList,actions} = this.props;
         // console.log('=====',this.props)
         return (
-                <input type="text" className="width-360" placeholder="请输入上传位置，默认为根目录，如'/目录id1/目录id2'"  ref={(loc)=>this.uploadLocInput=loc}/>
+                <input type="text" className="width-400" placeholder="请输入上传位置，如'/目录id1/目录id2'，默认上传到当前目录'"  />
     );
     }
 }
@@ -48,4 +48,4 @@ class UploadLocationPicker extends React.Component {
 // });
 
 // export default connect(mapStateToProps,mapDispatchToProps)(UploadLocationPicker);
-export default  UploadLocationPicker;
+export default  FloatingActionsModal;

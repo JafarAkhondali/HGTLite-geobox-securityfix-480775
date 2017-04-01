@@ -1,6 +1,6 @@
 let fileTagActions = {
     setInputFileTag: tagValue => ({
-        type: "INPUT_FILE_TAG",
+        type: "SET_INPUT_FILE_TAG",
         payload: tagValue
     })
 }
