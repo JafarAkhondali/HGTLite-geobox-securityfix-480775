@@ -72,7 +72,7 @@ class FileItem extends React.Component {
             <div  >
                 <Grid>
                     <Row >
-                        <Col md={3}>
+                        <Col md={4}>
                             <div className="to-p-left-18" >
                                 <span className="width-36 display-inline-block"> <i className={itemIconClass}></i>  </span><Link to='#'>
                                 <span className="font-file-name "  data-fid={fileItem.file_id}  data-fname={fileItem.name} data-typeid={fileItem.type_id} onClick={this.handleNameClick}>    {fileItem.name} </span></Link>
@@ -85,7 +85,7 @@ class FileItem extends React.Component {
                                 <FileItemFloating   />
                             </div>
                         </Col>
-                        <Col md={2}> {fileItem.size} </Col>
+                        <Col md={1}> {fileItem.size} </Col>
                         <Col md={2}> {fileItem.modified}  </Col>
                     </Row>
                 </Grid>

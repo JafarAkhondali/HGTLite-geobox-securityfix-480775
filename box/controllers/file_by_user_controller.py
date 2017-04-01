@@ -12,7 +12,7 @@ from box import geobox, db
 from box.model.gb_file_do import GbFile, GbFileSchema
 from box.model.gb_file_dir_do import GbFileDir, GbFileDirSchema
 from box.domain.file_list_dto import FileList,FileListSchema
-
+from box.common.nice_file_size import get_size_nice_str
 _BASE_URL = '/files'
 
 '''根据用户名和当前目录获取子目录和文件，不分页'''
@@ -68,7 +68,7 @@ def list_all_by_user_dir(user_id,dir_id):
     fTags =''
     cFileList = []
     for file in fileRecords1:
-        r2 = FileList(file.file_id,file.file_display_name,fStyle,file.file_size, file.file_type_id, file.update_date,fTags )
+        r2 = FileList(file.file_id,file.file_display_name,fStyle,get_size_nice_str(file.file_size), file.file_type_id, file.update_date,fTags )
         if is_chinese( file.file_display_name[0]) :
             cFileList.append(r2)
         else:
@@ -76,7 +76,6 @@ def list_all_by_user_dir(user_id,dir_id):
         # print file.__dict__
     cFileList.sort(key=lambda char2:lazy_pinyin(char2.name)[0][0])
     resultList += cFileList
-
 
     # f1 = FileList('file098', 'fname', 'fa-file-o','245.65 GB', 'type001', '2017-03-26', '武汉' )
 
