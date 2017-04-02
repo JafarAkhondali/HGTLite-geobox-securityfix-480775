@@ -38,12 +38,17 @@ class FloatActionModal extends React.Component {
                 break;
 
             case 'move':
-                console.log('提交move')
+                let paramsObj1=this.props.stateFABModal.fabModalOKParams;
+                paramsObj1.targetDirId=fabInputValue;
+                this.props.floatActionModalActions.setFABModalOKParams(paramsObj1);
+                // console.log('提交move')
                 if(fabInputValue=='不填写则删除文件到回收站'){
-                    let paramsObj=this.props.stateFABModal.fabModalOKParams;
-                    paramsObj.targetDIrId=fabInputValue;
-                    this.props.floatActionModalActions.setFABModalOKParams(paramsObj);
-                    this.props.floatActionModalActions.removeFileById(this.props.stateFABModal.fabModalOKParams);
+                    if(this.props.stateFABModal.fabModalOKParams.type=='dir'){
+                        this.props.floatActionModalActions.removeDirById(this.props.stateFABModal.fabModalOKParams);
+                    }
+                    if(this.props.stateFABModal.fabModalOKParams.type!='dir'){
+                        this.props.floatActionModalActions.removeFileById(this.props.stateFABModal.fabModalOKParams);
+                    }
                 }else{
                     toastr.warning('暂不支持移动到指定文件夹id')
                 }

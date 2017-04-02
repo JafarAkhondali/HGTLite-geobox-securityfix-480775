@@ -45,6 +45,21 @@ def remove_file_by_id(id):
     boolResultSchema = BoolResultSchema()
     return jsonify(boolResultSchema.dump(boolResult).data)
 
+
+'''根据id移除文件夹'''
+@geobox.route('/'+pyconst.VERSION +_BASE_URL + '/remove/dir/<id>')
+def remove_dir_by_id(id):
+
+    record =GbFileDir.query.filter_by(dir_id=id).first()
+    record.is_deleted=1
+
+    db.session.commit()
+
+    boolResult  = BoolResult(True)
+    print boolResult.__dict__
+    boolResultSchema = BoolResultSchema()
+    return jsonify(boolResultSchema.dump(boolResult).data)
+
 @geobox.route('/'+pyconst.VERSION +_BASE_URL +'/toggle/star/<id>')
 @geobox.route('/'+pyconst.VERSION +_BASE_URL + '/toggle/star/<id>/<type>')
 def toggle_star_file_or_dir(id,type='dir'):

@@ -11,8 +11,8 @@ let newFolderActions = {
                 // console.log(state);
                 let userId =state.userNameNav.userName;
                 let curDirList = state.currentDir.dirList;
-                console.log('=====新建文件夹检查当前目录',curDirList)
-                console.log(typeof curDirList)
+                // console.log('=====新建文件夹检查当前目录',curDirList)
+                // console.log(typeof curDirList)
                 let parentDirId='';
 
                 if(curDirList==undefined||curDirList==null||curDirList.length==0){
@@ -22,11 +22,11 @@ let newFolderActions = {
                     let curLen = curDirList.length;
                      parentDirId=curDirList[(curLen-1)][1];
                 }
-                console.log('最终目录id',parentDirId)
+                // console.log('最终目录id',parentDirId)
 
                 let dirName=folderName;
 
-                console.log('=====新建文件夹的参数',userId,parentDirId,folderName);
+                // console.log('=====新建文件夹的参数',userId,parentDirId,folderName);
 
                 var newDirURL=BASE_URL.localServer+'/dir/add/'+userId+'/'+parentDirId+'/'+dirName;
 
@@ -37,7 +37,7 @@ let newFolderActions = {
                 }).then(function(json){
                     let newFolderResult = json;
 
-                    console.log('=====新建文件夹结果',newFolderResult);
+                    // console.log('=====新建文件夹结果',newFolderResult);
 
                     dispatch(currentDirAction.fetchSelectedDir(parentDirId));
 
@@ -45,7 +45,6 @@ let newFolderActions = {
 
 
                 })
-
 
 
             }

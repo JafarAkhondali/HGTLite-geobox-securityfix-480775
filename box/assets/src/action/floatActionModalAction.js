@@ -104,6 +104,55 @@ let floatActionModalActions = {
 
             }
     },
+    removeDirById:function(params){
+
+             return function(dispatch, getState) {
+
+                const state = getState();
+                // console.log(state);
+
+                // console.log('=====renameFileOrDir',params);
+
+                // 根据id移除文件到回收站
+                var removeFidURL = BASE_URL.localServer + '/' + VERSION.api + '/file/remove/dir/' + params.id ;
+
+                fetch(removeFidURL, {
+                    mode: 'cors'
+                }).then(function(response) {
+                    // console.log('response2');
+                    // console.log('===res statusText',res.statusText)
+                    return response.json();
+                }).then(function(json) {
+                    // console.log('json2')
+
+                    let removeResult = json;
+
+                    // console.log('重命名文件或文件夹结果', renameResult);
+                    // console.log(typeof renameResult.result);
+                    if(removeResult.result){
+                        dispatch(currentDirActions.refreshParent(params.type,params.id));
+                        toastr.success('删除文件夹成功');
+                    }else{
+                        toastr.error("删除文件夹失败")
+                    }
+
+                    // sessionStorage.setItem('gbUserFiles', JSON.stringify(newDirList));
+
+
+                }).catch(e => {
+                    console.log('删除文件夹失败')
+
+                    // console.log(e)
+                    console.log(e.message)
+
+                    toastr.error("删除文件夹失败")
+
+                });
+
+
+
+            }
+    },
 
     setFABModalTitle:(mTitle)=>({
         type:"SET_FAB_MODAL_TITLE",

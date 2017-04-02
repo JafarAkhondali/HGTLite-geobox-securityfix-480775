@@ -52,10 +52,10 @@ def save_obj_dir(bundle_obj):
 
 
 @geobox.route(_BASE_URL + '/add/<user_id>/<parent_dir_id>/<dir_name>')
-def save_dir_by_name(user_id,parent_dir_id,dir_name):
+def save_dir_by_name_route(user_id,parent_dir_id,dir_name):
     # print 'add01'
     new_dir_id = str(uuid4()).replace('-','')
-    new_dir = GbFileDir(new_dir_id, dir_name, parent_dir_id, 0,user_id,None,None,user_id,datetime.now())
+    new_dir = GbFileDir(new_dir_id, dir_name, parent_dir_id, 0,0,user_id,None,None,user_id,datetime.now())
     # print 'add02'
     db.session.add(new_dir)
     db.session.commit()

@@ -107,10 +107,10 @@ class FileItemFloating extends React.Component {
         // console.log(f)
         // console.log(typeof f)
 
-        if(fileType=='dir'){
-            toastr.error('暂不支持移动文件夹');
-            return;
-        }
+        // if(fileType=='dir'){
+        //     toastr.error('暂不支持移动文件夹');
+        //     return;
+        // }
 
 
         // 设置modal显示内容
@@ -133,11 +133,30 @@ class FileItemFloating extends React.Component {
 
     }
 
+    /**
+    * 文件下载浮动按钮事件
+    */
     handleFloatDownloadClick(event){
-        console.log('download')
+
+        console.log('download');
+
+        if(!event){
+            event = window.event;
+            console.log('转换event')
+        }
+
+        console.log('event',event)
+        console.log(typeof event)
+
+        console.log(event.target)
+
         let fileName = event.target.dataset.fname;
         let parentDirId = event.target.dataset.pid;
         let fileType = event.target.dataset.type;
+
+        console.log('=====传入参数：',fileName,parentDirId,fileType);
+
+
 
         if(fileType=='dir'){
             toastr.warning('下载失败','文件夹暂不支持下载');
@@ -146,7 +165,7 @@ class FileItemFloating extends React.Component {
 
 
         let fileRealPath = BASE_URL.fileServer+'/'+this.props.stateUserName+'/'+parentDirId+'/'+fileName;
-        // console.log('=====待下载文件的地址：',fileRealPath);
+        console.log('=====待下载文件的地址：',fileRealPath);
         window.location.assign(fileRealPath);
 
     }

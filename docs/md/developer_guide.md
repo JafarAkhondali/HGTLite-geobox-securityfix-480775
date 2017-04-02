@@ -9,3 +9,6 @@
 - 部署前要生成最新前端资源，进入 `/path/to/geobox/box/assets`，执行`npm run build:prod`
 - 进入 `/path/to/geobox`执行`gunicorn -c deploy.py run:geobox`启动服务器，通过`http://localhost:8889`访问首页
 - 关闭服务器执行`pkill gunicorn`
+
+#### to-do
+- event.target 火狐无法获取值
