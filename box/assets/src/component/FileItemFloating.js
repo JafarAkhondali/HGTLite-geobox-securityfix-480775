@@ -54,8 +54,37 @@ class FileItemFloating extends React.Component {
     handleFloatShareClick(event){
         console.log('star')
     }
+
+    /**
+    * 编辑浮动按钮事件
+    */
     handleFloatEditClick(event){
+
         console.log('edit');
+
+        let modalType = event.target.dataset.modaltype;
+        let fileType = event.target.dataset.ftype;
+        let fileName = event.target.dataset.fname;
+        let fileId = event.target.dataset.fid;
+        let parentId = event.target.dataset.pid;
+
+        console.log('=====编辑modal接收',modalType,fileType,fileName,fileId,parentId);
+
+        let fileOrDir = fileType=='dir'?'文件夹':'文件';
+
+        // 设置modal显示内容
+        this.props.floatActionModalActions.setFABModalTitle('重命名'+fileOrDir);
+        this.props.floatActionModalActions.setFABModalInputSpan('请输入新名称');
+        this.props.floatActionModalActions.setFABModalInputValue(fileName);
+
+        // 设置编辑参数
+        this.props.floatActionModalActions.setFABModalType(modalType);
+        let paramsObj={};
+        paramsObj.newName=fileName;
+        paramsObj.id=fileId;
+        paramsObj.type=fileType;
+        paramsObj.parentId=parentId;
+        this.props.floatActionModalActions.setFABModalOKParams(paramsObj);
 
         this.props.floatActionModalActions.showFABModal();
 
@@ -100,7 +129,7 @@ class FileItemFloating extends React.Component {
                     <i className={this.faIconFactory('fa-share-alt')} ></i>
                 </button>
                 <button className="btn btn-default padding-0 border-none" onClick={this.handleFloatEditClick}>
-                    <i data-type={fileObj.type_id}  data-fname={fileObj.name} data-fid={fileObj.file_id} className={this.faIconFactory('fa-edit')} ></i>
+                    <i data-modaltype='edit' data-ftype={fileObj.type_id}  data-fname={fileObj.name} data-fid={fileObj.file_id} data-pid={fileObj.parent_id} className={this.faIconFactory('fa-edit')} ></i>
                 </button>
                 <button className="btn btn-default padding-0 border-none" onClick={this.handleFloatMoveClick}>
                     <i className={this.faIconFactory('fa-sign-out')} ></i>

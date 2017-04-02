@@ -16,7 +16,7 @@ let currentDirActions = {
 
             // console.log('显示地图状态', state.toggleMap.showingMap);
 
-            // 获取用户根目录
+            // 根据dirId获取指定目录下文件
             var selectedDirURL = BASE_URL.localServer + '/' + VERSION.api + '/files/' + state.userNameNav.userName + '/'+dirId+'/all';
 
             fetch(selectedDirURL, {
@@ -36,7 +36,47 @@ let currentDirActions = {
                 dispatch(fileListActions.fileFetchSuccess(newDirList));
 
             }).catch(e => {
-                console.log('获取指定目录文件失败')
+                console.log('根据dirId获取指定目录下文件失败')
+
+                // console.log(e)
+                console.log(e.message)
+
+            });
+        }
+
+    },
+
+    refreshParent: function(type,id) {
+
+        return function(dispatch, getState) {
+            // console.log(dirId);
+
+            const state = getState();
+
+            // console.log('显示地图状态', state.toggleMap.showingMap);
+
+            // 根据当前fileId或dirId刷新父目录
+            var refreshURL = BASE_URL.localServer + '/' + VERSION.api + '/files/refresh/' + state.userNameNav.userName + '/'+id+'/'+type+'/all';
+
+            fetch(refreshURL, {
+                mode: 'cors'
+            }).then(function(response) {
+                console.log('response');
+                // console.log('===res statusText',res.statusText)
+                return response.json();
+            }).then(function(json) {
+                // console.log('json2')
+
+                let newDirList = json;
+                console.log('获取指定目录', newDirList);
+
+                sessionStorage.setItem('gbUserFiles', JSON.stringify(newDirList));
+
+                dispatch(fileListActions.fileFetchSuccess(newDirList));
+                
+
+            }).catch(e => {
+                console.log('根据当前fileId或dirId刷新父目录失败')
 
                 // console.log(e)
                 console.log(e.message)

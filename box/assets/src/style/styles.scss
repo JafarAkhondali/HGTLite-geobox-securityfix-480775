@@ -29,6 +29,33 @@
     font-size: 48px;
 }
 
+.display-table{
+    display:table;
+}
+
+.fab-modal-content{
+    // width:640px;
+    height:160px;
+}
+
+.display-table-cell{
+    display: table-cell;
+}
+
+.display-flex{
+    display:flex;
+    justify-content: center;
+   align-items: center;
+}
+
+.margin-auto{
+    margin:auto;
+}
+
+.margin0-auto{
+    margin:0 auto;
+}
+
 .bg-white {
   background-color: #fff;
   height: 960px;
@@ -118,6 +145,10 @@
 
 .letter-space-8{
     letter-spacing: 8px
+}
+
+.padding-64{
+    padding: 64px;
 }
 
 .to-top18{
@@ -222,6 +253,9 @@
   margin-left: 48%;
 }
 
+.to-m-right-16{
+    margin-right: 16px;
+}
 
 
 
@@ -282,6 +316,10 @@
 
 .width-96{
     width: 96px;
+}
+
+.width-128{
+    width: 128px;
 }
 
 .width-144{

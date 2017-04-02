@@ -29,7 +29,7 @@ let fileListActions = {
 
                     /** 备注这里的url只是测试用的，这个是之前hacker news的api, 这里只是确保接口是通的，至于数据还是自己mock */
                     // let weight = Math.floor(200 + Math.random() * 50);
-                    // 
+                    //
                     // let newFile = [{
                     //
                     //     fileId: "file00"+weight,
