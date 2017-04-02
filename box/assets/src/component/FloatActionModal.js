@@ -5,6 +5,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {toastr} from 'react-redux-toastr';
 
 import classNames from 'classnames';
 
@@ -27,12 +28,25 @@ class FloatActionModal extends React.Component {
         // console.log(event.target.dataset.order);
 
         switch(this.props.stateFABModal.fabModalType){
+
             case 'edit':
-                // console.log('提交OK');
+                // console.log('提交edit');
                 let paramsObj=this.props.stateFABModal.fabModalOKParams;
                 paramsObj.newName=fabInputValue;
                 this.props.floatActionModalActions.setFABModalOKParams(paramsObj);
                 this.props.floatActionModalActions.renameFileOrDir(this.props.stateFABModal.fabModalOKParams);
+                break;
+
+            case 'move':
+                console.log('提交move')
+                if(fabInputValue=='不填写则删除文件到回收站'){
+                    let paramsObj=this.props.stateFABModal.fabModalOKParams;
+                    paramsObj.targetDIrId=fabInputValue;
+                    this.props.floatActionModalActions.setFABModalOKParams(paramsObj);
+                    this.props.floatActionModalActions.removeFileById(this.props.stateFABModal.fabModalOKParams);
+                }else{
+                    toastr.warning('暂不支持移动到指定文件夹id')
+                }
                 break;
 
             default:
@@ -40,7 +54,7 @@ class FloatActionModal extends React.Component {
         }
 
 
-        // let selectedDirId=event.target.dataset.did;
+        //最终关闭Modal
         this.props.floatActionModalActions.hideFABModal();
     }
 

@@ -77,12 +77,12 @@ class FileItemFloating extends React.Component {
         this.props.floatActionModalActions.setFABModalInputSpan('请输入新名称');
         this.props.floatActionModalActions.setFABModalInputValue(fileName);
 
-        // 设置编辑参数
+        // 设置文件编辑参数
         this.props.floatActionModalActions.setFABModalType(modalType);
         let paramsObj={};
-        paramsObj.newName=fileName;
         paramsObj.id=fileId;
         paramsObj.type=fileType;
+        paramsObj.newName=fileName;
         paramsObj.parentId=parentId;
         this.props.floatActionModalActions.setFABModalOKParams(paramsObj);
 
@@ -98,19 +98,34 @@ class FileItemFloating extends React.Component {
         console.log('move');
 
         let modalType = event.target.dataset.modaltype;
-        let f = event.target.dataset.fileobj;
+        let fileType = event.target.dataset.ftype;
+        let fileName = event.target.dataset.fname;
+        let fileId = event.target.dataset.fid;
+        let parentId = event.target.dataset.pid;
 
-        if(f.type_id=='dir'){
+
+        // console.log(f)
+        // console.log(typeof f)
+
+        if(fileType=='dir'){
             toastr.error('暂不支持移动文件夹');
             return;
         }
+
 
         // 设置modal显示内容
         this.props.floatActionModalActions.setFABModalTitle('移动文件');
         this.props.floatActionModalActions.setFABModalInputSpan('移动到');
         this.props.floatActionModalActions.setFABModalInputValue('不填写则删除文件到回收站');
 
-        //
+        //设置移动参数
+        this.props.floatActionModalActions.setFABModalType(modalType);
+        let paramsObj={};
+        paramsObj.id=fileId;
+        paramsObj.type=fileType;
+        paramsObj.targetDirId='';
+        this.props.floatActionModalActions.setFABModalOKParams(paramsObj);
+
 
         this.props.floatActionModalActions.showFABModal();
 
@@ -158,7 +173,7 @@ class FileItemFloating extends React.Component {
                     <i data-modaltype='edit' data-ftype={fileObj.type_id}  data-fname={fileObj.name} data-fid={fileObj.file_id} data-pid={fileObj.parent_id} className={this.faIconFactory('fa-edit')} ></i>
                 </button>
                 <button className="btn btn-default padding-0 border-none" onClick={this.handleFloatMoveClick}>
-                    <i data-modaltype='move' data-fileobj={fileObj} className={this.faIconFactory('fa-sign-out')} ></i>
+                    <i data-modaltype='move' data-ftype={fileObj.type_id}  data-fname={fileObj.name} data-fid={fileObj.file_id} data-pid={fileObj.parent_id} className={this.faIconFactory('fa-sign-out')} ></i>
                 </button>
                 <button className="btn btn-default padding-0 border-none" onClick={this.handleFloatDownloadClick}>
                     <i data-type={fileObj.type_id} data-fname={fileObj.name} data-pid={fileObj.parent_id} className={this.faIconFactory('fa-download')} ></i>

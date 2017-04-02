@@ -10,6 +10,7 @@ from box.domain.int_result_dto import  IntResult,IntResultSchema
 
 _BASE_URL = '/file'
 
+'''根据id重命名文件或文件夹'''
 @geobox.route('/'+pyconst.VERSION +_BASE_URL +'/rename/<id>/<new_name>')
 @geobox.route('/'+pyconst.VERSION +_BASE_URL + '/rename/<id>/<new_name>/<type>')
 def rename_file_or_dir(id,new_name,type='dir'):
@@ -30,8 +31,9 @@ def rename_file_or_dir(id,new_name,type='dir'):
     boolResultSchema = BoolResultSchema()
     return jsonify(boolResultSchema.dump(boolResult).data)
 
+'''根据id移除文件'''
 @geobox.route('/'+pyconst.VERSION +_BASE_URL + '/remove/<id>')
-def remove_file(id):
+def remove_file_by_id(id):
 
     record =GbFile.query.filter_by(file_id=id).first()
     record.is_deleted=1
