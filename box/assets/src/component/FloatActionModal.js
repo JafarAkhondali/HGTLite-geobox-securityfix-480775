@@ -28,7 +28,7 @@ class FloatActionModal extends React.Component {
 
         switch(this.props.stateFABModal.fabModalType){
             case 'edit':
-                console.log('提交OK');
+                // console.log('提交OK');
                 let paramsObj=this.props.stateFABModal.fabModalOKParams;
                 paramsObj.newName=fabInputValue;
                 this.props.floatActionModalActions.setFABModalOKParams(paramsObj);
@@ -45,8 +45,7 @@ class FloatActionModal extends React.Component {
     }
 
     handleFABInputChange(event){
-        console.log('获取FABModal Input的内容');
-
+        // console.log('获取FABModal Input的内容');
         this.props.floatActionModalActions.setFABModalInputValue(event.target.value);
 
     }

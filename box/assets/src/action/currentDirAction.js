@@ -61,7 +61,7 @@ let currentDirActions = {
             fetch(refreshURL, {
                 mode: 'cors'
             }).then(function(response) {
-                console.log('response');
+                // console.log('response');
                 // console.log('===res statusText',res.statusText)
                 return response.json();
             }).then(function(json) {
@@ -73,7 +73,7 @@ let currentDirActions = {
                 sessionStorage.setItem('gbUserFiles', JSON.stringify(newDirList));
 
                 dispatch(fileListActions.fileFetchSuccess(newDirList));
-                
+
 
             }).catch(e => {
                 console.log('根据当前fileId或dirId刷新父目录失败')

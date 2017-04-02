@@ -13,7 +13,7 @@ let floatActionModalActions = {
                 const state = getState();
                 // console.log(state);
 
-                console.log('=====renameFileOrDir',params);
+                // console.log('=====renameFileOrDir',params);
 
                 // 重命名文件或文件夹
                 var renameURL = BASE_URL.localServer + '/' + VERSION.api + '/file/rename/' + params.id + '/'+params.newName+'/'+params.type;
@@ -29,13 +29,17 @@ let floatActionModalActions = {
 
                     let renameResult = json;
 
-                    console.log('重命名文件或文件夹结果', renameResult);
-
-                    console.log(typeof renameResult.result);
+                    // console.log('重命名文件或文件夹结果', renameResult);
+                    // console.log(typeof renameResult.result);
+                    if(renameResult.result){
+                        dispatch(currentDirActions.refreshParent(params.type,params.id));
+                        toastr.success('重命名成功');
+                    }else{
+                        toastr.error("重命名失败")
+                    }
 
                     // sessionStorage.setItem('gbUserFiles', JSON.stringify(newDirList));
 
-                    dispatch(currentDirActions.refreshParent(params.type,params.id));
 
                 }).catch(e => {
                     console.log('重命名文件或文件夹失败')
