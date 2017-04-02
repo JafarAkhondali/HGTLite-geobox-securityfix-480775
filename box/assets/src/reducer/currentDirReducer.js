@@ -12,7 +12,7 @@ function currentDirReducer(state = initialState, action) {
     switch (action.type) {
 
         case 'ADD_DIR_BREADCRUMB':
-            console.log('面包屑添加', action.payload);
+            // console.log('面包屑添加', action.payload);
 
             let selectedDir = action.payload;
             let oldDirs = state.dirList;
@@ -27,7 +27,7 @@ function currentDirReducer(state = initialState, action) {
             return newState;
 
         case 'REMOVE_TAIL_DIR':
-            console.log('面包屑移除',action.payload)
+            // console.log('面包屑移除',action.payload)
 
             let dueOrder = parseInt(action.payload) + 1;
             console.log(dueOrder);
