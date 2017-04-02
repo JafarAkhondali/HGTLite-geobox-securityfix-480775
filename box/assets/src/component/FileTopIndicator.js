@@ -383,7 +383,7 @@ class FileTopIndicator extends React.Component {
 
                  <Modal.Footer id = "uploadFooter" >
                      <Button onClick = { this.closeUploadModal }> 取消 </Button>
-                <button type = "submit" className = "btn btn-upload "> 上传 </button>
+                         <button type = "submit" className = "btn btn-upload "> 上传 </button>
                 </Modal.Footer>
 
                 </form>

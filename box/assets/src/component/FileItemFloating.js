@@ -4,13 +4,18 @@ import   '../style/styles.scss';
 import React  from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import classNames from 'classnames';
 import {toastr} from 'react-redux-toastr';
 
 import BASE_URL from '../script/BaseUrl';
 
+import floatActionModalAction from '../action/floatActionModalAction';
+import currentDirAction from '../action/currentDirAction';
 
+
+// 添加标签、分享、重命名、移动四大功能共用一个modal
 class FileItemFloating extends React.Component {
 
     constructor(){
@@ -50,7 +55,10 @@ class FileItemFloating extends React.Component {
         console.log('star')
     }
     handleFloatEditClick(event){
-        console.log('star')
+        console.log('edit');
+
+        this.props.floatActionModalActions.showFABModal();
+
     }
     handleFloatMoveClick(event){
         console.log('star')
@@ -77,7 +85,7 @@ class FileItemFloating extends React.Component {
 
     render() {
 
-        let {stateUserName,showFloating,fileObj}=this.props;
+        let {stateUserName,fileObj,currentDirActions,floatActionModalActions}=this.props;
         // console.log('=====FIleItemFloating属性：',this.props);
 
         return (
@@ -92,7 +100,7 @@ class FileItemFloating extends React.Component {
                     <i className={this.faIconFactory('fa-share-alt')} ></i>
                 </button>
                 <button className="btn btn-default padding-0 border-none" onClick={this.handleFloatEditClick}>
-                    <i className={this.faIconFactory('fa-edit')} ></i>
+                    <i data-type={fileObj.type_id}  data-fname={fileObj.name} data-fid={fileObj.file_id} className={this.faIconFactory('fa-edit')} ></i>
                 </button>
                 <button className="btn btn-default padding-0 border-none" onClick={this.handleFloatMoveClick}>
                     <i className={this.faIconFactory('fa-sign-out')} ></i>
@@ -112,9 +120,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(currentDirAction, dispatch)
+    currentDirActions: bindActionCreators(currentDirAction, dispatch),
+    floatActionModalActions: bindActionCreators(floatActionModalAction, dispatch),
+    dispatch:dispatch
 });
 
-export default connect(mapStateToProps)(FileItemFloating);
+export default connect(mapStateToProps,mapDispatchToProps)(FileItemFloating);
 
 // export default FileItemFloating;

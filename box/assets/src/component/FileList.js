@@ -8,11 +8,12 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import classNames from 'classnames';
 
-import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
+import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon,Modal} from 'react-bootstrap'
 
 import FileItem from './FileItem';
 import HRLine from './HRLine';
 import ToggleMapButton from './ToggleMapButton';
+import FloatActionModal from './FloatActionModal';
 
 import fileListAction from '../action/fileListAction';
 import newFolderAction from '../action/newFolderAction';
@@ -21,9 +22,26 @@ class FileList extends React.Component {
 
     constructor() {
         super()
+
+        // this.state = {
+        //     showFloatActionModal: false
+        // }
+
         this.handleNewFolderOK=this.handleNewFolderOK.bind(this);
         this.handleNewFolderNO=this.handleNewFolderNO.bind(this);
+        // this.closeFloatActionModal=this.closeFloatActionModal.bind(this);
+        // this.openFloatActionModal=this.openFloatActionModal.bind(this);
+
+
     }
+
+ //    closeFloatActionModal() {
+ //   this.setState({ showFloatActionModal: false });
+ // }
+ //
+ // openFloatActionModal() {
+ //   this.setState({ showFloatActionModal: true });
+ // }
 
     getFileItems(files) {
         // console.log("获取文件数组："+files)
@@ -100,6 +118,8 @@ handleNewFolderNO(event){
                     {this.getFileItems(files)}
                 </div>
 
+                {/*===============浮动工具栏共用的Modal*/}
+                <FloatActionModal />
 
             </div>
 

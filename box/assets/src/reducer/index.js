@@ -6,6 +6,7 @@ import currentDirReducer from './currentDirReducer';
 import fileListReducer from './fileListReducer';
 import fileFABReducer from './fileFABReducer';
 import fileTagReducer from './fileTagReducer';
+import floatActionModalReducer from './floatActionModalReducer';
 import loginReducer from './loginReducer';
 import newFolderReducer from './newFolderReducer';
 import registerReducer from './registerReducer';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     fileList: fileListReducer,
     fileFAB: fileFABReducer,
     fileTag:fileTagReducer,
+    floatActionModal:floatActionModalReducer,
     login:loginReducer,
     newFolder:newFolderReducer,
     register:registerReducer,

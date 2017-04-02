@@ -82,7 +82,7 @@ class FileItem extends React.Component {
                         <Col md={3}>
                             <div ref={(c)=>{this.fabDiv = c}} onMouseOver={this.handleMouseOver}
                                  onMouseLeave={this.handleMouseOut} className={fabClass}>
-                                <FileItemFloating  fileObj={fileItem} />
+                                <FileItemFloating  fileObj={fileItem}  />
                             </div>
                         </Col>
                         <Col md={1}> {fileItem.size} </Col>
