@@ -56,7 +56,7 @@ class FileItemFloating extends React.Component {
     }
 
     /**
-    * 编辑浮动按钮事件
+    * 文件编辑浮动按钮事件
     */
     handleFloatEditClick(event){
 
@@ -89,9 +89,35 @@ class FileItemFloating extends React.Component {
         this.props.floatActionModalActions.showFABModal();
 
     }
+
+    /**
+    *  文件移动浮动按钮事件
+    */
     handleFloatMoveClick(event){
-        console.log('star')
+
+        console.log('move');
+
+        let modalType = event.target.dataset.modaltype;
+        let f = event.target.dataset.fileobj;
+
+        if(f.type_id=='dir'){
+            toastr.error('暂不支持移动文件夹');
+            return;
+        }
+
+        // 设置modal显示内容
+        this.props.floatActionModalActions.setFABModalTitle('移动文件');
+        this.props.floatActionModalActions.setFABModalInputSpan('移动到');
+        this.props.floatActionModalActions.setFABModalInputValue('不填写则删除文件到回收站');
+
+        //
+
+        this.props.floatActionModalActions.showFABModal();
+
+
+
     }
+
     handleFloatDownloadClick(event){
         console.log('download')
         let fileName = event.target.dataset.fname;
@@ -132,7 +158,7 @@ class FileItemFloating extends React.Component {
                     <i data-modaltype='edit' data-ftype={fileObj.type_id}  data-fname={fileObj.name} data-fid={fileObj.file_id} data-pid={fileObj.parent_id} className={this.faIconFactory('fa-edit')} ></i>
                 </button>
                 <button className="btn btn-default padding-0 border-none" onClick={this.handleFloatMoveClick}>
-                    <i className={this.faIconFactory('fa-sign-out')} ></i>
+                    <i data-modaltype='move' data-fileobj={fileObj} className={this.faIconFactory('fa-sign-out')} ></i>
                 </button>
                 <button className="btn btn-default padding-0 border-none" onClick={this.handleFloatDownloadClick}>
                     <i data-type={fileObj.type_id} data-fname={fileObj.name} data-pid={fileObj.parent_id} className={this.faIconFactory('fa-download')} ></i>
