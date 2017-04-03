@@ -93,5 +93,6 @@ if __name__=="__main__":
         boundShp = createQuadrilateral()
         fileDoc = create_box_file_doc(fileId,"武汉影像"+str(i)+".tif", "武汉数据", upTime)
         rasterPartDoc = create_raster_part_doc(randint(0,50),boundShp,"武汉"+str(i))
+        print rasterPartDoc
         create_index("geoboxes","box_file",fileId,fileDoc,es)
         put_doc("geoboxes","box_file",fileId,rasterPartDoc,es)

@@ -30,7 +30,7 @@ class FileItem extends React.Component {
     }
 
     handleNameClick(event){
-        console.log(event.target)
+        // console.log(event.target)
         // console.log(event.target.dataset.fid)
         // console.log(event.target.dataset.typeid)
         let fId = event.target.dataset.fid;
@@ -38,7 +38,7 @@ class FileItem extends React.Component {
         let parentDirId = event.target.dataset.pid;
         let typeId = event.target.dataset.typeid;
         let tag = event.target.dataset.tag;
-        console.log('======点击的参数fid,fname,pid,tid：',fId,fName,parentDirId,typeId,tag);
+        // console.log('======点击的参数fid,fname,pid,tid：',fId,fName,parentDirId,typeId,tag);
 
         if(typeId =='dir'){
             // console.log('---1')
