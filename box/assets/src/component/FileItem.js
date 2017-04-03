@@ -57,8 +57,8 @@ class FileItem extends React.Component {
         }
 
         let fileRealPath = BASE_URL.fileServer+'/'+this.props.stateUserName+'/'+parentDirId+'/'+fName;
-        console.log('=====待下载文件的地址：',fileRealPath);
-
+        console.log('=====文件地址：',fileRealPath);
+        this.props.shpViewActions.setViewTitle(fName);
         this.props.shpViewActions.fetchShpFileArrayBuffer(fileRealPath);
 
     }
@@ -76,7 +76,7 @@ class FileItem extends React.Component {
 
     render() {
 
-        let {fileItem, showFAB,stateUserName, fileItemActions,currentDirActions,shpViewActions} = this.props;
+        let {fileItem, showFAB,stateUserName, shpFileTitle,fileItemActions,currentDirActions,shpViewActions} = this.props;
         // onMouseOver={actions.showFAB} onMouseLeave={actions.hideFAB}
         let fabClass = classNames(showFAB ? 'opacity100' : 'opacity0');
         let itemIconClass = classNames('fa', 'fa-2x', 'fa-blue', 'opacity75',fileItem.style);
@@ -117,7 +117,8 @@ FileItem.propTypes = {
 
 const mapStateToProps = state => ({
     showFAB: state.fileFAB.showingFAB,
-    stateUserName:state.userNameNav.userName
+    stateUserName:state.userNameNav.userName,
+    shpFileTitle : state.shpView.shpViewTitle
 });
 
 const mapDispatchToProps = dispatch => ({

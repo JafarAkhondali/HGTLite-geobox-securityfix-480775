@@ -57,6 +57,10 @@ setShpBufferMap:(buffer1)=>({
     type:'SET_SHP_BUFFER_MAP',
     payload:buffer1
 }),
+setViewTitle:(shpName)=>({
+    type:'SET_VIEW_TITLE',
+    payload:shpName
+}),
 
 shpFetchStart: () => ({
     type: 'SHP_FETCH_START'

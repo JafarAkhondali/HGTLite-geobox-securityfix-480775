@@ -3,7 +3,8 @@ import {fromJS} from 'immutable';
 const initialState = {
     isLoadingShp: false,
     shpBufferData: {},
-    isShpAdded: false
+    isShpAdded: false,
+    shpViewTitle:'文件名'
 };
 
 function shpViewReducer(state = initialState, action) {
@@ -18,6 +19,9 @@ function shpViewReducer(state = initialState, action) {
             console.log('=====SET_SHP_BUFFER_MAP',successMsg);
 
             return fromJS(state).set('shpBufferData', successMsg).toJS();
+
+        case 'SET_VIEW_TITLE':
+            return fromJS(state).set('shpViewTitle', action.payload).toJS();
 
         case 'SHP_FETCH_SUCCESS':
             return fromJS(state).set('isLoadingShp', false).toJS();

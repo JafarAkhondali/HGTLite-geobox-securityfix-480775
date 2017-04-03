@@ -10,7 +10,7 @@ export function deepCopy2dArray(input) {
 }
 
 export function deepCopy2dArrayLen(input,len) {
-    
+
     let target = new Array(len);
 
     for (let i = 0; i < len; i++) {
