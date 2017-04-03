@@ -1,4 +1,5 @@
 # _*_ coding: utf-8 _*_
+import re
 from flask import jsonify,request
 from datetime import datetime
 from sqlalchemy import text
@@ -68,8 +69,12 @@ def list_all_by_user_dir(user_id,dir_id):
     fileRecords1 = sorted(fileRecords,key=lambda itemF:itemF.file_display_name.lower())
     fStyle='fa-file-o'
     fTags =''
+    # 匹配标签，是否含shp
+    shpReg = re.compile('shp')
     cFileList = []
     for file in fileRecords1:
+        if shpReg.search(file.file_tag):
+            fTags = 'shp'
         r2 = FileList(file.file_id,file.file_real_location,file.file_display_name,fStyle,get_size_nice_str(file.file_size), file.file_type_id, file.update_date,fTags)
         if is_chinese( file.file_display_name[0]) :
             cFileList.append(r2)

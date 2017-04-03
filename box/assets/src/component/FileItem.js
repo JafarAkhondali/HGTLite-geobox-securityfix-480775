@@ -8,10 +8,10 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import classNames from 'classnames';
 
-import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap'
+import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} from 'react-bootstrap';
 
-import HRLine from './HRLine'
-import FileItemFloating from './FileItemFloating'
+import HRLine from './HRLine';
+import FileItemFloating from './FileItemFloating';
 
 import fileItemAction from '../action/fileItemAction';
 import currentDirAction from '../action/currentDirAction';
@@ -36,10 +36,11 @@ class FileItem extends React.Component {
         let fId = event.target.dataset.fid;
         let fName = event.target.dataset.fname;
         let parentDirId = event.target.dataset.pid;
-        let tId = event.target.dataset.typeid;
-        console.log('======点击的参数fid,fname,pid,tid：',tId,fName,parentDirId,tId);
+        let typeId = event.target.dataset.typeid;
+        let tag = event.target.dataset.tag;
+        console.log('======点击的参数fid,fname,pid,tid：',fId,fName,parentDirId,typeId,tag);
 
-        if(tId =='dir'){
+        if(typeId =='dir'){
             // console.log('---1')
 
             this.props.currentDirActions.addDirBreadcrumb(fName,fId);
@@ -48,18 +49,18 @@ class FileItem extends React.Component {
             this.props.fileItemActions.fetchSelectedDir(fId);
             // console.log('---3')
 
-
             return;
         }
 
-        if(tId=='shpzip'){
-
+        if(tag=='shp'){
+            let fileRealPath = BASE_URL.fileServer+'/'+this.props.stateUserName+'/'+parentDirId+'/'+fName;
+            console.log('=====文件地址：',fileRealPath);
+            this.props.shpViewActions.setViewTitle(fName);
+            this.props.shpViewActions.fetchShpFileArrayBuffer(fileRealPath);
+            return;
         }
 
-        let fileRealPath = BASE_URL.fileServer+'/'+this.props.stateUserName+'/'+parentDirId+'/'+fName;
-        console.log('=====文件地址：',fileRealPath);
-        this.props.shpViewActions.setViewTitle(fName);
-        this.props.shpViewActions.fetchShpFileArrayBuffer(fileRealPath);
+        console.log('普通类型的文件点击无操作');
 
     }
 
@@ -90,7 +91,7 @@ class FileItem extends React.Component {
                         <Col md={4}>
                             <div className="to-p-left-18" >
                                 <span className="width-36 display-inline-block"> <i className={itemIconClass}></i>  </span><Link to='#'>
-                                <span className="font-file-name "  data-fid={fileItem.file_id}  data-fname={fileItem.name} data-typeid={fileItem.type_id} data-pid={fileItem.parent_id} onClick={this.handleNameClick}>    {fileItem.name} </span></Link>
+                                <span className="font-file-name "  data-fid={fileItem.file_id}  data-fname={fileItem.name} data-typeid={fileItem.type_id} data-pid={fileItem.parent_id} data-tag={fileItem.tags} onClick={this.handleNameClick}>    {fileItem.name} </span></Link>
                             </div>
                         </Col>
                         <Col md={2}> </Col>
