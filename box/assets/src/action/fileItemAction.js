@@ -7,7 +7,6 @@ let fileItemActions = {
     fetchSelectedDir: function(dirId) {
 
         return function(dispatch, getState) {
-            // console.log(dirId);
 
             const state = getState();
 

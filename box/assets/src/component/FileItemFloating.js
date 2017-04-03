@@ -129,8 +129,6 @@ class FileItemFloating extends React.Component {
 
         this.props.floatActionModalActions.showFABModal();
 
-
-
     }
 
     /**

@@ -15,6 +15,9 @@ import FileItemFloating from './FileItemFloating'
 
 import fileItemAction from '../action/fileItemAction';
 import currentDirAction from '../action/currentDirAction';
+import shpViewAction from '../action/shpViewAction';
+
+import BASE_URL from '../script/BaseUrl';
 
 
 class FileItem extends React.Component {
@@ -32,8 +35,10 @@ class FileItem extends React.Component {
         // console.log(event.target.dataset.typeid)
         let fId = event.target.dataset.fid;
         let fName = event.target.dataset.fname;
+        let parentDirId = event.target.dataset.pid;
         let tId = event.target.dataset.typeid;
-        // console.log(tId)
+        console.log('======点击的参数fid,fname,pid,tid：',tId,fName,parentDirId,tId);
+
         if(tId =='dir'){
             // console.log('---1')
 
@@ -46,6 +51,16 @@ class FileItem extends React.Component {
 
             return;
         }
+
+        if(tId=='shpzip'){
+
+        }
+
+        let fileRealPath = BASE_URL.fileServer+'/'+this.props.stateUserName+'/'+parentDirId+'/'+fName;
+        console.log('=====待下载文件的地址：',fileRealPath);
+
+        this.props.shpViewActions.fetchShpFileArrayBuffer(fileRealPath);
+
     }
 
     handleMouseOver() {
@@ -61,7 +76,7 @@ class FileItem extends React.Component {
 
     render() {
 
-        let {fileItem, showFAB, fileItemActions,currentDirActions} = this.props;
+        let {fileItem, showFAB,stateUserName, fileItemActions,currentDirActions,shpViewActions} = this.props;
         // onMouseOver={actions.showFAB} onMouseLeave={actions.hideFAB}
         let fabClass = classNames(showFAB ? 'opacity100' : 'opacity0');
         let itemIconClass = classNames('fa', 'fa-2x', 'fa-blue', 'opacity75',fileItem.style);
@@ -75,7 +90,7 @@ class FileItem extends React.Component {
                         <Col md={4}>
                             <div className="to-p-left-18" >
                                 <span className="width-36 display-inline-block"> <i className={itemIconClass}></i>  </span><Link to='#'>
-                                <span className="font-file-name "  data-fid={fileItem.file_id}  data-fname={fileItem.name} data-typeid={fileItem.type_id} onClick={this.handleNameClick}>    {fileItem.name} </span></Link>
+                                <span className="font-file-name "  data-fid={fileItem.file_id}  data-fname={fileItem.name} data-typeid={fileItem.type_id} data-pid={fileItem.parent_id} onClick={this.handleNameClick}>    {fileItem.name} </span></Link>
                             </div>
                         </Col>
                         <Col md={2}> </Col>
@@ -101,12 +116,14 @@ FileItem.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    showFAB: state.fileFAB.showingFAB
+    showFAB: state.fileFAB.showingFAB,
+    stateUserName:state.userNameNav.userName
 });
 
 const mapDispatchToProps = dispatch => ({
     fileItemActions: bindActionCreators(fileItemAction, dispatch),
     currentDirActions:bindActionCreators(currentDirAction, dispatch),
+    shpViewActions:bindActionCreators(shpViewAction, dispatch),
     dispatch:dispatch
 });
 

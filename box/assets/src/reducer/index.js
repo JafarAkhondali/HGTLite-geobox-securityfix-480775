@@ -10,6 +10,7 @@ import floatActionModalReducer from './floatActionModalReducer';
 import loginReducer from './loginReducer';
 import newFolderReducer from './newFolderReducer';
 import registerReducer from './registerReducer';
+import shpViewReducer from './shpViewReducer';
 import toggleMapReducer from './toggleMapReducer';
 import userNameNavReducer from './userNameNavReducer';
 import uploadLocPickerReducer from './uploadLocPickerReducer';
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
     login:loginReducer,
     newFolder:newFolderReducer,
     register:registerReducer,
+    shpView:shpViewReducer,
     userNameNav:userNameNavReducer,
     uploadLocPicker:uploadLocPickerReducer,
     toggleMap:toggleMapReducer,

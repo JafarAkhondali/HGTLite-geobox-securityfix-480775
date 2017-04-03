@@ -1,7 +1,7 @@
 import BASE_URL from '../script/BaseUrl';
 import VERSION from '../script/Version';
 import {push} from 'react-router-redux';
-import fileListActions from './fileListAction'
+import fileListActions from './fileListAction';
 
 let loginActions = {
 
@@ -89,24 +89,24 @@ let loginActions = {
                     // console.log('获取用户根目录', userRootList);
 
                     // 获取当前用户的文件
-                    let weight = Math.floor(200 + Math.random() * 50);
-                    let newFileList = [{
-                        file_id: "file00" + weight,
-                        style: 'fa-folder-open-o',
-                        name: '武汉市地图' + weight,
-                        size: '456.7 MB',
-                        type_id: '文件夹',
-                        tags: '老河口',
-                        modified: '2017-02-28'
-                    }, {
-                        file_id: "file00" + (weight + 1),
-                        style: 'fa-file-o',
-                        name: '武汉市地图' + (weight + 1),
-                        size: '456.7 MB',
-                        type_id: '文件夹',
-                        tags: '老河口',
-                        modified: '2017-02-28'
-                    }]
+                    // let weight = Math.floor(200 + Math.random() * 50);
+                    // let newFileList = [{
+                    //     file_id: "file00" + weight,
+                    //     style: 'fa-folder-open-o',
+                    //     name: '武汉市地图' + weight,
+                    //     size: '456.7 MB',
+                    //     type_id: '文件夹',
+                    //     tags: '老河口',
+                    //     modified: '2017-02-28'
+                    // }, {
+                    //     file_id: "file00" + (weight + 1),
+                    //     style: 'fa-file-o',
+                    //     name: '武汉市地图' + (weight + 1),
+                    //     size: '456.7 MB',
+                    //     type_id: '文件夹',
+                    //     tags: '老河口',
+                    //     modified: '2017-02-28'
+                    // }]
 
                     // console.log('更新文件列表之前');
 

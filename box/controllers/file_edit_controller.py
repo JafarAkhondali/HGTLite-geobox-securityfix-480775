@@ -10,6 +10,9 @@ from box.domain.int_result_dto import  IntResult,IntResultSchema
 
 _BASE_URL = '/file'
 
+
+
+
 '''根据id重命名文件或文件夹'''
 @geobox.route('/'+pyconst.VERSION +_BASE_URL +'/rename/<id>/<new_name>')
 @geobox.route('/'+pyconst.VERSION +_BASE_URL + '/rename/<id>/<new_name>/<type>')
@@ -59,6 +62,27 @@ def remove_dir_by_id(id):
     print boolResult.__dict__
     boolResultSchema = BoolResultSchema()
     return jsonify(boolResultSchema.dump(boolResult).data)
+
+# '''根据id重返回文件真实地址'''
+# @geobox.route('/'+pyconst.VERSION +_BASE_URL +'/rename/<id>/<new_name>')
+# @geobox.route('/'+pyconst.VERSION +_BASE_URL + '/rename/<id>/<new_name>/<type>')
+# def rename_file_or_dir(id,new_name,type='dir'):
+#
+#
+#     if type=='dir' :
+#         record1 =GbFileDir.query.filter_by(dir_id=id).first()
+#         record1.dir_name=new_name
+#
+#     else:
+#         record2 =GbFile.query.filter_by(file_id=id).first()
+#         record2.file_display_name=new_name
+#
+#     db.session.commit()
+#
+#     boolResult  = BoolResult(True)
+#     print boolResult.__dict__
+#     boolResultSchema = BoolResultSchema()
+#     return jsonify(boolResultSchema.dump(boolResult).data)
 
 @geobox.route('/'+pyconst.VERSION +_BASE_URL +'/toggle/star/<id>')
 @geobox.route('/'+pyconst.VERSION +_BASE_URL + '/toggle/star/<id>/<type>')
