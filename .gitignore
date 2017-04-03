@@ -1,4 +1,6 @@
 *.pyc
+*.log
+*.tags
 yarn-error.log
 _modules
 superset/assets/coverage/*
@@ -126,4 +128,3 @@ ENV/
 
 # Rope project settings
 .ropeproject
-

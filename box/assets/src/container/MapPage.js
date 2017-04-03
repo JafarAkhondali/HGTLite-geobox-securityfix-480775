@@ -21,7 +21,7 @@ class MapPage extends Component {
         return (
             <div className="container bg-white">
                 <h1>leaflet 地图1</h1>
-                <MapVector />
+                <MapShp />
             </div>
         )
     }

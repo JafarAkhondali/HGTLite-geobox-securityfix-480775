@@ -1,7 +1,7 @@
 import React from 'react';
-import {Map, Circle, TileLayer, LayersControl, FeatureGroup} from 'react-leaflet'
-import JQuery from 'jquery'
-import {ShapeFile} from 'react-leaflet-shapefile'
+import {Map, Circle, TileLayer, LayersControl, FeatureGroup} from 'react-leaflet';
+import JQuery from 'jquery';
+import {ShapeFile} from 'react-leaflet-shapefile';
 
 const {BaseLayer, Overlay} = LayersControl;
 
@@ -18,11 +18,12 @@ export default class MapShp extends React.Component {
             isadded: false
         }
     }
-    
+
     readerLoad(e) {
         this.setState({geodata: e.target.result});
         this.setState({isadded: true});
     }
+
 
     handleFile(e) {
         var reader = new FileReader();

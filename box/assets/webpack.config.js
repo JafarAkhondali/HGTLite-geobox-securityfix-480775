@@ -5,13 +5,14 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var STATIC_SERVER_URL = 'http://192.168.99.40:8889';
 // var STATIC_SERVER_URL = 'http://localhost:8889';
+// publicPath: STATIC_SERVER_URL+'/static/assets/dist/'
 
 module.exports = {
     entry: './src/index.js',
     output: {
         path: __dirname + '/dist',
         filename: 'bundle_[name].js',
-        publicPath: STATIC_SERVER_URL+'/static/assets/dist/'
+         publicPath: STATIC_SERVER_URL+'/static/assets/dist/'
     },
     node: {fs: 'empty'},
     module: {
