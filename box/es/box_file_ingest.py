@@ -4,7 +4,6 @@ from datetime import datetime
 from random import randint
 from geometry_helper import createQuadrilateral
 
-
 try:
     from elasticsearch import Elasticsearch
     es = Elasticsearch()
@@ -111,6 +110,7 @@ if __name__=="__main__":
         print '{0:1}'.format(i)
         fileId = str(uuid4()).replace('-','')
         upTime = datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')
+        # boundShp = createQuadrilateral()
         boundShp = createQuadrilateral()
         # fileDoc = create_box_file_doc(fileId,"武汉影像"+str(i)+".tif", "武汉数据", upTime)
         fileDoc = create_box_file_doc(
@@ -130,7 +130,7 @@ if __name__=="__main__":
             f_is_public=0,
             f_is_deleted=0,
             f_is_starred=0)
-        # rasterPartDoc = create_raster_part_doc(randint(0,50),boundShp,"武汉"+str(i))
+        rasterPartDoc = create_raster_part_doc(randint(0,50),boundShp,"武汉"+str(i))
         # print rasterPartDoc
         create_index("geoboxes","box_file",fileId,fileDoc,es)
         put_doc("geoboxes","box_file",fileId,rasterPartDoc,es)

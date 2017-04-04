@@ -169,6 +169,6 @@ if __name__ == '__main__':
     tifPath = "/root/Documents/dataseeds/rstif/xindian-uav.tif"
     # tifPath = "/root/Documents/dataseeds/rs/bigemap/whu_campus_Level_19.tif"
     # calcShpBbox(shpPath)
-    calcTiffBbox(tifPath)
-    parseTiff(tifPath)
+    # calcTiffBbox(tifPath)
+    # parseTiff(tifPath)
     # polygonizeTiff(tifPath)

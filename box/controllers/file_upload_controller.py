@@ -11,6 +11,13 @@ from box.model.gb_file_raster_do import GbFileRaster,GbFileRasterSchema
 from box.model.gb_file_vector_do import GbFileVector,GbFileVectorSchema
 
 from box.gdal.gdal_helper import calcShpBbox,calcTiffBbox
+from box.es.box_file_ingest import create_polygon_shape,create_box_file_doc,create_raster_part_doc,create_index,put_doc
+
+try:
+    from elasticsearch import Elasticsearch
+    es = Elasticsearch()
+except ImportError:
+    quit()
 
 '''上传文件
 todo: 重复文件提示，利用消息系统分离提取元信息和边界的线程
@@ -62,6 +69,7 @@ def upload_route():
         upload.save(destination)
         dirId = uploadDict['file_dir_id']
         fileSize=fInfoListJson[index]['size']
+        fileSuffix= upload.filename.rsplit('.')[-1]
         fileTag=uploadDict['file_tag']
         updateDate=fInfoListJson[index]['modifiedDate']
         uploadBy=uploadDict['upload_by']
@@ -69,6 +77,7 @@ def upload_route():
         userId=uploadDict['user_id']
         uploadBy=uploadDict['upload_by']
         uploadDateTime = datetime.strptime(uploadDict['upload_date'],'%Y-%m-%d %H:%M:%S')
+        uploadDateES =  datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')
 
         # 用户及文件上传信息插入mysql
         gbFile = GbFile(
@@ -79,7 +88,7 @@ def upload_route():
             file_real_location = uploadKey,
             file_type_id = 'type016',
             file_size =  fileSize,
-            file_suffix =  upload.filename.rsplit('.')[-1],
+            file_suffix = fileSuffix,
             file_tag = fileTag,
             is_public = 0,
             create_date = None,
@@ -97,12 +106,37 @@ def upload_route():
         # print gbFile
         gbFileLists.append(gbFile)
 
+        #对文件元信息建立es索引
+        fileDoc = create_box_file_doc(
+            user_id=userId,
+            fid=fileId,
+            file_display_name=filename,
+            file_real_location=uploadKey,
+            dir_id=dirId,
+            dir_name='',
+            file_size=fileSize,
+            file_suffix=fileSuffix,
+            file_tye_id='type016',
+            file_tag=fileTag,
+            file_notes=fileNotes,
+            upload_date=uploadDateES,
+            dir_is_starred=0,
+            f_is_public=0,
+            f_is_deleted=0,
+            f_is_starred=0)
+        create_index("geoboxes","box_file",fileId,fileDoc,es)
+
         # tif影像范围读取入库，es建索引
         tiffReg = re.compile('tif')
         if  tiffReg.search(uploadDict['file_tag']) or tiffReg.search(filename):
             tiffBbox = calcTiffBbox(destination)
             print tiffBbox
             # print type(tiffBbox)
+
+            #对影像范围建立es地理索引
+            esShape =  create_polygon_shape(tiffBbox)
+            rasterPartDoc = create_raster_part_doc(None,esShape,None)
+            put_doc("geoboxes","box_file",fileId,rasterPartDoc,es)
 
             bboxStr=''
             for coord in tiffBbox:
@@ -124,7 +158,7 @@ def upload_route():
             )
             db.session.add(gbFileTiff)
             print 'tiff范围提取'
-            
+
         shpReg = re.compile('shp')
         if shpReg.search(filename) or shpReg.search(uploadDict['file_tag']):
             print 'shp范围提取'
