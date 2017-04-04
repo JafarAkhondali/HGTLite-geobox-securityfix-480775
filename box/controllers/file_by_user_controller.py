@@ -70,10 +70,15 @@ def list_all_by_user_dir(user_id,dir_id):
     fTags =''
     # 匹配标签，是否含shp
     shpReg = re.compile('shp')
+    tiffReg = re.compile('tif')
     cFileList = []
     for file in fileRecords1:
         if shpReg.search(file.file_tag):
             fTags = 'shp'
+            fStyle='fa-object-group'
+        if  tiffReg.search(file.file_display_name) or tiffReg.search(file.file_tag):
+            fTag = 'tiff'
+            fStyle='fa-joomla'
         r2 = FileList(file.file_id,file.file_real_location,file.file_display_name,fStyle,get_size_nice_str(file.file_size), file.file_type_id, file.update_date,fTags)
         if is_chinese( file.file_display_name[0]) :
             cFileList.append(r2)
