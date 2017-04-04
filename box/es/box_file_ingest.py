@@ -1,8 +1,9 @@
 # _*_ coding: utf-8 _*_
 from uuid import uuid4
 from datetime import datetime
-from geometry_helper import createQuadrilateral
 from random import randint
+from geometry_helper import createQuadrilateral
+
 
 try:
     from elasticsearch import Elasticsearch
@@ -54,7 +55,7 @@ def create_box_file_doc(user_id,fid,file_display_name,file_real_location,dir_id,
         "file_notes":file_notes,
         "user_id":user_id,
         "file_user":{
-            "create_by"user_id,
+            "create_by":user_id,
             "update_by":user_id,
             "upload_by":user_id
         },
@@ -91,26 +92,45 @@ def create_vector_part_doc(ext,region):
     return vectorObj
 
 
-def create_polygon_shape(polygon_coords){
+def create_polygon_shape(polygon_coords):
     print polygon_coords
     print type(polygon_coords)
     linestring = polygon_coords
     linestring.append(polygon_coords[0])
+    print linestring
     polygonShape = {
         "type":"polygon",
         "coordinates":[linestring]
     }
+    return polygonShape
 
-}
+
 
 if __name__=="__main__":
-    for i in range(0,100):
+    for i in range(0,1):
         print '{0:1}'.format(i)
         fileId = str(uuid4()).replace('-','')
         upTime = datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')
         boundShp = createQuadrilateral()
-        fileDoc = create_box_file_doc(fileId,"武汉影像"+str(i)+".tif", "武汉数据", upTime)
-        rasterPartDoc = create_raster_part_doc(randint(0,50),boundShp,"武汉"+str(i))
-        print rasterPartDoc
+        # fileDoc = create_box_file_doc(fileId,"武汉影像"+str(i)+".tif", "武汉数据", upTime)
+        fileDoc = create_box_file_doc(
+            user_id='supersu',
+            fid=fileId,
+            file_display_name="武汉影像"+str(i),
+            file_real_location='real_loc',
+            dir_id='dir',
+            dir_name='di',
+            file_size=10240,
+            file_suffix='tif',
+            file_tye_id='type016',
+            file_tag='tif',
+            file_notes='',
+            upload_date=upTime,
+            dir_is_starred=0,
+            f_is_public=0,
+            f_is_deleted=0,
+            f_is_starred=0)
+        # rasterPartDoc = create_raster_part_doc(randint(0,50),boundShp,"武汉"+str(i))
+        # print rasterPartDoc
         create_index("geoboxes","box_file",fileId,fileDoc,es)
         put_doc("geoboxes","box_file",fileId,rasterPartDoc,es)

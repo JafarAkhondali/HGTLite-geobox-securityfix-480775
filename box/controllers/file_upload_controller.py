@@ -123,9 +123,8 @@ def upload_route():
                  update_date=updateDate
             )
             db.session.add(gbFileTiff)
-
-
             print 'tiff范围提取'
+            
         shpReg = re.compile('shp')
         if shpReg.search(filename) or shpReg.search(uploadDict['file_tag']):
             print 'shp范围提取'
