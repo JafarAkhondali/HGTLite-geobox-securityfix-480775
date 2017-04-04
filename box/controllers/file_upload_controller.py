@@ -4,17 +4,15 @@ from box import geobox, db
 from flask import Flask, request, redirect, url_for, render_template
 from uuid import uuid4
 from datetime import datetime
-import os
-import json
-import ConfigParser
+import os,re,json,ConfigParser
 
 from box.model.gb_file_do import GbFile,GbFileSchema
 
 '''上传文件
-todo: 重复文件提示
+todo: 重复文件提示，利用消息系统分离提取元信息和边界的线程
 '''
 @geobox.route("/file/upload", methods=["POST"])
-def upload():
+def upload_route():
     # 从配置文件获取文件存储路径
     cf = ConfigParser.ConfigParser()
     # cf.read('test.conf')
@@ -55,14 +53,23 @@ def upload():
         filename = upload.filename.rsplit("/")[0]
         print u'=====文件名是'+filename
         destination = "/".join([targetPath, filename])
-        # print "Accept incoming file:", filename
-        # print "Save it to:", destination
+        # print "保存文件", destination
         upload.save(destination)
         uploadDateTime = datetime.strptime(uploadDict['upload_date'],'%Y-%m-%d %H:%M:%S')
         # print dateTime0
+        fileId =str(uuid4()).replace('-','')
+
+        # tif影像处理
+        tiffReg = re.compile('tif')
+        shpReg = re.compile('shp')
+        if tiffReg.search(filename) or tiffReg.search(uploadDict['file_tag']):
+            print 'tiff范围提取'
+
+        if shpReg.search(filename) or shpReg.search(uploadDict['file_tag']):
+            print 'shp范围提取'
 
         gbFile = GbFile(
-            file_id = str(uuid4()).replace('-',''),
+            file_id = fileId,
             file_display_name = filename,
             file_real_name = filename,
             dir_id = uploadDict['file_dir_id'],
@@ -84,6 +91,7 @@ def upload():
             upload_date = uploadDateTime,
             is_starred = 0
         )
+        # 上传信息入库
         # print gbFile
         gbFileLists.append(gbFile)
 
@@ -91,5 +99,6 @@ def upload():
         db.session.add(f)
 
     db.session.commit()
+
 
     return '上传完成'

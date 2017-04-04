@@ -4,8 +4,8 @@ import os.path
 import os
 
 '''解压zip文件
-解压前/opt/tempx/bou2_4m.zip
-解压后/opt/tempx/bou2_4m_shp/a.shp
+params /opt/tempx/bou2_4m.zip
+return /opt/tempx/bou2_4m_shp/a.shp
 '''
 def unzip_shp(zip_full_path):
 
@@ -42,9 +42,28 @@ def unzip_shp(zip_full_path):
                 f.write(data)
     zfobj.close()
 
-    def zip_shp(shp_name):
-
-        print 'file counts is'
+'''将名称相同的shp压缩成zip
+params /root/Documents/dataseeds/lhkrail_shp/grailn
+return /root/Documents/dataseeds/lhkrail_shp/grailn.zip
+'''
+def zip_shp(shp_full_path):
+    fileNameNoSuffix = shp_full_path.rsplit('/',1)[1]
+    print fileNameNoSuffix
+    # 删除旧文件
+    if os.path.isfile(shp_full_path+'.zip'):
+        os.remove(shp_full_path+'.zip')
+    # 创建新压缩文件
+    fileListZipping = []
+    possileFilesList = ['.shp','.shx','.dbf','.prj','.sbn','.sbx','.xml','fbn','fbx','ain','.shp.xml']
+    with zipfile.ZipFile(shp_full_path+'.zip', 'w') as myzip:
+        for suffix in possileFilesList:
+            possibleFile = shp_full_path+suffix
+            if os.path.isfile(possibleFile):
+                # fileListZipping.append(possibleFile)
+                myzip.write(possibleFile,possibleFile.rsplit('/',1)[1])
+                print possibleFile
+    myzip.close()
+        # print 'file counts is'
 
     '''备用
     '''
@@ -67,6 +86,10 @@ def unzip_shp(zip_full_path):
 
 if __name__ == '__main__':
     # zipFilePath=u'/opt/tempx/bou2_4m.zip'
-    zipFilePath=u'/root/Documents/dataseeds/poicopy.zip'
+    # zipFilePath=u'/root/Documents/dataseeds/老河口poicopy_shp/老河口poicopy.zip'
+    zipFilePath=u'/root/Documents/dataseeds/lhkrail.zip'
+    fFullName=u'/root/Documents/dataseeds/lhkrail_shp/grailn'
+    # fFullName=u'/root/Documents/dataseeds/老河口poicopy_shp/老河口poicopy'
     # unzipShp(zipFilePath)
-    unzip_shp(zipFilePath)
+    # unzip_shp(zipFilePath)
+    # zip_shp(fFullName)

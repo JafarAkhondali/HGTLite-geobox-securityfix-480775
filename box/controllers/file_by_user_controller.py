@@ -54,7 +54,6 @@ def list_all_by_user_dir(user_id,dir_id):
     # for iii in resultList:
     #     print iii.__dict__
 
-
     # 获取用户根目录文件
     filters4File = {
         GbFile.user_id == user_id,
