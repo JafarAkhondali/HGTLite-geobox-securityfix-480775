@@ -13,7 +13,7 @@ class GbFileRaster(db.Model):
     update_by = db.Column(db.String(96))
     update_date = db.Column(db.DateTime)
 
-    def __init__(self, file_id, file_type_id, parent_id, is_starred, user_id,create_by,create_date,update_by,update_date):
+    def __init__(self, file_id, file_type_id, img_resolution, notes, raster_extent,create_by,create_date,update_by,update_date):
         self.file_id = file_id
         self.file_type_id = file_type_id
         self.img_resolution = img_resolution

@@ -3,7 +3,7 @@ from uuid import uuid4
 from datetime import datetime
 from geometry_helper import createQuadrilateral
 from random import randint
-# from ../common/print_hepler
+
 try:
     from elasticsearch import Elasticsearch
     es = Elasticsearch()
@@ -24,38 +24,43 @@ def put_doc( index_name,type_name,uuid, body,es_conn=es):
                     body=body)
     return ret
 
-def create_box_file_doc(fid,file_display_name,file_dir_name,upload_date):
+
+# "file_tag":["武汉","影像"],
+
+def create_box_file_doc(user_id,fid,file_display_name,file_real_location,dir_id,dir_name,file_size,file_suffix,file_tye_id,file_tag,file_notes,upload_date,dir_is_starred=0,f_is_public=0,f_is_deleted=0,f_is_starred=0):
     uploadDate = upload_date
     fileObj = {
-        "file_id": 'boxfid'+fid,
+        "file_id": fid,
         "file_display_name":file_display_name,
-        "file_real_name":'boxfrname'+fid,
-        "file_real_location":'boxfrloc'+fid,
+        "file_real_name": file_display_name,
+        "file_real_location":file_real_location,
         "file_dir":{
-            "id":'bdirid'+fid,
-            "name":file_dir_name,
-            "is_starred":"0"
+            "id":dir_id,
+            "name":dir_name,
+            "is_starred":dir_is_starred
         },
-        "file_size":1536000,
-        "file_suffix":"tif",
+        "file_size":file_size,
+        "file_suffix":file_suffix,
         "file_type":{
-            "type_id":"type001",
-            "type_name_cn":"普通影像",
-            "group_id":"group001",
-            "group_name_cn":"普通影像"
+            "type_id":file_tye_id,
+            "type_name_cn":"",
+            "group_id":"",
+            "group_name_cn":""
         },
-        "file_tag":["武汉","影像"],
-        "is_public":"0",
-        "is_deleted":"0",
-        "is_starred":"0",
-        "file_notes":"文件说明： 来源于网络",
-        "user_id":'buserid'+fid,
+        "file_tag":file_tag,
+        "is_public":f_is_public,
+        "is_deleted":f_is_deleted,
+        "is_starred":f_is_starred,
+        "file_notes":file_notes,
+        "user_id":user_id,
         "file_user":{
-            "create_by":"userCreated",
-            "upload_by":"userUploaded"
+            "create_by"user_id,
+            "update_by":user_id,
+            "upload_by":user_id
         },
         "file_date":{
             "create_date":uploadDate,
+            "update_date":uploadDate,
             "upload_date":uploadDate
         }
     }
@@ -84,6 +89,19 @@ def create_vector_part_doc(ext,region):
         }
     }
     return vectorObj
+
+
+def create_polygon_shape(polygon_coords){
+    print polygon_coords
+    print type(polygon_coords)
+    linestring = polygon_coords
+    linestring.append(polygon_coords[0])
+    polygonShape = {
+        "type":"polygon",
+        "coordinates":[linestring]
+    }
+
+}
 
 if __name__=="__main__":
     for i in range(0,100):

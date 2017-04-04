@@ -30,6 +30,8 @@ from box.controller import index
 from box.controller import gb_suffix_bundle_controller
 from box.controller import gb_file_controller
 from box.controller import gb_file_dir_controller
+from box.controller import gb_file_raster_controller
+from box.controller import gb_file_vector_controller
 
 from box.controllers import file_upload_controller
 from box.controllers import file_by_user_controller

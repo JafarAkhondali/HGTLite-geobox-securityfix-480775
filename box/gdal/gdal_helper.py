@@ -2,11 +2,49 @@
 import os,sys
 from osgeo import gdal,ogr,osr
 
-# shpPath = "/root/Documents/dataseeds/lhkadmin/lhkadmin.shp"
-# shpPath = u"/root/Documents/dataseeds/LHK老河口poicopy/老河口poicopy.shp"
-shpPath = u"/root/Documents/dataseeds/LHK老河口铁路/grailn.shp"
-# tifPath = "/root/Documents/dataseeds/rstif/xindian-uav.tif"
-tifPath = "/root/Documents/dataseeds/rs/bigemap/whu_campus_Level_19.tif"
+'''计算tiff影像外包矩形'''
+def calcTiffBbox(tiff_path):
+    gtif = gdal.Open(tiff_path)
+    gt = gtif.GetGeoTransform()
+    cols = gtif.RasterXSize
+    rows = gtif.RasterYSize
+    extent = GetExtent(gt,cols,rows)
+    # print '====extent_proj',extent
+    src_srs=osr.SpatialReference()
+    src_srs.ImportFromWkt(gtif.GetProjection())
+    tgt_srs = src_srs.CloneGeogCS()
+    geo_ext = ReprojectCoords(extent,src_srs,tgt_srs)
+    # print '====extent_lnglat',geo_ext
+    # print type(extent)
+    return geo_ext
+
+'''计算shp矢量外包矩形'''
+def calcShpBbox(shp_path):
+    driver = ogr.GetDriverByName('ESRI Shapefile')
+    dataSource = driver.Open(shp_path, 0) # 0 means read-only. 1 means writeable.
+    # Check to see if shapefile is found.
+    if dataSource is None:
+        print '无法打开shp文件： %s' % (shp_path)
+    else:
+        print '读取的shp文件是： %s' % (shp_path)
+        layer = dataSource.GetLayer()
+        #extent的类型是tuple,包含4个元素，Xmin、Xmax、Ymin、Ymax
+        ext = layer.GetExtent()
+        # bbox类型是list
+        col,row=2,4
+        bbox = [[0 for x in range(col)] for y in range(row)]
+        bbox[0][0]=ext[0]
+        bbox[0][1]=ext[3]
+        bbox[1][0]=ext[0]
+        bbox[1][1]=ext[2]
+        bbox[2][0]=ext[1]
+        bbox[2][1]=ext[2]
+        bbox[3][0]=ext[1]
+        bbox[3][1]=ext[3]
+        # extentList = [[ext[0],ext[3]], [ext[2],[ext[3]], [ext[1],[ext[2]], [ext[1],[ext[3]]]
+        # print bbox
+        # print type(bbox)
+        return bbox
 
 def GetExtent(gt,cols,rows):
     ''' Return list of corner coordinates from a geotransform
@@ -52,10 +90,10 @@ def ReprojectCoords(coords,src_srs,tgt_srs):
 
 def parseShapefile(shp_path):
     driver = ogr.GetDriverByName('ESRI Shapefile')
-    dataSource = driver.Open(shpPath, 0) # 0 means read-only. 1 means writeable.
+    dataSource = driver.Open(shp_path, 0) # 0 means read-only. 1 means writeable.
     # Check to see if shapefile is found.
     if dataSource is None:
-        print 'Could not open %s' % (shpPath)
+        print 'Could not open %s' % (shp_path)
     else:
         print 'Opened %s' % (shp_path)
         layer = dataSource.GetLayer()
@@ -78,7 +116,7 @@ def parseShapefile(shp_path):
         print bbox
         print type(bbox)
         featureCount = layer.GetFeatureCount()
-        print "Number of features in %s: %d" % (os.path.basename(shpPath),featureCount)
+        print "Number of features in %s: %d" % (os.path.basename(shp_path),featureCount)
 
 
 def parseTiff(tiff_path):
@@ -125,6 +163,12 @@ def polygonizeTiff(tiff_path):
 
 
 if __name__ == '__main__':
-    parseShapefile(shpPath)
-    # parseTiff(tifPath)
+    # shpPath = "/root/Documents/dataseeds/lhkadmin/lhkadmin.shp"
+    # shpPath = u"/root/Documents/dataseeds/LHK老河口poicopy/老河口poicopy.shp"
+    shpPath = u"/root/Documents/dataseeds/LHK老河口铁路/grailn.shp"
+    tifPath = "/root/Documents/dataseeds/rstif/xindian-uav.tif"
+    # tifPath = "/root/Documents/dataseeds/rs/bigemap/whu_campus_Level_19.tif"
+    # calcShpBbox(shpPath)
+    calcTiffBbox(tifPath)
+    parseTiff(tifPath)
     # polygonizeTiff(tifPath)

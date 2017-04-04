@@ -189,8 +189,6 @@ class FileTopIndicator extends React.Component {
 
         formData.append('fileInfoList',JSON.stringify(fileInfoList));
 
-
-
         this.setState({
             uploadFormData: formData
         });
