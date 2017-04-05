@@ -4,7 +4,7 @@ from box import geobox, db
 from flask import Flask, request, redirect, url_for, render_template
 from uuid import uuid4
 from datetime import datetime
-import os,re,json,pickle,ConfigParser,threading
+import os,re,json,pickle,ConfigParser
 
 from box.model.gb_file_do import GbFile,GbFileSchema
 from box.model.gb_file_raster_do import GbFileRaster,GbFileRasterSchema
@@ -125,6 +125,7 @@ def upload_route():
             f_is_deleted=0,
             f_is_starred=0)
         create_index("geoboxes","box_file",fileId,fileDoc,es)
+        print ' 建立es索引完成'
 
         # tif影像范围读取入库，es建索引
         tiffReg = re.compile('tif')
@@ -137,6 +138,7 @@ def upload_route():
             esShape =  create_polygon_shape(tiffBbox)
             rasterPartDoc = create_raster_part_doc(None,esShape,None)
             put_doc("geoboxes","box_file",fileId,rasterPartDoc,es)
+            print '影像范围建立es索引'
 
             bboxStr=''
             for coord in tiffBbox:
@@ -157,7 +159,7 @@ def upload_route():
                  update_date=updateDate
             )
             db.session.add(gbFileTiff)
-            print 'tiff范围提取'
+            print u'影像范围导入mysql'
 
         shpReg = re.compile('shp')
         if shpReg.search(filename) or shpReg.search(uploadDict['file_tag']):
@@ -166,9 +168,7 @@ def upload_route():
     for f in gbFileLists:
         db.session.add(f)
 
-
-
     db.session.commit()
-
+    print '文件元信息导入mysql完成'
 
     return '上传完成'

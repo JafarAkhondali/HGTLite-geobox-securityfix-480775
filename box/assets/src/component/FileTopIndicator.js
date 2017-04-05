@@ -7,7 +7,7 @@ import '../style/file-uploader.scss'
 import React from 'react';
 import ReactDOM from 'react-dom'
 import {connect} from 'react-redux';
-import { bindActionCreators} from 'redux';
+import { bindActionCreators,dispatch} from 'redux';
 import {Link} from 'react-router';
 import {toastr} from 'react-redux-toastr';
 
@@ -20,6 +20,8 @@ import UploadLocPicker from './UploadLocPicker';
 import fileTagAction from '../action/fileTagAction';
 import currentDirAction from '../action/currentDirAction';
 import newFolderAction from '../action/newFolderAction';
+import searchIndexAction from '../action/searchIndexAction';
+import routerURLAction from '../action/routerURLAction';
 
 import {formatDate} from '../script/DatetimeFormat';
 
@@ -46,6 +48,8 @@ class FileTopIndicator extends React.Component {
         this.closeUploadModal=this.closeUploadModal.bind(this);
         this.openUploadModal=this.openUploadModal.bind(this);
         this.handleNewFolderClick = this.handleNewFolderClick.bind(this);
+        this.handleSearchIndexInput=this.handleSearchIndexInput.bind(this);
+        this.handleSearchIndexButtonClick=this.handleSearchIndexButtonClick.bind(this);
     }
 
     closeUploadModal() {
@@ -66,6 +70,16 @@ class FileTopIndicator extends React.Component {
         this.props.fileTagActions.setInputFileTag(event.target.value);
     }
 
+    handleSearchIndexInput(event){
+        console.log('=====搜索input',event.target.value)
+
+        this.props.searchIndexActions.setSerachIndexInput(event.target.value);
+    }
+
+    handleSearchIndexButtonClick(event){
+        console.log('=====搜索button',event.target.value)
+        this.props.routerURLActions.changeRoute('/search')
+}
     /**
      * 文件选取input添加文件事件
      */
@@ -136,7 +150,7 @@ class FileTopIndicator extends React.Component {
         event.preventDefault()
 
         let curUserName=this.props.stateUserName;
-        // console.log('====user',curUserName)
+        console.log('====userid',curUserName)
 
         let formData = this.state.uploadFormData;
         let curDirList = this.props.stateCurDirList;
@@ -295,8 +309,8 @@ class FileTopIndicator extends React.Component {
 
     render() {
 
-        let {fTag,stateUploadLoc,stateCurDirList,stateUserName,fileTagActions,currentDirActions,newFolderActions} = this.props;
-        // console.log('=====FileTopIndicator属性',this.props)
+        let {fTag,stateUploadLoc,stateCurDirList,stateUserName,stateSearchKW,fileTagActions,currentDirActions,newFolderActions,routerActions} = this.props;
+        console.log('=====FileTopIndicator属性',this.props)
 
         let progressBarStyle={ width:this.state.progressPercentage/100};
 
@@ -324,9 +338,9 @@ class FileTopIndicator extends React.Component {
                         <Col md = {2}>
                         <FormGroup >
                             <InputGroup >
-                            <FormControl type = "text" placeholder="输入文件名" />
+                            <FormControl type = "text" placeholder="输入文件名" value={stateSearchKW} onChange={this.handleSearchIndexInput} />
                             <InputGroup.Button>
-                                <Button> 搜索 </Button>
+                                <Button onClick={this.handleSearchIndexButtonClick}> 搜索 </Button>
                             </InputGroup.Button>
                             </InputGroup>
                          </FormGroup>
@@ -353,7 +367,7 @@ class FileTopIndicator extends React.Component {
                     </div>
 
                     <div className="display-inline-block to-m-left8">
-                        <div> <span className="font-file-list" > 添加标签： </span></div>
+                        <div> <span className="font-file-list" >  </span></div>
                         <input type = "text" value = {fTag} onChange={ this.handleChangeTag} placeholder="给文件加个特色标签吧" />
                         </div>
                     </div>
@@ -397,13 +411,17 @@ const mapStateToProps = state => ({
     fTag: state.fileTag.fTag,
     stateUploadLoc:state.uploadLocPicker.uploadLoc,
     stateCurDirList:state.currentDir.dirList,
-    stateUserName:state.userNameNav.userName
+    stateUserName:state.userNameNav.userName,
+    stateSearchKW:state.searchIndex.stateSearchKW
 });
+
 
 const mapDispatchToProps = dispatch => ({
     fileTagActions: bindActionCreators(fileTagAction, dispatch),
     currentDirActions:bindActionCreators(currentDirAction, dispatch),
     newFolderActions:bindActionCreators(newFolderAction, dispatch),
+    searchIndexActions:bindActionCreators(searchIndexAction,dispatch),
+    routerURLActions:bindActionCreators(routerURLAction,dispatch),
     dispatch:dispatch
 
 });

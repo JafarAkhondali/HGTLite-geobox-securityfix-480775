@@ -1,8 +1,7 @@
 import '../style/search-page.scss'
 
-
-import React, {Component} from 'react'
-import {extend} from 'lodash'
+import React from 'react';
+import {extend} from 'lodash';
 import {
     SearchkitManager, SearchkitProvider,
     SearchBox, RefinementListFilter, Pagination,
@@ -11,7 +10,7 @@ import {
     ViewSwitcherHits, ViewSwitcherToggle, DynamicRangeFilter,
     InputFilter, GroupedSelectedFilters,
     Layout, TopBar, LayoutBody, LayoutResults,
-    ActionBar, ActionBarRow, SideBar
+    ActionBar, ActionBarRow, SideBar,TermQuery,BoolShould,FilteredQuery
 } from 'searchkit'
 
 import BASE_URL from '../script/BaseUrl';
@@ -20,12 +19,17 @@ import BASE_URL from '../script/BaseUrl';
 const esIndexName='geoboxes';
 const host = BASE_URL.esServer+'/'+esIndexName;
 const searchkit = new SearchkitManager(host)
+// searchkit.addDefaultQuery((query)=> {
+//    return query.addQuery(FilteredQuery({
+//      filter:null
+//    }))
+//  })
 
 const FileHitsGridItem = (props) => {
     const {bemBlocks, result} = props
     // let url = "http://www.imdb.com/title/" + result._source.imdbId
-    let url = "https://www.baidu.com"
-    console.log(result._source)
+    let url = ""
+    // console.log('查询后的返回结果',result._source)
     const source: any = extend({}, result._source, result.highlight)
     return (
         <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit" width="640" height="320">
@@ -37,7 +41,7 @@ const FileHitsGridItem = (props) => {
                  </div>
 
                 <div data-qa="title" className={bemBlocks.item("title")}
-                     dangerouslySetInnerHTML={{__html: source.file_dispaly_name}}>
+                     dangerouslySetInnerHTML={{__html: source.file_display_name}}>
                 </div>
             </a>
         </div>
@@ -47,7 +51,7 @@ const FileHitsGridItem = (props) => {
 const FileHitsListItem = (props) => {
     const {bemBlocks, result} = props
     // let url = "http://www.imdb.com/title/" + result._source.imdbId
-    let url = "https://www.baidu.com"
+    let url = ""
     const source: any = extend({}, result._source, result.highlight)
     return (
         <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
@@ -59,21 +63,21 @@ const FileHitsListItem = (props) => {
 
             <div className={bemBlocks.item("details")}>
                 <a href={url} target="_blank"><h2 className={bemBlocks.item("title")}
-                                                  dangerouslySetInnerHTML={{__html: source.file_dispaly_name}}></h2></a>
+                                                  dangerouslySetInnerHTML={{__html: source.file_display_name}}></h2></a>
             </div>
         </div>
     )
 }
 
-class SearchkitPage extends Component {
+class SearchkitPage extends React.Component {
     render() {
         return (
             <SearchkitProvider searchkit={searchkit}>
                 <Layout>
                     <TopBar>
-                        <div className="my-logo rgb-white-pure">所有文件</div>
-                        <SearchBox autofocus={true} searchOnChange={true}
-                                   prefixQueryFields={["file_dispaly_name^10", "file_suffix^2", "file_real_name", "title^10"]}/>
+                        <div className="my-logo rgb-white-pure"></div>
+                        <SearchBox autofocus={true} searchOnChange={true} placeholder='输入文件名'
+                                   prefixQueryFields={["file_display_name^10", "file_suffix^2", "file_real_name"]}/>
                     </TopBar>
 
                     <LayoutBody>
@@ -84,13 +88,13 @@ class SearchkitPage extends Component {
                                 <RangeFilter min={0} max={50} field="raster.img_resolution" id="resolution" title="分辨率"
                                                         showHistogram={true}/>
 
-
-                                                <NumericRefinementListFilter id="fileSize" title="文件大小" field="file_size"
+                                <NumericRefinementListFilter id="fileSize" title="文件大小" field="file_size"
                                      options={[
-                                         {title: "All"},
-                                         {title: "up to 20", from: 0, to: 20},
-                                         {title: "21 to 60", from: 21, to: 1024000},
-                                         {title: "60 or more", from: 1024000, to: 2048000}
+                                         {title: "所有"},
+                                         {title: "0 - 10M", from: 0, to: 10485760},
+                                         {title: "10M - 128M", from: 10485760, to: 134217728},
+                                         {title: "128M - 1G", from: 134217728, to: 1073741824},
+                                         {title: "1G - ...", from: 1073741824, to: 4400000000000}
                                      ]}/>
                         </SideBar>
 
@@ -117,7 +121,7 @@ class SearchkitPage extends Component {
 
                             <ViewSwitcherHits
                                 hitsPerPage={16} highlightFields={["title", "plot"]}
-                                sourceFilter={["file_id","file_dispaly_name","file_real_name","file_size","file_suffix","file_date","raster"]}
+                                sourceFilter={["file_id","file_display_name","file_size","file_suffix","file_date","raster","file_tag","is_deleted"]}
                                 hitComponents={[
                                     {key: "grid", title: "小图", itemComponent: FileHitsGridItem, defaultOption: true},
                                     {key: "list", title: "列表", itemComponent: FileHitsListItem}

@@ -40,6 +40,6 @@ class GbUser(db.Model):
         return '<GbUser %r>' % self.user_nickname
 
 
-class GbFileSchema(ma.ModelSchema):
+class GbUserSchema(ma.ModelSchema):
     class Meta:
         model = GbUser

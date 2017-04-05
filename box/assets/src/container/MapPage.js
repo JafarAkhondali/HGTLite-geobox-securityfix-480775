@@ -20,8 +20,8 @@ class MapPage extends Component {
         // container bg-white
         return (
             <div className="container bg-white">
-                <h1>leaflet 地图1</h1>
-                <MapShp />
+                <h1>地理文件覆盖区域</h1>
+                <MapVector />
             </div>
         )
     }

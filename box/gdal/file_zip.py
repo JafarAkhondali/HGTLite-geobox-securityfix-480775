@@ -1,6 +1,5 @@
 # _*_ coding: utf-8 _*_
 import zipfile
-import os.path
 import os
 
 '''解压zip文件

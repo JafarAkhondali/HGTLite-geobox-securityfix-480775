@@ -11,8 +11,10 @@ import {Grid, Row, Col, Button, FormGroup, InputGroup, FormControl, Glyphicon} f
 
 import loginAction from '../action/loginAction';
 
+import {formatDate} from '../script/DatetimeFormat';
 
 class LoginPage extends Component {
+
     constructor() {
         super()
 
@@ -59,6 +61,8 @@ class LoginPage extends Component {
         rFormData.append('user_name',rName);
         rFormData.append('user_password',rPass);
         rFormData.append('user_email',rEmail);
+        rFormData.append('register_date',formatDate());
+
 
         this.props.actions.fetchRegister(rFormData);
 

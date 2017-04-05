@@ -12,18 +12,9 @@ import {
 
  class MapVector extends React.Component {
     render () {
-        const center = [51.505, -0.09]
+        const center = [51.52, -0.01]
 
-        const polyline = [
-            [51.505, -0.09],
-            [51.51, -0.1],
-            [51.51, -0.12],
-        ]
 
-        const multiPolyline = [
-            [[51.5, -0.1], [51.5, -0.12], [51.52, -0.12]],
-            [[51.5, -0.05], [51.5, -0.06], [51.52, -0.06]],
-        ]
 
         const polygon = [
             [51.515, -0.09],
@@ -41,23 +32,30 @@ import {
             [51.5, -0.06],
         ]
 
+        const rectangle2 = [
+            [51.51, -0.07],
+            [51.53, -0.02],
+        ]
+
+        const rectangle3 = [
+            [51.54, -0.08],
+            [51.57, -0.06],
+        ]
+
         return (
-            <Map center={center} zoom={13}>
+            <Map center={center} zoom={12}>
                 <TileLayer
                     attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                 />
-                <Circle center={center} fillColor='blue' radius={200} />
-                <CircleMarker center={[51.51, -0.12]} color='red' radius={20}>
+
+                <Rectangle bounds={rectangle} color='blue'>
                     <Popup>
-                        <span>Popup in CircleMarker</span>
+                        <span>无要素信息</span>
                     </Popup>
-                </CircleMarker>
-                <Polyline color='lime' positions={polyline} />
-                <Polyline color='lime' positions={multiPolyline} />
-                <Polygon color='purple' positions={polygon} />
-                <Polygon color='purple' positions={multiPolygon} />
-                <Rectangle bounds={rectangle} color='black' />
+                </Rectangle>
+                <Rectangle bounds={rectangle2} color='blue' />
+                <Rectangle bounds={rectangle3} color='blue' />
             </Map>
         )
     }
